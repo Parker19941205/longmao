@@ -1,0 +1,56 @@
+{
+  "ver": "1.2.4",
+  "uuid": "8f1cbe3b-166d-46be-a359-196c7cdfbe47",
+  "rawTextureUuid": "daf53050-b694-4f55-aed7-0b808f54bd86",
+  "size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "type": "Texture Packer",
+  "subMetas": {
+    "battery-battery.png": {
+      "ver": "1.0.4",
+      "uuid": "b789fd29-62c0-4bb0-86c2-994f5a72079c",
+      "rawTextureUuid": "daf53050-b694-4f55-aed7-0b808f54bd86",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 171,
+      "height": 111,
+      "rawWidth": 171,
+      "rawHeight": 111,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    },
+    "battery-paozuo.png": {
+      "ver": "1.0.4",
+      "uuid": "2189c6c6-ef83-402a-94ba-87e01206bed3",
+      "rawTextureUuid": "daf53050-b694-4f55-aed7-0b808f54bd86",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 173,
+      "trimY": 0,
+      "width": 55,
+      "height": 62,
+      "rawWidth": 55,
+      "rawHeight": 62,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+    "BATT_1": {
+    "TITLE_ICON": "paotai1",
+    "PAY_PRICE": 0,
+    "ATK_INC": 0,
+    "GOLD_INC": 0,
+    "ATK_SPEED": 0,
+    "PAY_TYPE": 2,
+    "GEM_INC": 0,
+    "ANI_FILE": "Battery"
+    },
+    "BATT_2": {
+    "TITLE_ICON": "paotai2",
+    "PAY_PRICE": 60,
+    "ATK_INC": 10,
+    "GOLD_INC": 5,
+    "ATK_SPEED": 10,
+    "PAY_TYPE": 1,
+    "GEM_INC": 1,
+    "ANI_FILE": "Battery_magic"
+    },
+    "BATT_3": {
+    "TITLE_ICON": "paotai3",
+    "PAY_PRICE": 300,
+    "ATK_INC": 10,
+    "GOLD_INC": 10,
+    "ATK_SPEED": 10,
+    "PAY_TYPE": 1,
+    "GEM_INC": 2,
+    "ANI_FILE": "Battery_gold"
+    },
+    "BATT_4": {
+    "TITLE_ICON": "paotai4",
+    "PAY_PRICE": 680,
+    "ATK_INC": 10,
+    "GOLD_INC": 5,
+    "ATK_SPEED": 50,
+    "PAY_TYPE": 1,
+    "GEM_INC": 1,
+    "ANI_FILE": "Battery_windmill"
+    },
+    "BATT_5": {
+    "TITLE_ICON": "paotai5",
+    "PAY_PRICE": 980,
+    "ATK_INC": 30,
+    "GOLD_INC": 5,
+    "ATK_SPEED": 30,
+    "PAY_TYPE": 1,
+    "GEM_INC": 1,
+    "ANI_FILE": "Battery_hero"
+    },
+    "BATT_6": {
+    "TITLE_ICON": "paotai6",
+    "PAY_PRICE": 1980,
+    "ATK_INC": 50,
+    "GOLD_INC": 5,
+    "ATK_SPEED": 10,
+    "PAY_TYPE": 1,
+    "GEM_INC": 1,
+    "ANI_FILE": "Battery_machine"
+    }
+    }
+    

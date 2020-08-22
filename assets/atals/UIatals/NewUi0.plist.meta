@@ -1,0 +1,34 @@
+{
+  "ver": "1.2.4",
+  "uuid": "ea62b1ad-baf4-4e39-b37a-48584fa6d6dd",
+  "rawTextureUuid": "cd7ff9b2-bcad-4def-8293-edbbc014458d",
+  "size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "type": "Texture Packer",
+  "subMetas": {
+    "libao2.png": {
+      "ver": "1.0.4",
+      "uuid": "fcff6858-6ee2-4748-aa86-8cded3bd2c5a",
+      "rawTextureUuid": "cd7ff9b2-bcad-4def-8293-edbbc014458d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 667,
+      "height": 392,
+      "rawWidth": 667,
+      "rawHeight": 392,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    }
+  }
+}

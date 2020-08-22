@@ -1,0 +1,771 @@
+{
+    "A1007": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    150,
+    0.007
+    ],
+    "ICON": "car2.png",
+    "ANI_DATA": [
+    150,
+    1000,
+    15,
+    30,
+    180,
+    95,
+    0,
+    20,
+    179,
+    82,
+    3
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    55,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/car2_enemy"
+    },
+    "A1005": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,250,
+    0.007
+    ],
+    "ICON": "home1.png",
+    "ANI_DATA": [
+    250,
+    1000,
+    15,
+    0,
+    180,
+    130,
+    1000,
+    46,
+    281,
+    231,
+    1
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    100,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 5,
+    "ANI_NAME_FIGHT_RUN": [
+    "run",
+    false
+    ],
+    "ANI_FILE": "monster/home1_enemy"
+    },
+    "A1011": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,90,
+    0.007
+    ],
+    "ICON": "air1.png",
+    "ANI_DATA": [
+    66,
+    1000,
+    15,
+    40,
+    180,
+    80,
+    480,
+    20,
+    96,
+    109,
+    0
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    150,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 2,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/air1_enemy"
+    },
+    "A1015": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    1000,
+    0.007
+    ],
+    "ICON": "boss1.png",
+    "ANI_DATA": [
+    1500,
+    1000,
+    15,
+    15,
+    180,
+    350,
+    480,
+    20,
+    603,
+    521,
+    0
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    999,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/boss1_enemy"
+    },
+    "A1006": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,216,
+    0.007
+    ],
+    "ICON": "car1.png",
+    "ANI_DATA": [
+    180,
+    1000,
+    15,
+    19,
+    180,
+    100,
+    0,
+    20,
+    181,
+    108,
+    3
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    55,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/car1_enemy"
+    },
+    "A1004": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    58,
+    0.007
+    ],
+    "ICON": "strongsoldier.png",
+    "ANI_DATA": [
+    135,
+    1000,
+    15,
+    18,
+    180,
+    90,
+    0,
+    20,
+    180,
+    78,
+    4
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/strongsoldier_enemy"
+    },
+    "R1001": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    25,
+    0.007
+    ],
+    "ICON": "jia.png",
+    "ANI_DATA": [
+    500,
+    150,
+    15,
+    0,
+    180,
+    80,
+    0,
+    20,
+    119,
+    166,
+    8
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "ANI_NAME_FIGHT_ATK": [
+    "attack",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/shouwei_paodan"
+    },
+    "A1014": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,113,
+    0.007
+    ],
+    "ICON": "air4.png",
+    "ANI_DATA": [
+    27,
+    1000,
+    15,
+    60,
+    180,
+    80,
+    480,
+    20,
+    122,
+    98,
+    7
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    1,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 3,
+    "ANI_NAME_FIGHT_RUN": [
+    "run",
+    false
+    ],
+    "ANI_FILE": "monster/air4_enemy"
+    },
+    "A1010": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,164,
+    0.007
+    ],
+    "ICON": "bus.png",
+    "ANI_DATA": [
+    200,
+    1000,
+    15,
+    21,
+    180,
+    120,
+    0,
+    20,
+    223,
+    142,
+    3
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    20,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 4,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/bus_enemy"
+    },
+    "B1002": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    163,
+    0
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_TYPE": 2,
+    "ANI_FILE": "monster/goldcat_enemy",
+    "ANI_DATA": [
+    10000,
+    0,
+    15,
+    0,
+    180,
+    60,
+    480,
+    0,
+    85,
+    95,
+    10
+    ]
+    },
+    "A1013": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,215,
+    0.007
+    ],
+    "ICON": "air3.png",
+    "ANI_DATA": [
+    80,
+    1000,
+    15,
+    21,
+    180,
+    80,
+    480,
+    20,
+    124,
+    96,
+    0
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    200,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 2,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/air3_enemy"
+    },
+    "A1003": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,12,
+    0.007
+    ],
+    "ICON": "defsoldier.png",
+    "ANI_DATA": [
+    64,
+    1000,
+    15,
+    28,
+    180,
+    60,
+    0,
+    20,
+    230,
+    74,
+    6
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/defsoldier_enemy"
+    },
+    "A1012": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    58,
+    0.007
+    ],
+    "ICON": "air2.png",
+    "ANI_DATA": [
+    50,
+    1000,
+    15,
+    30,
+    180,
+    80,
+    480,
+    20,
+    167,
+    164,
+    0
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    100,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 2,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/air2_enemy"
+    },
+    "A1002": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,5,
+    0.007
+    ],
+    "ICON": "bombsoldier.png",
+    "ANI_DATA": [
+    28,
+    1000,
+    15,
+    40,
+    180,
+    90,
+    0,
+    20,
+    121,
+    82,
+    5
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    125,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/bombsoldier_enemy"
+    },
+    "A1009": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,200,
+    0.007
+    ],
+    "ICON": "bigcar1.png",
+    "ANI_DATA": [
+    250,
+    1000,
+    15,
+    15,
+    180,
+    105,
+    0,
+    20,
+    330,
+    258,
+    2
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    70,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 6,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/bigcar1_enemy"
+    },
+    "A1008": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    120,
+    0.007
+    ],
+    "ICON": "car3.png",
+    "ANI_DATA": [
+    100,
+    1000,
+    15,
+    45,
+    180,
+    90,
+    0,
+    20,
+    134,
+    99,
+    3
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    true,
+    55,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/car3_enemy"
+    },
+    "A1001": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    3,
+    0.007
+    ],
+    "ICON": "soldier.png",
+    "ANI_DATA": [
+    44,
+    1000,
+    15,
+    30,
+    180,
+    60,
+    0,
+    20,
+    161,
+    54,
+    6
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/soldier_enemy"
+    },
+    "B1001": {
+    "DROP_REWARDS": [
+    0.005,
+    0.005,
+    1,
+    0.007
+    ],
+    "ICON": "defsoldier.png",
+    "ANI_DATA": [
+    51,
+    1000,
+    15,
+    28,
+    180,
+    60,
+    0,
+    20,
+    91,
+    74,
+    6
+    ],
+    "ANI_NAME_FIGHT_STAND": [
+    "stand",
+    false
+    ],
+    "ANI_NAME_DEATH": [
+    "dead",
+    false
+    ],
+    "BOMB_DATA": [
+    false,
+    0,
+    "effect/deadbomb_texiao",
+    "run",
+    1
+    ],
+    "ANI_TYPE": 1,
+    "ANI_NAME_FIGHT_RUN": [
+    "stand",
+    false
+    ],
+    "ANI_FILE": "monster/defsoldier_enemy"
+    }
+    }
+    

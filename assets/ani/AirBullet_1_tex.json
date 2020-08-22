@@ -1,0 +1,1 @@
+{"width":128,"SubTexture":[{"width":1,"y":1,"height":1,"name":"rect_attack_a","x":64},{"frameWidth":67,"y":1,"frameHeight":68,"width":61,"frameX":-3,"height":61,"name":"bullets/zimu","frameY":-4,"x":1}],"height":64,"name":"AirBullet_1","imagePath":"AirBullet_1_tex.png"}
