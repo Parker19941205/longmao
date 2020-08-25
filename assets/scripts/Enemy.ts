@@ -6,6 +6,7 @@ import CollisionEvent from "./CollisionEvent"
 import FightScene, { BombType, ActType } from "./FightScene"
 import { tools } from "./tool"
 import { Utils } from "./Utils"
+import { AudioMgr } from "./AudioMarger"
 //import { AniType } from "./FightScene"
 
 //怪物类型
@@ -93,7 +94,7 @@ export class Enemy{
         this.res = this.getAniData()
         this.rewards = this.getDropRewards()
         this.aniType = parseInt(this.getAniType())
-        //cc.log("敌人动画类型=============>",this.aniType)
+        cc.log("敌人动画类型=============>",this.aniType)
 
 
 
@@ -117,7 +118,7 @@ export class Enemy{
         this.vx = speed * Math.cos(this.res.angle * Math.PI/2)
         this.vy = 0
 
-        cc.log("敌人初始x速度=============>",this.vx)
+        //cc.log("敌人初始x速度=============>",this.vx)
         //cc.log("saveSpeed=============>", this.saveSpeed)
       
         return this
@@ -236,21 +237,36 @@ export class Enemy{
 
 
 
-
         let dx = xPos - this.vx * delay
         let dy = yPos - this.vy * delay
-        // if math.abs(self.res.gravity) > 0 then
-		// if self.aniType == AniType.ANI_TYPE_LAND
-		// or self.aniType == AniType.ANI_TYPE_BUILDING
-		// or self.aniType == AniType.ANI_TYPE_CAR
-		// or self.aniType == AniType.ANI_TYPE_DEFENCE then
-		// 	self.dropTime = self.dropTime + delay
-		// 	dy = dy - self.res.gravity * self.dropTime
-		// end
-        // end
-    
+   
+        //let yCp = this.bottom_bg.position.y+this.bottom_bg.height/2
+        //if(this.isDeath){
+            // if(Math.abs(this.res.gravity) > 0){
+            //     this.dropTime = this.dropTime + delay
+            //     let dx = xPos
+            //     let dy = yPos + this.vy * delay
+            //     dy = dy - this.res.gravity * this.dropTime
+            //     if(dy <= yCp){
+            //         dy = yCp
+            //         this.doDeath()
+            //     }
+            //     this.sprite.setPosition(dx, dy)
+            // }else{
+            //     this.doDeath()
+            // }
+            //this.doDeath()
+            //return
+        //}
+
+
+
+
+
+
 
         //cc.log("dx和dy===================>",dx,dy);
+        
         this.sprite.setPosition(dx, dy)
 
         //cc.log("SCREEN_WIDTH1===================>",this.FightScene.SCREEN_WIDTH/2);
@@ -311,16 +327,7 @@ export class Enemy{
         if(this.isDeath){
             return
         }
-        this.hp = this.hp - bullet.physicsATK
-        if(tag == 10){
-            this.hp = 0
-        }
-
-
-        this.updateHpBar()
-        this.hitNum(bullet.physicsATK)
-
-
+  
 
         if(bullet.bombType == BombType.Ice){  //被冰弹攻击
             this.sprite.stopActionByTag(ActType.TAG_ACT_SLOW)
@@ -346,6 +353,19 @@ export class Enemy{
             let action = cc.sequence(array)
             action.setTag(ActType.TAG_ACT_SLOW)
             this.sprite.runAction(action)
+
+        }else{
+            this.hp = this.hp - bullet.physicsATK
+            // if(tag == 10){
+            //     this.hp = 0
+            // }
+    
+    
+            this.updateHpBar()
+            this.hitNum(bullet.physicsATK)
+    
+
+
 
         }
 
@@ -412,14 +432,20 @@ export class Enemy{
         // armatureDisplay.armatureName = "armatureName";
         // armatureDisplay.playAnimation("stand",0);
 
-        let armatureDisplay:dragonBones.ArmatureDisplay = this.sprite.getComponent(dragonBones.ArmatureDisplay)
-        armatureDisplay.playAnimation("dead",1);
-        //armatureDisplay.debugBones = true
+        // if(this.aniType == AniType.ANI_TYPE_AIR){
+        //     let bottomYPos = this.bottom_bg.position.y+this.bottom_bg.height/2
 
+        //     var ation1 = cc.rotateBy(2, 360)
+        //     var ation2 = cc.moveBy(2,bottomYPos)
 
-        armatureDisplay.addEventListener(dragonBones.EventObject.FADE_IN_COMPLETE, this._animationEventHandler, this);
-        armatureDisplay.addEventListener(dragonBones.EventObject.FADE_OUT_COMPLETE, this._animationEventHandler, this);
-        armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this._animationEventHandler, this);
+        //     // let array =  new Array()
+        //     // array.push(cc.spawn(ation1,ation2))
+        //     // nodeImg.runAction(cc.sequence(array))
+        //     cc.log("动画执行========================>",bottomYPos)
+
+		//     this.sprite.runAction(cc.moveTo(2,bottomYPos)) //cc.spawn(ation1,ation2)
+        // }
+
 
         if(this.FightScene.isGameOver() == false){
             let star = 0
@@ -435,6 +461,16 @@ export class Enemy{
             bloodNode.active = false
         }
 
+        if(this.aniType == AniType.ANI_TYPE_AIR){
+            let bottomYPos = this.bottom_bg.position.y+this.bottom_bg.height/2
+            let x = this.sprite.getPosition().x
+            var ation1 = cc.rotateBy(1, 360)
+            var ation2 = cc.moveTo(1,cc.v2(x,bottomYPos))
+            this.sprite.runAction(cc.spawn(ation1,ation2)) //cc.spawn(ation1,ation2)
+            this.doDeath()
+        }else{
+            this.doDeath()
+        }
     }
 
     //动画播放回调
@@ -453,7 +489,7 @@ export class Enemy{
 
             if(this.isDeath = true){
              
-                let bones:dragonBones.ArmatureDisplay = this.sprite.getComponent(dragonBones.ArmatureDisplay)
+                let bones = this.sprite.getComponent(dragonBones.ArmatureDisplay)
                 //cc.log("播放完成bones==============>",bones)
                    // 取得挂点工具
                 let attachUtil =  bones.attachUtil;
@@ -463,8 +499,13 @@ export class Enemy{
                 var array  = attachUtil._attachedNodeArray
                 let pointNode:cc.Node = this.FightScene.node.getChildByName("pointNode")
 
+                //cc.log("骨骼数量==============>",array.length)
+                let bonesNum = array.length
+                if(bonesNum > 3){
+                    bonesNum = 3
+                }
 
-                for(var i=0;i<array.length;i++){
+                for(var i=0;i<bonesNum;i++){
                    // cc.log("骨骼节点==============>",array[i])
                     var boneNode = array[i]
                     let worldPos= boneNode.convertToWorldSpaceAR(cc.Vec2.ZERO)
@@ -474,6 +515,8 @@ export class Enemy{
                     let point= pointNode.convertToNodeSpaceAR(worldPos)
                     this.dropGoldEffect(point,i+1)
                     this.deadEffect(point,1.0)
+                    AudioMgr.getInstance().playEffect("SE016");
+
                 }
 
 
@@ -485,7 +528,17 @@ export class Enemy{
     }
 
     doDeath(){
-        this.isDeath = true
+        //this.isDeath = true
+
+        let armatureDisplay:dragonBones.ArmatureDisplay = this.sprite.getComponent(dragonBones.ArmatureDisplay)
+        armatureDisplay.playAnimation("dead",1);
+        //armatureDisplay.debugBones = true
+
+
+        armatureDisplay.addEventListener(dragonBones.EventObject.FADE_IN_COMPLETE, this._animationEventHandler, this);
+        armatureDisplay.addEventListener(dragonBones.EventObject.FADE_OUT_COMPLETE, this._animationEventHandler, this);
+        armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this._animationEventHandler, this);
+
     }
 
 
@@ -630,6 +683,7 @@ export class Enemy{
         let goldPos = this.FightScene.getGoldPos()
         let _removeEff = function(){
             //Effect:goldGainEffect(ccp(goldPos.x, goldPos.y))
+            AudioMgr.getInstance().playEffect("SE011");
             //eff:die()
             goldEffectNode.removeFromParent()
         }

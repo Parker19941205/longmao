@@ -13,6 +13,7 @@ import { Battery } from "./Battery";
 import { EqiupChange } from "./EqiupChange";
 import { Utils } from "./Utils";
 import { Shake } from "./Shake";
+import { AudioMgr } from "./AudioMarger";
 
 const {ccclass, property} = cc._decorator;
 
@@ -115,9 +116,9 @@ export default class FightScene extends cc.Component {
     private balanceUI
     private g_game_over = false
     private battery
-    private g_game_start = false
+    public g_game_start = false
     public weaponNode = null
-    private currentGates = 1
+    private currentGates = 0
     private bulletinitPos = null
     public isguajiing = true
     public issetBulletRock = false
@@ -125,11 +126,12 @@ export default class FightScene extends cc.Component {
     public SCREEN_WIDTH
     public SCREEN_HEIGHT
     public isOutEnemy = false
-
+    private bottom_bg
 
     onLoad(){
         this.g_fight_scene = this
         this.batteryNode.zIndex = 100
+        this.bottom_bg = this.node.getChildByName("bottom_bg")
 
         //let cellNum = Math.floor(12/10 + 1)
         this.SCREEN_WIDTH = cc.winSize.width
@@ -200,7 +202,7 @@ export default class FightScene extends cc.Component {
         }, 1)
 
 
-     
+        AudioMgr.getInstance().playEffect("BGM002",true);
 
     }
 
@@ -374,6 +376,8 @@ export default class FightScene extends cc.Component {
             return
         }    
 
+        AudioMgr.getInstance().playEffect("SE001");
+
         let res = {}
         res["ani"] = "bullets/NormalBullet"
         res["index"] = 0
@@ -393,6 +397,8 @@ export default class FightScene extends cc.Component {
         if(GameData.BulletsData == null){
             return
         }    
+        AudioMgr.getInstance().playEffect("SE007");
+
         this.issetBulletRock = true
         cc.log("重炮弹==============>")
 
@@ -416,6 +422,7 @@ export default class FightScene extends cc.Component {
         if(GameData.BulletsData == null){
             return
         }    
+        AudioMgr.getInstance().playEffect("SE005");
 
         cc.log("空气弹==============>")
 
@@ -461,6 +468,7 @@ export default class FightScene extends cc.Component {
         if(GameData.BulletsData == null){
             return
         }    
+        AudioMgr.getInstance().playEffect("SE003");
 
         cc.log("冰弹==============>")
 
@@ -484,6 +492,7 @@ export default class FightScene extends cc.Component {
         if(GameData.BulletsData == null){
             return
         }    
+        AudioMgr.getInstance().playEffect("SE009");
 
         cc.log("全屏弹==============>")
 
@@ -506,6 +515,7 @@ export default class FightScene extends cc.Component {
         if(GameData.BulletsData == null){
             return
         }    
+        AudioMgr.getInstance().playEffect("SE001");
 
         cc.log("保护弹==============>")
 
@@ -710,6 +720,7 @@ export default class FightScene extends cc.Component {
             let pointNode:cc.Node = this.node.getChildByName("pointNode")
             pointNode.removeAllChildren()
 
+
             var that = this
             let showPlayerDeath = cc.callFunc(function(){
                 var onResourceLoaded = function(errorMessage, loadedResource )
@@ -725,6 +736,9 @@ export default class FightScene extends cc.Component {
                     var prefebAni = prefeb.getComponent(dragonBones.ArmatureDisplay)
                     prefebAni.playAnimation('run', 1);
                     that.deadPrefebAni = prefeb
+
+                    AudioMgr.getInstance().playEffect("SE009");
+
                 };
                 cc.loader.loadRes('prefab/playerdead', onResourceLoaded );
             })
@@ -808,7 +822,7 @@ export default class FightScene extends cc.Component {
         this.currentGates = Number(this.currentGates) + 1
         this.reloadGatesData()
 
-
+        cc.sys.localStorage.setItem("CurrentGates",Number(this.currentGates));
         this.updateCurrentGates()
         this.playReadyAni()
 
@@ -821,7 +835,10 @@ export default class FightScene extends cc.Component {
         currentLabel.string = String(this.currentGates)
         var next = this.node.getChildByName("gatesNode").getChildByName("next")
         var last = this.node.getChildByName("gatesNode").getChildByName("last")
-    
+        var current = this.node.getChildByName("gatesNode").getChildByName("current")
+
+
+
         if(Number(this.currentGates) > 1){
          
           var nextLabel = next.getChildByName("gatesLabel").getComponent(cc.Label)
@@ -833,14 +850,16 @@ export default class FightScene extends cc.Component {
 
           next.active = true
           last.active = true
-
+          current.active = true
         }else{
-            next.active = false
-            last.active = false
+            if(Number(this.currentGates) == 1){
+                current.active = true
+            }else{
+                current.active = false
+                next.active = false
+                last.active = false
+            }
         }
-
-
-        cc.sys.localStorage.setItem("CurrentGates",Number(this.currentGates));
     }
 
 
@@ -880,6 +899,8 @@ export default class FightScene extends cc.Component {
         this.updateCurrentGates()
 
         this.playReadyAni()
+
+    
     }
 
     // 回到主页
@@ -891,7 +912,7 @@ export default class FightScene extends cc.Component {
 
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = true
-        this.currentGates = 1
+        this.currentGates = 0
         this.reloadGatesData()
 
         this.updateCurrentGates()
@@ -907,6 +928,8 @@ export default class FightScene extends cc.Component {
             console.log("1秒后更新炮台=========>")
             this.changeBattery("Battery")
         }, 2)
+
+        this.getFightUI().updateAll()
     }
 
 
@@ -919,6 +942,8 @@ export default class FightScene extends cc.Component {
             if(ready){
                 ready.removeFromParent()
                 that.g_game_start = true
+
+                that.getFightUI().updateAll()
             }
         })
 
@@ -932,6 +957,22 @@ export default class FightScene extends cc.Component {
     getGoldPos(){
 	    return this.fightUI.getGoldPos()
     }
+
+
+    attckEffectIce(bullet,pos){
+        for(var i=0;i < this.enemyList.length;i++ ){
+            let ani = this.enemyList[i]
+            if(ani){
+                let enemyX = ani.sprite.getPosition().x
+                //cc.log("子弹位置，敌人的位置=======>",pos.x,enemyX)
+                if((pos.x + 200) > enemyX && (pos.x - 200) < enemyX ){
+                    ani.hit(bullet)
+                }
+            }
+        }
+    }
+
+
 
 
 

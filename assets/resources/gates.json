@@ -1,4 +1,57 @@
 {
+    "0": {
+    "is_boss": 0,
+    "map_id": "map1",
+    "hard_level": 1,
+    "next_gates": "1",
+    "gate_type": 0,
+    "gate_cond": "",
+    "waves": [
+    {
+    "A1001": {
+    "A1001_2": {
+    "mon_x": 296,
+    "mon_y": 179,
+    "mon_type": 1,
+    "mon_id": "A1001_2",
+    "mon_time": "9"
+    },
+    "A1001_1": {
+    "mon_x": 209,
+    "mon_y": 163,
+    "mon_type": 1,
+    "mon_id": "A1001_1",
+    "mon_time": "6"
+    },
+    "A1001_3": {
+    "mon_x": 383,
+    "mon_y": 164,
+    "mon_type": 1,
+    "mon_id": "A1001_3",
+    "mon_time": "12"
+    },
+    "A1001_4": {
+    "mon_x": 478,
+    "mon_y": 161,
+    "mon_type": 1,
+    "mon_id": "A1001_4",
+    "mon_time": "16"
+    }
+    },
+    "A1003": {
+    "A1003_2": {
+    "mon_x": 550,
+    "mon_y": 160,
+    "mon_type": 1,
+    "mon_id": "A1003_2",
+    "mon_time": "19"
+    }
+    }
+    },
+    {},
+    {}
+    ]
+    },
     "69": {
     "is_boss": 1,
     "map_id": "map4",

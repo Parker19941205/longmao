@@ -6,6 +6,7 @@ import { tools } from "./tool"
 import { Utils } from "./Utils"
 import CollisionEvent from "./CollisionEvent"
 import { Shake } from "./Shake"
+import { AudioMgr } from "./AudioMarger"
 
 export class Bullet {
     scene: any
@@ -298,17 +299,18 @@ export class Bullet {
 
 
 
-                    
+            
                 let bottomYPos = this.bottom_bg.position.y+this.bottom_bg.height/2
-
+           
                 if(dy <= bottomYPos+40){    // 掉落在地上爆炸
                     if(this.bombType == BombType.Rock){
-                        this.vx = this.vx - 0.5
+                        this.vx = this.vx - 2.3
                         //dx = xPos + 30 * delay
                         dy = bottomYPos+40
                         if(this.isrun == false){
                             this.rotateAction2(10)
                             this.isrun = true
+                            AudioMgr.getInstance().playEffect("SE002");
                         }
 
                         if(this.vx <= 0){
@@ -351,10 +353,6 @@ export class Bullet {
                         this.die(true)
                         return
                     }
-
-
-
-
                 }
 
 
@@ -401,10 +399,13 @@ export class Bullet {
             if(this.bombType == BombType.Ice){
                 this.bombEffectIce()
                 this.sprite.removeFromParent()
+
+                AudioMgr.getInstance().playEffect("SE004");
             }else if(this.bombType == BombType.Screen){
                 this.bombEffectScreen()
                 this.sprite.removeFromParent()
                 this.FightScene.hurtAllEnemys(this)
+                AudioMgr.getInstance().playEffect("SE002");
             }else if(this.bombType == BombType.Protect){
                 this.bombEffectProtect()
                 this.sprite.removeFromParent()
@@ -419,7 +420,7 @@ export class Bullet {
                 bulletAni.playAnimation('run', 1);
                 this.sprite.removeFromParent()
 
-
+                AudioMgr.getInstance().playEffect("SE002");
                 //let armatureDisplay:dragonBones.ArmatureDisplay = this.bulletBomb.getComponent(dragonBones.ArmatureDisplay)
                // armatureDisplay.playAnimation("dead",1);
         
@@ -438,9 +439,16 @@ export class Bullet {
 
     //被击中
     hit(enemy,tag?:number){
-        if(tag != 10){
+        if(this.bombType != BombType.Rock && this.bombType != BombType.Protect){
             this.die(true)
         }
+        if(this.bombType == BombType.AirSon){
+            AudioMgr.getInstance().playEffect("SE006");
+        }
+        if(this.bombType == BombType.Rock){
+            AudioMgr.getInstance().playEffect("SE008");
+        }
+
     }
 
 
@@ -528,7 +536,7 @@ export class Bullet {
         var dirPath = "ani/iceBombEffect";
         this.playAni(this.bulletBomb, dirPath,"run")
 
-      
+        this.FightScene.attckEffectIce(this,this.sprite.getPosition())
     }
 
     playAni(node, path, newAnimation = "Animation1",time = 1){
@@ -583,7 +591,7 @@ export class Bullet {
 
 
          //cc.log("bulletBomb=================>", this.bulletBomb.getComponent(dragonBones.ArmatureDisplay))
-         var bulletAni:dragonBones.ArmatureDisplay =  this.bulletBomb.getComponent(dragonBones.ArmatureDisplay)
+         var bulletAni =  this.bulletBomb.getComponent(dragonBones.ArmatureDisplay)
          bulletAni.playAnimation('attack', 5);
         //this.sprite.removeFromParent()
 

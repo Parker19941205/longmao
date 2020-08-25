@@ -14,7 +14,9 @@ export class PauseUI {
     private _count_gems = 0
     private _count_golds = 0
     private continu_btn
-
+    private goback_btn
+        
+    
      // 构造方法
      constructor(scene:any) {
         cc.log("构造暂停UI类=============>")
@@ -40,6 +42,8 @@ export class PauseUI {
 
             var btnNode = prefabNode.getChildByName("btnNode")
             that.continu_btn = btnNode.getChildByName("continu_btn")
+            that.goback_btn = btnNode.getChildByName("goback_btn")
+
             that.showing(btnNode)
 
 
@@ -47,6 +51,18 @@ export class PauseUI {
                 cc.log("恢复=========>")
                 that.closing(btnNode,prefabNode)
             }, this);
+
+
+
+            //主页
+            that.goback_btn.on("touchend", (event) => {
+                cc.log("主页=========>")
+                that.closing(btnNode,prefabNode)
+                that.FightScene.getFightScene().goHome()
+            }, this);
+
+
+
         };
         cc.loader.loadRes('prefab/PauseUI', onResourceLoaded );
 

@@ -3,6 +3,8 @@
     Date:2014/5/7
     **/
 
+import { AudioMgr } from "./AudioMarger";
+
 
 export class FightFail {
     private FightScene;
@@ -42,8 +44,7 @@ export class FightFail {
             
 
 
-
-
+             AudioMgr.getInstance().playEffect("BGM004");
 
 
 

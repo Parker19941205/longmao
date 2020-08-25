@@ -3,6 +3,8 @@
     Date:2014/5/7
     **/
 
+import { AudioMgr } from "./AudioMarger";
+
 
 export class FightVictory {
     private FightScene;
@@ -47,7 +49,8 @@ export class FightVictory {
              }, this);
 
 
-
+             AudioMgr.getInstance().playEffect("BGM003");
+             AudioMgr.getInstance().playEffect("SE012");
 
         };
         cc.loader.loadRes('prefab/FightVictory', onResourceLoaded );
