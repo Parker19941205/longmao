@@ -1,0 +1,19 @@
+{
+  "package": "com.sfpaly.longmao.neame.gamecenter",
+  "name": "猫咪射手",
+  "icon": "C:\\Users\\DELL\\Desktop\\longma\\icon.png",
+  "versionName": "1.0.0",
+  "versionCode": "1",
+  "minPlatformVersion": "1056",
+  "deviceOrientation": "landscape",
+  "logLevel": "log",
+  "tinyPackageMode": true,
+  "tinyPackageServer": "https://yuema.sfplay.net/yuema_assets/longmao",
+  "useDebugKey": false,
+  "privatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\private.pem",
+  "certificatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\certificate.pem",
+  "disabledMode": "",
+  "npmPath": "",
+  "showNpmPath": false,
+  "packFirstScreenRes": false
+}

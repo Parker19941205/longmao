@@ -66,10 +66,19 @@ export class Utils{
      * @param completeCallback  动画播放完毕的回调
      * @param playTimes         播放次数 -1是根据龙骨文件 0五险循环 >0是播放次数
      */
-    public static loadDragonBones2 = function(node, path, armatureName = "armatureName", newAnimation = "newAnimation", completeCallback = null, playTimes = -1) {
+    public static loadDragonBones2 = function(node, path, callback?:any, armatureName = "armatureName", newAnimation = "Animation1", completeCallback = null, playTimes = 0) {
         cc.loader.loadResDir(path, function(err, assets) {
             cc.log("err=======>",err)
             cc.log("length=======>",assets.length)
+            cc.log("path=======>",path)
+
+            cc.log("armatureName=======>",err)
+            cc.log("newAnimation=======>",newAnimation)
+
+
+
+
+
             if (err || assets.length <= 0) return;
             let animationDisplay = node.addComponent(dragonBones.ArmatureDisplay)
             assets.forEach(asset => {
@@ -81,8 +90,17 @@ export class Utils{
                 }
             });
             animationDisplay.armatureName = armatureName;
-            //animationDisplay.playAnimation(newAnimation, playTimes);
-            animationDisplay.playAnimation("run",0);
+            animationDisplay.playAnimation(newAnimation, playTimes);
+            //animationDisplay.playAnimation("run",0);
+
+
+            if(callback){
+                //cc.log("加载回调=========>")
+                callback()
+            }
+
+
+
             if (completeCallback) {
                 animationDisplay.addEventListener(dragonBones.EventObject.COMPLETE, completeCallback);
             }

@@ -1,0 +1,8 @@
+°üÃû£ºcom.sfplay.yuema.vivominigame
+CpID£º20160503142027150906
+
+AppID£º100007444
+
+AppSecret£ºc8c0f98817cf9437ed4ee37660f0bdc1£¨ÕÊºÅ£©
+
+AppKey£º10b0ed87b11a29f2e0e6e07b32f125fb£¨ÕÊºÅ£©

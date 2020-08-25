@@ -35,8 +35,9 @@ export class Battery {
 
      createBattery(battery,aniNode,callfunc){
         var dirPath = "ani/" + battery;
-        Utils.loadDragonBones(aniNode, dirPath,callfunc)
+        //Utils.loadDragonBones(aniNode, dirPath,callfunc)
         
+        Utils.loadDragonBones2(aniNode, dirPath,callfunc)
      }
 
 
@@ -97,7 +98,7 @@ export class Battery {
         node.setPosition(position)
         pointNode.addChild(node,0,npcAni);
 
-        Utils.loadDragonBones(node,dirPath,null,"stand")
+        Utils.loadDragonBones2(node,dirPath,null,"armatureName","stand")
      }
 
 

@@ -564,21 +564,25 @@ export class Bullet {
 
     bombEffectScreen(){
         for(var i=0;i<30;i++){
-
             let destX = tools.getRandomNumInt(-480,480)
             let destY = tools.getRandomNumInt(-320,320)
-            //cc.log("随机生成的角度================>",degree)
 
-
-            // 使用给定的模板在场景中生成一个新节点
-            this.bulletBomb = new cc.Node();
-            this.bulletBomb.setPosition(destX,destY)
-            this.scene.node.addChild(this.bulletBomb);
-
+            var that = this
             var dirPath = "ani/baozhan";
-            this.playAni(this.bulletBomb, dirPath,"run")
-
-
+            var callfunc = (function(){
+                let node:cc.Node = that.FightScene.node.getChildByName("bombEffectScreen")
+                if(node){
+                    //cc.log("删除============>")
+                    node.removeFromParent()
+                }
+            })
+    
+            let node:cc.Node = new cc.Node();
+            node.setPosition(destX,destY)
+            this.FightScene.node.addChild(node,0,"bombEffectScreen");
+    
+            //Utils.loadDragonBones(node,dirPath,null,"run",callfunc,1)
+            Utils.loadDragonBones2(node,dirPath,null,"armatureName","run",callfunc,1)
         }
     }
 
@@ -597,7 +601,7 @@ export class Bullet {
 
         // 取得挂点工具
         let attachUtil = bulletAni.attachUtil;
-        cc.log("attachUtil===========>",attachUtil)
+        //cc.log("attachUtil===========>",attachUtil)
         let armature =   attachUtil._boneIndexToNode
         var attachNode8 = armature[8]
         var attachNode9 = armature[9]

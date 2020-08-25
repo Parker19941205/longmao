@@ -57,8 +57,8 @@ export class EqiupChange {
             let batteryData = GameData.BatteryData
             let i = 0
             for(const key of Object.keys(batteryData)) {
-                cc.log("key=============>",key)
-                cc.log("value=============>",batteryData[key])
+                //cc.log("key=============>",key)
+                //cc.log("value=============>",batteryData[key])
     
                 // for(const data of Object.values(enemies[key])){
                 //    // cc.log("data=============>",data)
@@ -66,7 +66,7 @@ export class EqiupChange {
                 //     EnemyObj.init(data)
                 // }
 
-                cc.log("TITLE_ICON=============>",batteryData[key].TITLE_ICON)
+                //cc.log("TITLE_ICON=============>",batteryData[key].TITLE_ICON)
 
                 var button = cc.instantiate(btn_template) //.clone();
                 let titileicon = button.getChildByName("titilebg").getChildByName("titileicon")
@@ -127,7 +127,10 @@ export class EqiupChange {
         let batteryData = GameData.BatteryData
 
         var dirPath = "ani/" + batteryData[index].ANI_FILE;
-        Utils.loadDragonBones(aniNode, dirPath)
+        //Utils.loadDragonBones(aniNode, dirPath)
+        Utils.loadDragonBones2(aniNode,dirPath)
+
+
 
 
         let gjnode = this.previewBg.getChildByName("gjSprite").getChildByName("label")  // 攻击

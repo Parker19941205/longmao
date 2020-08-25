@@ -76,6 +76,9 @@ export class Enemy{
     private width
     private height
     private falling
+    private guajiCDTime
+    private cdNormal = 6
+    private sumTime = 5
 
 
 
@@ -289,11 +292,26 @@ export class Enemy{
 
 
         // 挂机中自动发技能
-        if(this.FightScene.isguajiing == true && dx <= (yPosBattery.x + 300) && this.FightScene.issetBulletRock == false){
-            cc.log("发技能========>")
-            this.FightScene.createBulletRock()
-        }
+        // if(this.FightScene.isguajiing == true && dx <= (yPosBattery.x + 300) && this.FightScene.issetBulletRock == false){
+        //     cc.log("发技能========>")
+        //     this.FightScene.createBulletRock()
+        // }
 
+
+        this.FightScene.gjsumTime =this.FightScene.gjsumTime + delay
+        // 挂机中自动发技能
+        if(this.FightScene.isguajiing == true && dx <= (yPosBattery.x + 500) && this.FightScene.gjsumTime - this.FightScene.gjcountTime > this.FightScene.gjcdNormal){
+            this.FightScene.gjcountTime = this.FightScene.gjsumTime
+            cc.log("挂机发技能========>", this.FightScene.autoCdType)
+            if(this.FightScene.autoCdType == 0){
+                this.FightScene.createBulletScreen()
+                this.FightScene.autoCdType = 1
+            }else{
+                this.FightScene.createBulletProtect()
+                this.FightScene.autoCdType = 0
+            }
+           
+        }
 
     }
 
@@ -667,7 +685,8 @@ export class Enemy{
         node.setPosition(position)
         pointNode.addChild(node,0,"deadsmoke");
 
-        Utils.loadDragonBones(node,dirPath,null,"run",callfunc,1)
+        //Utils.loadDragonBones(node,dirPath,null,"run",callfunc,1)
+        Utils.loadDragonBones2(node,dirPath,null,"armatureName","run",callfunc,1)
     }
 
     // 金币掉落特效

@@ -14,6 +14,7 @@ import { EqiupChange } from "./EqiupChange";
 import { Utils } from "./Utils";
 import { Shake } from "./Shake";
 import { AudioMgr } from "./AudioMarger";
+import { Help } from "./Help";
 
 const {ccclass, property} = cc._decorator;
 
@@ -127,6 +128,18 @@ export default class FightScene extends cc.Component {
     public SCREEN_HEIGHT
     public isOutEnemy = false
     private bottom_bg
+    public autoCdType = 0
+
+
+
+    public gjcdNormal = 6
+    public gjsumTime = 5
+    public gjcountTime = 0
+
+
+
+
+
 
     onLoad(){
         this.g_fight_scene = this
@@ -207,6 +220,10 @@ export default class FightScene extends cc.Component {
     }
 
     start () {
+        //2秒后更新炮台
+        this.scheduleOnce(() => {
+            new Help(this)
+        }, 1)
     }
 
     // 更换炮台
@@ -243,7 +260,7 @@ export default class FightScene extends cc.Component {
     //自定义回调函数,参数t
     on_touch_move(t){
         //定义一个n_pos变量存储当前触摸点的位置
-        if(this.weaponNode == null){
+        if(this.weaponNode == null ||  this.isguajiing == true){
             return
         }
 
@@ -325,7 +342,7 @@ export default class FightScene extends cc.Component {
         let paodank:cc.Node = pointNode.getChildByName("paodank")
      
 
-        if(this.sumTime - this.countTime > this.cdNormal && this.g_game_over == false && (this.g_game_start == true || this.isguajiing == true)
+        if(this.sumTime - this.countTime > this.cdNormal && this.g_game_over == false && this.g_game_start == true && this.isguajiing == false
         && paodank != null && this.isOutEnemy == true){
             this.countTime = this.sumTime
             //cc.log("创建子弹================>")
@@ -885,6 +902,8 @@ export default class FightScene extends cc.Component {
         this.startGameBtn.node.active = false
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = false
+        this.pauseBtn.node.active = true
+
 
 
         var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
@@ -912,6 +931,8 @@ export default class FightScene extends cc.Component {
 
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = true
+        this.pauseBtn.node.active = false
+
         this.currentGates = 0
         this.reloadGatesData()
 
@@ -950,7 +971,8 @@ export default class FightScene extends cc.Component {
        
         let node:cc.Node = new cc.Node();
         pointNode.addChild(node,0,"ready");
-        Utils.loadDragonBones(node, dirPath,null,"run",callfunc,1)
+        //Utils.loadDragonBones(node, dirPath,null,"run",callfunc,1)
+        Utils.loadDragonBones2(node,dirPath,null,"armatureName","run",callfunc,1)
     }
 
 

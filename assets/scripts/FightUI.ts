@@ -39,7 +39,7 @@ export class FightUI {
 
         let bulletRockBtn = this.FightScene.node.getChildByName("skillNode").getChildByName("bulletRockBtn")
         bulletRockBtn.on("touchend", (event) => {   // 重型弹
-            if(bulletRockBtn.index == true){
+            if(bulletRockBtn.index == true || this.FightScene.isguajiing == true){
                 cc.log("冷却中=======>")
                 return
             }
@@ -52,7 +52,7 @@ export class FightUI {
 
         let airBulletBtn = this.FightScene.node.getChildByName("skillNode").getChildByName("AirBulletButton")
         airBulletBtn.on("touchend", (event) => {   // 空气弹
-            if(airBulletBtn.index == true){
+            if(airBulletBtn.index == true || this.FightScene.isguajiing == true){
                 cc.log("冷却中=======>")
                 return
             }
@@ -64,7 +64,7 @@ export class FightUI {
 
         let iceBulletBtn = this.FightScene.node.getChildByName("skillNode").getChildByName("IceBulletButton")
         iceBulletBtn.on("touchend", (event) => {   // 冰弹
-            if(iceBulletBtn.index == true){
+            if(iceBulletBtn.index == true || this.FightScene.isguajiing == true){
                 cc.log("冷却中=======>")
                 return
             }
@@ -78,6 +78,11 @@ export class FightUI {
         
         let bulletScreenBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletScreenBtn")
         bulletScreenBtn.on("touchend", (event) => {   // 全屏弹
+            if(this.FightScene.isguajiing == true){
+                return
+            }
+
+
             let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
             if(num > 0){
                 this.FightScene.createBulletScreen()
@@ -92,6 +97,10 @@ export class FightUI {
 
         let bulletProtectBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletProtectBtn")
         bulletProtectBtn.on("touchend", (event) => {   // 守卫弹
+            if(this.FightScene.isguajiing == true){
+                return
+            }
+
             let num =  cc.sys.localStorage.getItem("ProtectNum");
             if(num > 0){
                 this.FightScene.createBulletProtect()
@@ -478,7 +487,7 @@ export class FightUI {
 
     updateInfo(node,bulletType){
         let level_label = node.getChildByName("lvicon").getChildByName("level").getComponent(cc.Label)
-        let need_label = node.getChildByName("need").getComponent(cc.Label)
+        let need_label = node.getChildByName("lvupBtn").getChildByName("need").getComponent(cc.Label)
 
         let level = cc.sys.localStorage.getItem("bullet" + bulletType);
         level_label.string = "Lv." + level
