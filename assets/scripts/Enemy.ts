@@ -442,7 +442,7 @@ export class Enemy{
 
 
     die(force?:any){
-        cc.log("敌人die========================>")
+        //cc.log("敌人die========================>")
         this.isDeath = true
         // let armatureDisplay:dragonBones.ArmatureDisplay = node.addComponent(dragonBones.ArmatureDisplay);
         // armatureDisplay.dragonAsset = resource[0];
@@ -501,7 +501,7 @@ export class Enemy{
            
         }
         else if (event.type === dragonBones.EventObject.COMPLETE) {
-            cc.log("播放完成==============>")
+            //cc.log("播放完成==============>")
             //this.doDeath()
 
 

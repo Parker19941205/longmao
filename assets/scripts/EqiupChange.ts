@@ -5,17 +5,22 @@
 
 import { GameData } from "./GameData";
 import { Utils } from "./Utils";
+import { TipUI } from "./TipUI";
+import FightScene from "./FightScene";
 
 
 export class EqiupChange {
-    private FightScene;
+    private FightScene:FightScene
     private previewBg
+    private buttonArray:Map<any,any> = new Map()
+    private node
+
+
 
      // 构造方法
      constructor(scene:any) {
         cc.log("构造更换炮台类=============>")
         this.FightScene = scene
-
 
    
         this.createUI()
@@ -35,6 +40,9 @@ export class EqiupChange {
             that.FightScene.node.addChild(resource,200)
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
 
+          
+
+
 
             let paotanScrollView = resource.getChildByName("paotanScrollView")
             let scrollViewContent = paotanScrollView.getChildByName("view").getChildByName("content")
@@ -43,10 +51,9 @@ export class EqiupChange {
 
             
             let closeBtn = resource.getChildByName("closeBtn")
-            closeBtn.on("touchend", (event) => {   // 开始游戏
+            closeBtn.on("touchend", (event) => {   
                 resource.removeFromParent()
             }, this);
-
 
 
 
@@ -57,48 +64,42 @@ export class EqiupChange {
             let batteryData = GameData.BatteryData
             let i = 0
             for(const key of Object.keys(batteryData)) {
-                //cc.log("key=============>",key)
-                //cc.log("value=============>",batteryData[key])
-    
-                // for(const data of Object.values(enemies[key])){
-                //    // cc.log("data=============>",data)
-                //     var EnemyObj = new Enemy(this,key)
-                //     EnemyObj.init(data)
-                // }
-
-                //cc.log("TITLE_ICON=============>",batteryData[key].TITLE_ICON)
-
+     
                 var button = cc.instantiate(btn_template) //.clone();
                 let titileicon = button.getChildByName("titilebg").getChildByName("titileicon")
                 var icon = titileicon.getComponent(cc.Sprite)
                 Utils.loadSprite("res/" + batteryData[key].TITLE_ICON, icon)
 
-                // 方法2
-                // var s = "resources/res/paotai3.png"
-                // icon.spriteFrame = new cc.SpriteFrame(cc.url.raw(s))
-
-
+        
                 button.active = true;
                 button.index = key;
                 button.targetOff(that)
                 button.setPosition(0,-35-i*60)
                 button.on("touchend", that.GotoSelectLayer, that);
                 scrollViewContent.addChild(button);
-
-
                 
+
                 let equipBtn = button.getChildByName("equipBtn")
                 equipBtn.index = key;
                 equipBtn.on("touchend", that.changeBattry, that);
-
+                //that.buttonArray.push(equipBtn)
+                that.buttonArray.set(key,equipBtn)
 
 
                 i = i + 1
             }
 
 
+            // 初始化
+            let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
+            if(CurrentBattery == null){
+                cc.sys.localStorage.setItem("CurrentBattery","BATT_1");
+            }
+            cc.sys.localStorage.setItem("BATT_1",true);
             that.initBatteryPreview("BATT_1")
 
+
+            that.resetAllButton()
         };
         cc.loader.loadRes('prefab/PaodanChange', onResourceLoaded );
     }
@@ -111,25 +112,82 @@ export class EqiupChange {
         this.initBatteryPreview(index)
     }
     
+
+
     changeBattry(event) {
         var index = event.currentTarget.index;
-        cc.log("index==============>",index)
-        let batteryData = GameData.BatteryData
-        var file =  batteryData[index].ANI_FILE;
-       // this.initBatteryPreview(index)
+        cc.log("index==============>,event======>",index,event)
 
-       this.FightScene.changeBattery(file)
+        let equipIndex = cc.sys.localStorage.getItem(index);
+        cc.log("equipIndex==========>",equipIndex)
+        if(equipIndex == null){  // 购买炮台
+            this.buyBattry(index)
+            return
+        }
+
+   
+        cc.sys.localStorage.setItem("CurrentBattery",index);
+
+        //let batteryData = GameData.BatteryData
+        //var file =  batteryData[index].ANI_FILE;
+
+        this.FightScene.changeBattery()
+        this.resetAllButton()
     }
     
+    // 购买炮台
+    buyBattry(index){
+        let payPrice = Number(GameData.BatteryData[index].PAY_PRICE)
+        var curGolds = Number(cc.sys.localStorage.getItem("CurrentGolds"))
+        if(curGolds >= payPrice){
+            cc.sys.localStorage.setItem(index,true);
+            cc.sys.localStorage.setItem("CurrentGolds",curGolds - payPrice);
+            this.FightScene.updateFightUI()
+            this.resetAllButton()
+        }else{
+            new TipUI(this.FightScene,"金币不足")
+        }
+    }
+
+
+    //更新按钮状态
+    resetAllButton(){
+        //cc.log("size===========>",this.buttonArray.size)
+
+        this.buttonArray.forEach((value , key) =>{
+            var node = value
+            var res = "res/wuqiup_pay1" //正常状态
+
+            let saveData = cc.sys.localStorage.getItem(key);
+            if(saveData){ // 已购买
+                res = "res/battery_btn3"
+            }
+            let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
+            if(CurrentBattery == key){ // 已装备
+                res = "res/battery_btn1"
+            }
+
+
+            var button:cc.Button = node.getComponent(cc.Button)
+
+             cc.loader.loadRes(res, cc.SpriteFrame, function(err, spriteFrame) {
+                 if (!err) {
+                     button.normalSprite = spriteFrame
+                     button.pressedSprite = spriteFrame
+                     button.hoverSprite = spriteFrame
+                 }
+             });
+        });
+    }
+
+
 
     initBatteryPreview(index){
         let aniNode = this.previewBg.getChildByName("aniNode")
         let batteryData = GameData.BatteryData
 
         var dirPath = "ani/" + batteryData[index].ANI_FILE;
-        //Utils.loadDragonBones(aniNode, dirPath)
         Utils.loadDragonBones2(aniNode,dirPath)
-
 
 
 
@@ -148,10 +206,6 @@ export class EqiupChange {
         let bsjlnode = this.previewBg.getChildByName("bsjlSprite").getChildByName("label")  // 宝石奖励
         var bsjllabel =bsjlnode.getComponent(cc.Label)
         bsjllabel.string =  batteryData[index].PAY_PRICE
-
-
-
-
 
     }
 

@@ -15,6 +15,7 @@ import { Utils } from "./Utils";
 import { Shake } from "./Shake";
 import { AudioMgr } from "./AudioMarger";
 import { Help } from "./Help";
+import { SignUI } from "./SignUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -70,6 +71,8 @@ export default class FightScene extends cc.Component {
     @property(cc.Button)
     eqiupChangeBtn: cc.Button = null;
     
+    @property(cc.Button)
+    signBtn: cc.Button = null;  //签到
 
     @property(cc.Prefab)
     shouweiBomb: cc.Prefab = null;
@@ -184,7 +187,7 @@ export default class FightScene extends cc.Component {
        // var that = this
         GameData.loadDataFromFile((loadFileNum) => {
             cc.log("loadFileNum===============>",loadFileNum)
-            if(loadFileNum == 4){
+            if(loadFileNum == 5){
                 this.enemyData = GameData.GatesData[this.currentGates.toString()]
                 cc.log("文件加载完毕===============>",this.enemyData)
 
@@ -206,12 +209,21 @@ export default class FightScene extends cc.Component {
            new EqiupChange(this)
         }, this);
 
+        this.signBtn.node.on("touchend", (event) => {   // 签到
+            new SignUI(this)
+         }, this);
+
 
         // 初始化炮台
         this.battery = new Battery(this)   //炮台
-         //2秒后更新炮台
-         this.scheduleOnce(() => {
-            this.changeBattery("Battery")
+      
+        let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
+        if(CurrentBattery == null){
+            cc.sys.localStorage.setItem("CurrentBattery","BATT_1");
+        }
+        //2秒后更新炮台
+        this.scheduleOnce(() => {
+            this.changeBattery()
         }, 1)
 
 
@@ -227,7 +239,12 @@ export default class FightScene extends cc.Component {
     }
 
     // 更换炮台
-    changeBattery(file){
+    changeBattery(){
+        let batteryData = GameData.BatteryData
+        let index = cc.sys.localStorage.getItem("CurrentBattery");
+        var file =  batteryData[index].ANI_FILE;
+
+
         var that = this
         that.batteryNode.active = true
 
@@ -946,8 +963,7 @@ export default class FightScene extends cc.Component {
         
         //2秒后更新炮台
         this.scheduleOnce(() => {
-            console.log("1秒后更新炮台=========>")
-            this.changeBattery("Battery")
+            this.changeBattery()
         }, 2)
 
         this.getFightUI().updateAll()
@@ -994,7 +1010,9 @@ export default class FightScene extends cc.Component {
         }
     }
 
-
+    updateFightUI(){
+        this.getFightUI().updateAll()
+    }
 
 
 

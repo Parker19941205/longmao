@@ -25,7 +25,7 @@ export class TipUI  {
             if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
             if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
             var resource = cc.instantiate( loadedResource );
-            that.FightScene.node.addChild(resource)
+            that.FightScene.node.addChild(resource,1000)
 
 
             let tipsLayer = resource

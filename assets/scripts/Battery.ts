@@ -77,7 +77,6 @@ export class Battery {
 
 
 
-
      createNPC(index, position){
         //cc.log("createNPC=========>",index)
         //cc.log("position=========>",position)

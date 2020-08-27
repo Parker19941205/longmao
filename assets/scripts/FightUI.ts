@@ -480,7 +480,7 @@ export class FightUI {
 
     //获取炮弹数据
     getBulletRes(bulletId){
-        cc.log("获取炮弹数据===========>",bulletId)
+        //cc.log("获取炮弹数据===========>",bulletId)
          return GameData.BulletsData[bulletId] || {}
      }
 
@@ -526,17 +526,25 @@ export class FightUI {
         this.updateScoreInfo()
 
 
+        //游戏开始升级按钮隐藏
         if(this.FightScene.g_game_start == true){
             node.getChildByName("lvupBtn").active = false
             var buyBtn = node.getChildByName("buyBtn")
             if(buyBtn){
                 buyBtn.active = true
             }
+            if(bulletType == BombType.Normal){
+                node.active = false
+            }
+
         }else{
             node.getChildByName("lvupBtn").active = true
             var buyBtn = node.getChildByName("buyBtn")
             if(buyBtn){
                 buyBtn.active = false
+            }
+            if(bulletType == BombType.Normal){
+                node.active = true
             }
         }
 
@@ -574,7 +582,7 @@ export class FightUI {
         return isCanLv
     }
 
-
+    // 技能CD时间
     checkCDTime(BulletBtn,cdTime){
         BulletBtn.index = true
         var bar = BulletBtn.getComponent(cc.ProgressBar)
@@ -583,7 +591,7 @@ export class FightUI {
         //  this.FightScene.schedule(function(){
         //  }, 0.01);
         cdTime = cdTime || 6
-        cc.log("cdTime===============>",cdTime)
+        //cc.log("cdTime===============>",cdTime)
 
         var callback = (cc.callFunc(function () {
             jindu = jindu - (1/(100*cdTime))
@@ -612,34 +620,6 @@ export class FightUI {
 	    return point
     }
 
-
-    
-    updateUplvBuyBtn(){
-
-        let buyBtnScreen = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletScreenBtn").getChildByName("buyBtn")
-        let buyBtnProtect = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletProtectBtn").getChildByName("buyBtn")
-
-        let lvupBtnScreen = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletScreenBtn").getChildByName("lvupBtn")
-        let lvupBtnProtect = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletProtectBtn").getChildByName("lvupBtn")
-        
-        if(this.FightScene.g_game_start == true){
-            buyBtnScreen.active = true
-            buyBtnProtect.active = true
-
-            lvupBtnScreen.active = false
-            lvupBtnProtect.active = false
-
-        }else{
-            buyBtnScreen.active = false
-            buyBtnProtect.active = false
-
-
-            lvupBtnScreen.active = true
-            lvupBtnProtect.active = true
-        }
-
-
-    }
 
 
 

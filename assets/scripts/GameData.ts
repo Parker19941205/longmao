@@ -3,6 +3,9 @@ export class GameData {
     public  static AnisData = null
     public  static BulletsData = null
     public  static BatteryData = null
+    public  static SignInData = null
+
+
 
     public static loadDataFromFile(callback: Function) {
         var loadFileNum = 0
@@ -39,7 +42,13 @@ export class GameData {
             cc.loader.releaseAsset(asset)
         });
 
-
+        // 签到奖励
+        cc.loader.loadRes("signIn", function (err, asset) {
+            GameData.SignInData = asset.json // JSON.parse(asset.json);
+            loadFileNum = loadFileNum + 1
+            callback(loadFileNum)
+            cc.loader.releaseAsset(asset)
+        });
 
     }
 

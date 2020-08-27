@@ -41,6 +41,17 @@ export class Utils{
         })
     }
     
+    public static loadButtonSprite = function(path, button) {
+        cc.loader.loadRes(path, cc.SpriteFrame, function(err, spriteFrame) {
+            if (!err) {
+                button.normalSprite = spriteFrame
+                button.pressedSprite = spriteFrame
+                button.hoverSprite = spriteFrame
+            }
+        })
+    }
+
+
     public static loadAtlasSprite = function(atlas, name, sprite) {
         cc.loader.loadRes(atlas, cc.SpriteAtlas, function(err, atlas) {
             var frame = atlas.getSpriteFrame(name);
@@ -68,12 +79,12 @@ export class Utils{
      */
     public static loadDragonBones2 = function(node, path, callback?:any, armatureName = "armatureName", newAnimation = "Animation1", completeCallback = null, playTimes = 0) {
         cc.loader.loadResDir(path, function(err, assets) {
-            cc.log("err=======>",err)
-            cc.log("length=======>",assets.length)
-            cc.log("path=======>",path)
+            // cc.log("err=======>",err)
+            // cc.log("length=======>",assets.length)
+            // cc.log("path=======>",path)
 
-            cc.log("armatureName=======>",err)
-            cc.log("newAnimation=======>",newAnimation)
+            // cc.log("armatureName=======>",err)
+            // cc.log("newAnimation=======>",newAnimation)
 
 
 

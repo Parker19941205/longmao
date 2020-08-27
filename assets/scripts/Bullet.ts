@@ -534,33 +534,21 @@ export class Bullet {
         this.scene.node.addChild(this.bulletBomb);
 
         var dirPath = "ani/iceBombEffect";
-        this.playAni(this.bulletBomb, dirPath,"run")
+        //this.playAni(this.bulletBomb, dirPath,"run")
 
+        var that = this
+        var callfunc = (function(){
+            if(that.bulletBomb){
+                that.bulletBomb.removeFromParent()
+            }
+        })
+
+
+        Utils.loadDragonBones2(this.bulletBomb,dirPath,null,"armatureName","run",callfunc,1)
         this.FightScene.attckEffectIce(this,this.sprite.getPosition())
     }
 
-    playAni(node, path, newAnimation = "Animation1",time = 1){
-        cc.loader.loadResDir(path,cc.Asset,null,(err, resource)=>{
-            //console.log("资源：",resource);
-            //let node:cc.Node = new cc.Node();
-            let armatureDisplay:dragonBones.ArmatureDisplay = node.addComponent(dragonBones.ArmatureDisplay);
-            armatureDisplay.dragonAsset = resource[0];
-            armatureDisplay.dragonAtlasAsset = resource[3];
-            armatureDisplay.armatureName = "armatureName";
-            armatureDisplay.playAnimation(newAnimation,time);
-
-        
-            //armatureDisplay.addEventListener(dragonBones.EventObject.START, this._animationEventHandler1, this);
-            //armatureDisplay.addEventListener(dragonBones.EventObject.START, this._animationEventHandler, this);
-            armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this._animationEventHandler, this);
-            //armatureDisplay.addEventListener(dragonBones.EventObject.FADE_IN, this._animationEventHandler, this);
-
-         
-
-
-        });
-    }
-
+   
 
     bombEffectScreen(){
         for(var i=0;i<30;i++){
@@ -627,7 +615,6 @@ export class Bullet {
         bulletAni.addEventListener(dragonBones.EventObject.COMPLETE, this._animationEventHandler, this);
 
     }
-
 
 
 
