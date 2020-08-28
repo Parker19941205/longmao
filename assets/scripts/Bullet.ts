@@ -3,7 +3,7 @@ import { removeListener } from "process"
 import { GameData } from "./GameData"
 import FightScene, { BombType, ActType, TrackType } from "./FightScene"
 import { tools } from "./tool"
-import { Utils } from "./Utils"
+import { Utils } from "./frameworks/Utils"
 import CollisionEvent from "./CollisionEvent"
 import { Shake } from "./Shake"
 import { AudioMgr } from "./AudioMarger"
@@ -80,6 +80,9 @@ export class Bullet {
 
         this.info = this.getBulletRes(this.bulletId)
         //cc.log("获取子弹数据==================>",this.info)
+        this.speed = this.info["SPEED"] || 0
+
+        
 
         this.trackType = this.res["trackType"]
         this.bombType = this.res["bombType"]

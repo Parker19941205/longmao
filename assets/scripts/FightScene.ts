@@ -11,11 +11,18 @@ import { PauseUI } from "./PauseUI";
 import { FightFail } from "./FightFail";
 import { Battery } from "./Battery";
 import { EqiupChange } from "./EqiupChange";
-import { Utils } from "./Utils";
+import { Utils } from "./frameworks/Utils";
 import { Shake } from "./Shake";
 import { AudioMgr } from "./AudioMarger";
 import { Help } from "./Help";
 import { SignUI } from "./SignUI";
+import { SDK } from "./platform/SDK";
+import { PlatformManager } from "./platform/PlatformManager";
+import { Def } from "./frameworks/Def";
+import { EvalSourceMapDevToolPlugin } from "webpack";
+import { Lib } from "./frameworks/Lib";
+import { GuajiUI } from "./GuajiUI";
+import { OnlineOffUI } from "./OnlineOffUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -74,10 +81,11 @@ export default class FightScene extends cc.Component {
     @property(cc.Button)
     signBtn: cc.Button = null;  //签到
 
-    @property(cc.Prefab)
+    @property(cc.Prefab)      // 守卫炸弹
     shouweiBomb: cc.Prefab = null;
 
-
+    @property(cc.Button)
+    guajishouyiBtn: cc.Button = null;  //挂机收益
 
 
     private startX = 0
@@ -124,7 +132,7 @@ export default class FightScene extends cc.Component {
     public weaponNode = null
     private currentGates = 0
     private bulletinitPos = null
-    public isguajiing = true
+    public isguajiing = true      // 是否在挂机
     public issetBulletRock = false
     private deadPrefebAni
     public SCREEN_WIDTH
@@ -132,17 +140,20 @@ export default class FightScene extends cc.Component {
     public isOutEnemy = false
     private bottom_bg
     public autoCdType = 0
-
+    public StopBannerNode = false
 
 
     public gjcdNormal = 6
     public gjsumTime = 5
     public gjcountTime = 0
+    private QiqiuitemType = 0
+    private QiqiuNode = null
+    private hard_level = 1
 
-
-
-
-
+    onDestroy() {
+        console.log("离线========>")
+        //cc.sys.localStorage.setItem("offlineTime",Lib.GetTimeBySecond());
+    }
 
     onLoad(){
         this.g_fight_scene = this
@@ -152,7 +163,8 @@ export default class FightScene extends cc.Component {
         //let cellNum = Math.floor(12/10 + 1)
         this.SCREEN_WIDTH = cc.winSize.width
         this.SCREEN_HEIGHT = cc.winSize.height
-
+        console.log("窗口的宽=======>",this.SCREEN_WIDTH)
+        console.log("窗口的高=======>",this.SCREEN_HEIGHT)
 
 
         //监听触摸开始事件
@@ -175,29 +187,37 @@ export default class FightScene extends cc.Component {
         },this);
         
 
-    //    let noded:cc.Node= cc.instantiate("defsoldier_enemy")
-    //    let co= this.node.addComponent(CollisionEvent)
-    //     co.fightScene=this;
+        let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
+        if(CurrentBattery == null || CurrentBattery.length == 0){
+            cc.sys.localStorage.setItem("CurrentBattery","BATT_1");
+        }
+
 
         cc.director.getCollisionManager().enabled = true
         cc.director.getCollisionManager().enabledDebugDraw = false
         cc.director.getCollisionManager().enabledDrawBoundingBox = false
 
     
-       // var that = this
         GameData.loadDataFromFile((loadFileNum) => {
             cc.log("loadFileNum===============>",loadFileNum)
             if(loadFileNum == 5){
                 this.enemyData = GameData.GatesData[this.currentGates.toString()]
-                cc.log("文件加载完毕===============>",this.enemyData)
+                console.log("文件加载完毕===============>",this.enemyData)
+                this.hard_level = this.enemyData["hard_level"] || 1.0
 
                 this.fightUI = new FightUI(this)
+                //更新炮台
+                this.scheduleOnce(() => {
+                    this.changeBattery()
+                }, 1)
             }
         });
 
 
         this.pauseBtn.node.on("touchend", (event) => {   // 暂停
             this.creatPauseUi()
+            this.StopBannerNode  = true
+            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
         }, this);
 
         this.startGameBtn.node.on("touchend", (event) => {   // 开始游戏
@@ -207,41 +227,58 @@ export default class FightScene extends cc.Component {
 
         this.eqiupChangeBtn.node.on("touchend", (event) => {   // 更换炮台
            new EqiupChange(this)
+           this.StopBannerNode  = true
+           SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
         }, this);
 
         this.signBtn.node.on("touchend", (event) => {   // 签到
             new SignUI(this)
+            this.StopBannerNode  = true
+            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
          }, this);
+
+
+         this.guajishouyiBtn.node.on("touchend", (event) => {   // 挂机收益
+            new GuajiUI(this)
+            this.StopBannerNode  = true
+            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+         }, this);
+
+         
 
 
         // 初始化炮台
         this.battery = new Battery(this)   //炮台
       
-        let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
-        if(CurrentBattery == null){
-            cc.sys.localStorage.setItem("CurrentBattery","BATT_1");
-        }
-        //2秒后更新炮台
-        this.scheduleOnce(() => {
-            this.changeBattery()
-        }, 1)
-
 
         AudioMgr.getInstance().playEffect("BGM002",true);
+        PlatformManager.getInstance().init();
+        SDK.getInstance().initSDK(this)
 
+        this.createQiqiu()
+        this.schedule(this.updateData, 1);
+        this.createOnlineOff()
+
+        //banner的显示
+        this.scheduleOnce(() => {
+            this.bannerShowHide()
+        }, 3)
     }
 
     start () {
-        //2秒后更新炮台
-        this.scheduleOnce(() => {
-            new Help(this)
-        }, 1)
     }
 
     // 更换炮台
     changeBattery(){
         let batteryData = GameData.BatteryData
         let index = cc.sys.localStorage.getItem("CurrentBattery");
+
+        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
+        if(ShiyongBattery != "" && ShiyongBattery != null){ 
+            index = ShiyongBattery 
+        }
+
+
         var file =  batteryData[index].ANI_FILE;
 
 
@@ -260,7 +297,7 @@ export default class FightScene extends cc.Component {
         })
         )
     }
-
+    //https://yuema.sfplay.net/longmao_assets/bytedance
 
 
 
@@ -631,7 +668,7 @@ export default class FightScene extends cc.Component {
             for(const data of Object.values(enemies[key])){
                // cc.log("data=============>",data)
                 var EnemyObj = new Enemy(this,key)
-                EnemyObj.init(data)
+                EnemyObj.init(data, this.hard_level)
             }
         }
 
@@ -860,6 +897,12 @@ export default class FightScene extends cc.Component {
         this.updateCurrentGates()
         this.playReadyAni()
 
+
+        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
+        if(ShiyongBattery != "" && ShiyongBattery != null){
+            cc.sys.localStorage.setItem("ShiyongBattery","");
+            this.changeBattery()
+        }
     }
 
   
@@ -871,12 +914,21 @@ export default class FightScene extends cc.Component {
         var last = this.node.getChildByName("gatesNode").getChildByName("last")
         var current = this.node.getChildByName("gatesNode").getChildByName("current")
 
+        var next2 = this.node.getChildByName("gatesNode").getChildByName("next2")
+        var last2 = this.node.getChildByName("gatesNode").getChildByName("last2")
 
+
+        
 
         if(Number(this.currentGates) > 1){
          
           var nextLabel = next.getChildByName("gatesLabel").getComponent(cc.Label)
           var lastLabel = last.getChildByName("gatesLabel").getComponent(cc.Label)
+
+        
+          var nextLabel2 = next2.getChildByName("gatesLabel").getComponent(cc.Label)
+          var lastLabel2 = last2.getChildByName("gatesLabel").getComponent(cc.Label)
+
 
           nextLabel.string = String(Number(this.currentGates) + 1)
           lastLabel.string = String(Number(this.currentGates) - 1)
@@ -885,6 +937,15 @@ export default class FightScene extends cc.Component {
           next.active = true
           last.active = true
           current.active = true
+
+            if(Number(this.currentGates) > 2){
+                next2.active = true
+                last2.active = true
+
+                nextLabel2.string = String(Number(this.currentGates) + 2)
+                lastLabel2.string = String(Number(this.currentGates) - 2)
+
+            }
         }else{
             if(Number(this.currentGates) == 1){
                 current.active = true
@@ -892,6 +953,8 @@ export default class FightScene extends cc.Component {
                 current.active = false
                 next.active = false
                 last.active = false
+                next2.active = false
+                last2.active = false
             }
         }
     }
@@ -909,6 +972,7 @@ export default class FightScene extends cc.Component {
 
     reloadGatesData(){
         this.enemyData = GameData.GatesData[this.currentGates.toString()]
+        this.hard_level = this.enemyData["hard_level"] || 1.0
     }
 
 
@@ -922,21 +986,41 @@ export default class FightScene extends cc.Component {
         this.pauseBtn.node.active = true
 
 
-
+        // 得到当前关卡
         var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
-        if(lastSaevGates == null){
+        if(lastSaevGates == null || lastSaevGates.length == 0){
             lastSaevGates = 1
+            cc.sys.localStorage.setItem("CurrentGates",Number(lastSaevGates));
         }
 
         this.currentGates = lastSaevGates
+       
 
         this.enemyData = null
         this.reloadGatesData()
         this.updateCurrentGates()
-
         this.playReadyAni()
 
+
+        // 是否有试用炮台
+        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
+        if(ShiyongBattery != "" && ShiyongBattery != null && Number(this.currentGates) > 1){
+            cc.sys.localStorage.setItem("ShiyongBattery","");
+            this.changeBattery()
+        }
+
+
+        if(this.QiqiuNode != null){
+            this.QiqiuNode.removeFromParent()
+        }
     
+
+         // 引导
+         if(this.currentGates == 1 || this.currentGates == 2 || this.currentGates == 3){
+            this.scheduleOnce(() => {
+                new Help(this)
+            }, 3)
+        }
     }
 
     // 回到主页
@@ -960,13 +1044,19 @@ export default class FightScene extends cc.Component {
             this.deadPrefebAni = null
         }
 
-        
+        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
+        if(ShiyongBattery != "" && ShiyongBattery != null){
+            cc.sys.localStorage.setItem("ShiyongBattery","");
+        }
+
+
         //2秒后更新炮台
         this.scheduleOnce(() => {
             this.changeBattery()
         }, 2)
 
         this.getFightUI().updateAll()
+        this.createQiqiu()
     }
 
 
@@ -1013,6 +1103,163 @@ export default class FightScene extends cc.Component {
     updateFightUI(){
         this.getFightUI().updateAll()
     }
+
+
+
+    createQiqiu(){
+        var that = this
+        var onResourceLoaded = function(errorMessage, loadedResource )
+        {
+            if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
+            if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
+            var resource = cc.instantiate( loadedResource );
+
+            resource.setPosition(-that.SCREEN_WIDTH/2,that.SCREEN_HEIGHT/2)
+            that.node.addChild(resource,100)
+            that.QiqiuNode = resource
+
+            var action1 = cc.moveTo(15,cc.v2(that.SCREEN_WIDTH/2,50))
+            var action2 = cc.moveTo(15,cc.v2(-that.SCREEN_WIDTH/2,-50))
+            var action3 = cc.moveTo(15,cc.v2(that.SCREEN_WIDTH/2+100,-that.SCREEN_HEIGHT/2+50))
+            var action4 = cc.callFunc(function(){
+                //cc.log("消失=====>",resource)
+                //resource. = false
+
+            })
+            var action5 = cc.delayTime(3)
+            var action6 = cc.callFunc(function(){
+                //cc.log("重新开始=====>",that.QiqiuitemType)
+                //resource.active = true
+                let itemiconNode = resource.getChildByName("itemicon")
+                itemiconNode.setContentSize(cc.size(120,80))
+                if(that.QiqiuitemType == 0){
+                    itemiconNode.setContentSize(cc.size(100,100))
+                }
+
+
+                var resName ="res/qiandao_baodan2"
+                if(that.QiqiuitemType == 0){
+                    resName = "res/qiandao_baodan2"
+                    that.QiqiuitemType = 1
+                }else{
+                    resName = "res/batteryMagic"
+                    that.QiqiuitemType = 0
+                }
+
+               
+
+
+                let rewordicon = resource.getChildByName("itemicon").getComponent(cc.Sprite)  // 奖励icon
+                Utils.loadSprite(resName, rewordicon)
+                resource.setPosition(-that.SCREEN_WIDTH/2,that.SCREEN_HEIGHT/2)
+            })
+
+
+
+            let array =  new Array()
+            array.push(action1)
+            array.push(action2)
+            array.push(action3)
+            array.push(action4)
+            array.push(action5)
+            array.push(action6)
+            resource.runAction(cc.repeatForever(cc.sequence(array)))
+
+            var clickNode = resource.getChildByName("clickNode")
+            clickNode.on("touchend", (event) => {   // 看视频领取
+                cc.log("看视频领取==========>")
+                SDK.getInstance().ShowVideoAd(() => {
+                    that.playSuccessReward()
+                }, Def.videoType.qiqiugift);
+             }, that);
+        }
+        cc.loader.loadRes('prefab/QiqiuUI', onResourceLoaded );
+    }
+
+
+    playSuccessReward(){
+        if(this.QiqiuitemType == 0){  // 试用高级炮台
+            cc.sys.localStorage.setItem("ShiyongBattery","BATT_2");
+            this.changeBattery()
+        }else{
+            let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
+            cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
+            this.updateFightUI()
+        }
+    }
+
+    // 每秒更新
+    updateData(){
+        if(this.isguajiing == true){
+            let num =  cc.sys.localStorage.getItem("GuajiGold");
+            if(num == null || num.length == 0){
+                num = 0
+            }
+
+            cc.sys.localStorage.setItem("GuajiGold",Number(num) + 4);
+        }
+        cc.sys.localStorage.setItem("offlineTime",Lib.GetTimeBySecond());
+    }
+
+
+    //离线收益
+    createOnlineOff(){
+        var offlineTime = cc.sys.localStorage.getItem("offlineTime");
+        var currentTime = Lib.GetTimeBySecond()
+        console.log("离线收益,offlineTime=====>",offlineTime)
+        console.log("离线收益=====>",currentTime - offlineTime)
+
+
+        if(offlineTime != null && offlineTime.length > 0){
+            //cc.log("离线收益=====>",currentTime - offlineTime)
+            var time = currentTime - offlineTime
+            if(time > 0){
+                this.scheduleOnce(() => {
+                    new OnlineOffUI(this,time)
+                }, 1)
+            }
+        }
+
+    }
+
+
+
+
+    bannerShowHide(){
+
+        var bannerShowNode = new cc.Node()
+        this.node.addChild(bannerShowNode)
+
+        var that = this
+        var action1 = cc.delayTime(10)
+        var action2 = cc.callFunc(function(){
+            //cc.log("消失=====>")
+            if(that.StopBannerNode  == false){
+                SDK.getInstance().CloseBannerAd()
+            }
+        })
+        var action3 = cc.delayTime(10)
+        var action4 = cc.callFunc(function(){
+            //cc.log("显示=====>")
+            if(that.isguajiing == true){
+                SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+            }
+        })
+
+
+        let array =  new Array()
+        array.push(action1)
+        array.push(action2)
+        array.push(action3)
+        array.push(action4)
+        bannerShowNode.runAction(cc.repeatForever(cc.sequence(array)))
+
+
+        SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+    }
+
+
+
 
 
 

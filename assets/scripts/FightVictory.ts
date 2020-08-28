@@ -4,6 +4,8 @@
     **/
 
 import { AudioMgr } from "./AudioMarger";
+import { SDK } from "./platform/SDK";
+import { Def } from "./frameworks/Def";
 
 
 export class FightVictory {
@@ -40,13 +42,51 @@ export class FightVictory {
             that.FightScene.node.addChild(resource,100)
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
 
-
             var next_btn = resource.getChildByName("next_btn")
         
-            next_btn.on("touchend", (event) => {   // 下一关
-                resource.removeFromParent()
-                that.FightScene.enterNextGate()
+            next_btn.on("touchend", (event) => {   // 双倍领取
+                SDK.getInstance().ShowVideoAd(() => {
+                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 200)
+                    that.FightScene.updateFightUI()
+
+                    resource.removeFromParent()
+                    that.FightScene.goHome()
+                }, Def.videoType.video_score);
              }, this);
+
+
+
+             var nothanksNode = resource.getChildByName("nothanksNode")
+             var callback = cc.callFunc(function () {
+                nothanksNode.active =  true
+             })
+     
+             var action = cc.sequence(cc.delayTime(3),callback)
+             resource.runAction(action)
+
+
+
+             nothanksNode.on("touchend", (event) => {   //  普通领取
+                SDK.getInstance().ShowVideoAd(() => {
+                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
+                    that.FightScene.updateFightUI()
+
+                    resource.removeFromParent()
+                    that.FightScene.goHome()
+                }, Def.videoType.video_score);
+             }, this);
+
+
+
+
+             //关卡加1下一关
+             var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
+             var currentGates = Number(lastSaevGates) + 1
+             cc.sys.localStorage.setItem("CurrentGates",Number(currentGates));
+
+
 
 
              AudioMgr.getInstance().playEffect("BGM003");

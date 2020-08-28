@@ -4,6 +4,8 @@
     **/
 
 import { AudioMgr } from "./AudioMarger";
+import { SDK } from "./platform/SDK";
+import { Def } from "./frameworks/Def";
 
 
 export class FightFail {
@@ -34,20 +36,47 @@ export class FightFail {
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
 
             var continue_btn = resource.getChildByName("continue_btn")
-        
-            continue_btn.on("touchend", (event) => {   // 下一关
+            var nothanksNode = resource.getChildByName("nothanksNode")
+            
+
+
+
+            nothanksNode.on("touchend", (event) => {   // 回到主页
                 resource.removeFromParent()
                 that.FightScene.goHome()
              }, this);
 
 
+             continue_btn.on("touchend", (event) => {   // 重新开始
+                SDK.getInstance().ShowVideoAd(() => {
+                    resource.removeFromParent()
+                    that.FightScene.goHome()
+                }, Def.videoType.video_rebirth);
+             }, this);
+
+
+
+
+             var daojishi = resource.getChildByName("daojishi")
             
+            var daojishi_label = daojishi.getComponent(cc.Label)
+            var jindu = 3
+            var callback = (cc.callFunc(function () {
+                jindu = jindu - 1
+                daojishi_label.string = String(jindu)
+
+                if(jindu <= 0){
+                    daojishi.stopAllActions();
+                    nothanksNode.active =  true
+                }
+            }))
+    
+            var action = cc.repeatForever(cc.sequence(cc.delayTime(1),callback))
+            daojishi.runAction(action)
 
 
-             AudioMgr.getInstance().playEffect("BGM004");
 
-
-
+            AudioMgr.getInstance().playEffect("BGM004");
         };
         cc.loader.loadRes('prefab/FightFail', onResourceLoaded );
     }

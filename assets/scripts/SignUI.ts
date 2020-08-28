@@ -5,9 +5,11 @@
 
 import { AudioMgr } from "./AudioMarger";
 import { GameData } from "./GameData";
-import { Utils } from "./Utils";
+import { Utils } from "./frameworks/Utils";
 import { TipUI } from "./TipUI";
-import { Lib } from "./Lib";
+import { Lib } from "./frameworks/Lib";
+import { SDK } from "./platform/SDK";
+import { Def } from "./frameworks/Def";
 
 
 export class SignUI {
@@ -49,36 +51,38 @@ export class SignUI {
             let closeButton = resource.getChildByName("closeButton");
             closeButton.on("touchend", (event) => {
                 resource.removeFromParent()
+                that.FightScene.StopBannerNode  = false
              }, this);
 
 
              let SignInDays =  cc.sys.localStorage.getItem("SignInDays");
-             cc.log("SignInDays========>",SignInDays)
-             if(SignInDays == null){
+             //cc.log("SignInDays========>",SignInDays)
+             if(SignInDays == null || SignInDays.length == 0){
                 cc.sys.localStorage.setItem("SignInDays",0);
              }
-
-
-            //  let SignedToday =  cc.sys.localStorage.getItem("SignedToday");
-            //  cc.log("SignedToday========>",SignedToday)
-            //  if(SignedToday == null){
-            //     cc.sys.localStorage.setItem("SignedToday",false);
-            //  }
 
 
              
             var getSignButton = resource.getChildByName("getSignButton")
             getSignButton.on("touchend", (event) => {   //  双倍领取
                 that.isDouble = true
-                that.getReword()
+                var bool =  that.getReword()
+                if(bool == true){
+                    SDK.getInstance().ShowVideoAd(() => {
+                        that.playSuccessReward()
+                    }, Def.videoType.signget);
+                }
              }, this);
 
 
-             
-            var normalSign = resource.getChildByName("normalSign")
-            normalSign.on("touchend", (event) => {   // 普通领取
+            
+            var normalSignNode = resource.getChildByName("normalSignNode")
+            normalSignNode.on("touchend", (event) => {   // 普通领取
                 that.isDouble = false
-                that.getReword()
+                var bool =  that.getReword()
+                if(bool == true){
+                    that.playSuccessReward()
+                }
              }, this);
 
 
@@ -93,7 +97,7 @@ export class SignUI {
             let i = 0
             for(const key of Object.keys(SignInData)) {
      
-                cc.log("key====>,AMOUNT========>",key,SignInData[key].AMOUNT)
+                //cc.log("key====>,AMOUNT========>",key,SignInData[key].AMOUNT)
                 var button = cc.instantiate(rewordItem) //.clone();
                 button.active = true;
                 var x = i%3
@@ -114,17 +118,32 @@ export class SignUI {
                 let SignInDays = cc.sys.localStorage.getItem("SignInDays")
                 that.curDayId = Number(SignInDays) + 1
 
-                if(Number(key) == that.curDayId){                 // 今日的签到奖励
-                    let todayicon = button.getChildByName("todayicon")
-                    todayicon.active = true
 
+                //cc.log("SignInDays=========>",SignInDays)
+                    
+                if(Number(key) == that.curDayId){                 // 今日的签到奖励
                     that.updatePreView(SignInData[key])
                     that.rewardData = SignInData[key]
+
+                    //icon
+                    if(that.getReword() == true){
+                        let todayicon = button.getChildByName("todayicon")
+                        todayicon.active = true
+                    }
+                }
+
+                let yigeticon = button.getChildByName("yigeticon")  // 已获得icon
+                if(Number(key) < that.curDayId){  
+                    yigeticon.active = true
                 }
 
 
                 i = i + 1
             }
+
+
+
+
 
 
            
@@ -148,7 +167,7 @@ export class SignUI {
 
     getReword(){
         if(this.rewardData == null){
-            return
+            return false
         }
 
         var SignedTime = cc.sys.localStorage.getItem("SignedTime")
@@ -157,10 +176,15 @@ export class SignUI {
         var SignedToday = Lib.compare_time(SignedTime * 1000)
         if(SignedToday == true){
             new TipUI(this.FightScene,"今日已经签到")
-            return
+            return false
         }
 
+        return true
+    }
 
+
+
+    playSuccessReward(){
         cc.log("rewardData==========>",this.rewardData)
 
         let kind = Number(this.rewardData.KIND)
@@ -188,13 +212,9 @@ export class SignUI {
         
 
 
-
         this.FightScene.updateFightUI()
-        new TipUI(this.FightScene,"签到成功")
+        //new TipUI(this.FightScene,"签到成功")
     }
-
-
-
 
 
      

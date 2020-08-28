@@ -43,15 +43,32 @@ export class Help {
 
             var masklayer = resource.getChildByName("masklayer")
             var bgcontent = resource.getChildByName("bgcontent")
+            var sprite = bgcontent.getComponent(cc.Sprite);
+            var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
 
             var index = 0
             masklayer.on("touchend", (event) => {   // 下一关
                 //cc.log("下一张==========>")
                 var s = "res/helper_103"
+                var s1 = "res/helper_104"
+
+                if(Number(lastSaevGates) == 2 || Number(lastSaevGates) == 3){
+                    resource.removeFromParent()
+                    return
+                }
+
+
 
                 if(index == 0){
-                    var sprite = bgcontent.getComponent(cc.Sprite);
                     cc.loader.loadRes(s,cc.SpriteFrame,(er:Error,res:cc.SpriteFrame)=>{
+                        if(er){
+                            return;
+                        }
+                        sprite.spriteFrame = res;
+                        index = index + 1
+                    })
+                }else if(index == 1){
+                    cc.loader.loadRes(s1,cc.SpriteFrame,(er:Error,res:cc.SpriteFrame)=>{
                         if(er){
                             return;
                         }
@@ -62,6 +79,33 @@ export class Help {
                     resource.removeFromParent()
                 }
              }, this);
+
+
+
+            
+             if(Number(lastSaevGates) == 2){
+                var s = "res/helper_106"
+                cc.loader.loadRes(s,cc.SpriteFrame,(er:Error,res:cc.SpriteFrame)=>{
+                    if(er){
+                        return;
+                    }
+                    sprite.spriteFrame = res;
+                })
+
+             }else if(Number(lastSaevGates) == 3){
+                var s = "res/helper_107"
+                cc.loader.loadRes(s,cc.SpriteFrame,(er:Error,res:cc.SpriteFrame)=>{
+                    if(er){
+                        return;
+                    }
+                    sprite.spriteFrame = res;
+                })
+             }
+
+
+
+
+
         };
         cc.loader.loadRes('prefab/helper_102', onResourceLoaded );
     }

@@ -5,7 +5,7 @@ import { GameData } from "./GameData"
 import CollisionEvent from "./CollisionEvent"
 import FightScene, { BombType, ActType } from "./FightScene"
 import { tools } from "./tool"
-import { Utils } from "./Utils"
+import { Utils } from "./frameworks/Utils"
 import { AudioMgr } from "./AudioMarger"
 //import { AniType } from "./FightScene"
 
@@ -97,7 +97,7 @@ export class Enemy{
         this.res = this.getAniData()
         this.rewards = this.getDropRewards()
         this.aniType = parseInt(this.getAniType())
-        cc.log("敌人动画类型=============>",this.aniType)
+        //cc.log("敌人动画类型=============>",this.aniType)
 
 
 
@@ -127,7 +127,9 @@ export class Enemy{
         return this
     }
    
-    init(data){
+    init(data,hardLevel){
+        this.setHardLevel(hardLevel)
+
         this.creatEnemy(data)
     }
 
@@ -211,7 +213,7 @@ export class Enemy{
         res["size"] = cc.size(Number(data[8]) || 0,Number(data[9]) || 0)  // 怪物尺寸
         res["zorder"] = data[10]			// 精灵层级
 
-
+        //cc.log("data=========>",data)
 
         return res
     }
@@ -425,6 +427,26 @@ export class Enemy{
     }
 
 
+    //设置难度倍数
+    setHardLevel(level){
+        if( level == null){
+            level = 1
+        }
+        this.hardLevel = level
+
+        this.maxHp = this.maxHp * this.hardLevel
+
+
+        this.hp = this.hp * this.hardLevel
+
+        //cc.log("最大血量", this.maxHp)
+        //cc.log("当前血量", this.hp)
+    }
+
+
+
+
+
     //获取当前生命值
     getCurHp(){
         return Number(this.hp) || 0
@@ -587,7 +609,7 @@ export class Enemy{
 
 
         //贝塞尔曲线
-        var bezier = [cc.v2(20*rand, 30*rate), cc.v2(20*rand, 30*rate), cc.v2(40*rand, 20)];
+        var bezier = [cc.v2(20*rand, 30*rate), cc.v2(20*rand, 30*rate), cc.v2(40*rand, 40)];
         var bezierForward = cc.bezierBy(0.8, bezier);
         //nodeImg.runAction(bezierForward);
 
@@ -691,6 +713,11 @@ export class Enemy{
 
     // 金币掉落特效
     dropGoldEffect(position,index){
+        if(this.FightScene.isguajiing == true){
+            return
+        }
+
+
         var sceneNode:cc.Node = this.FightScene.node.getChildByName("goldEffectNode")
 
         var goldEffectNode = cc.instantiate(sceneNode);

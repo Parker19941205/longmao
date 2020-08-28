@@ -62,21 +62,33 @@ export class Def {
    }
 
    public static readonly videoType = {
-      free_shake: "重新摇一摇",
-      time_shake: "摇一摇时间冷却",
-      talk_second: "对话秒回",
-      talk_help: "对话选项去差",
-      role_time: "去除失败等待时间",
-      diamon_shop: "商店加钻石",
-      note_shop: "商店加短信",
-      start_talk: "开约",
-      start_shake: "摇一摇开约",
-      recall_ui: "撤回",
-      showInfo_scan: "扫一扫界面看资料",
-      clearCd_scan: "扫一扫清除时间",
-      qiehuanjianmian: "切换界面",
-      send_message: "发了几条消息后弹出",
+      signget: "签到领取",
+      qiqiugift: "气球礼包",
+      buyhighbullet: "购买高级子弹",
+      upbullet: "升级子弹",
+      guajishouyi: "挂机收益",
+      video_offline: "离线收益",
+      video_battery: "更换炮台免费金币",
+      video_rebirth: "失败界面",
+      video_score: "结算界面双倍",
    }
+
+
+   public static readonly bannerType = {
+      banner_main: "主界面",
+      qiqiugift: "气球礼包",
+      buyhighbullet: "购买高级子弹",
+      upbullet: "升级子弹",
+      guajishouyi: "挂机收益",
+      video_offline: "离线收益",
+      video_battery: "更换炮台免费金币",
+      video_rebirth: "失败界面",
+      video_score: "结算界面双倍",
+   }
+
+
+
+
 
    public static readonly insetVideoType = {
       click_reply: "点击回复按钮",

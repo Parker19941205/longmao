@@ -107,6 +107,7 @@ export class PauseUI {
         array.push(cc.scaleTo(0.3, 0))
         array.push(cc.callFunc(function () {
             prefabNode.removeFromParent()
+            that.FightScene.StopBannerNode  = false
         }))
         btnNode.runAction(cc.sequence(array))
 

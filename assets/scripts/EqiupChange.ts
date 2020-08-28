@@ -4,9 +4,11 @@
     **/
 
 import { GameData } from "./GameData";
-import { Utils } from "./Utils";
+import { Utils } from "./frameworks/Utils";
 import { TipUI } from "./TipUI";
 import FightScene from "./FightScene";
+import { SDK } from "./platform/SDK";
+import { Def } from "./frameworks/Def";
 
 
 export class EqiupChange {
@@ -14,7 +16,7 @@ export class EqiupChange {
     private previewBg
     private buttonArray:Map<any,any> = new Map()
     private node
-
+    private lookvideoBtn
 
 
      // 构造方法
@@ -40,8 +42,7 @@ export class EqiupChange {
             that.FightScene.node.addChild(resource,200)
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
 
-          
-
+            that.lookvideoBtn = resource.getChildByName("lookvideoBtn")
 
 
             let paotanScrollView = resource.getChildByName("paotanScrollView")
@@ -53,7 +54,23 @@ export class EqiupChange {
             let closeBtn = resource.getChildByName("closeBtn")
             closeBtn.on("touchend", (event) => {   
                 resource.removeFromParent()
+                that.FightScene.StopBannerNode  = false
             }, this);
+
+
+
+            that.lookvideoBtn.on("touchend", (event) => {   
+                SDK.getInstance().ShowVideoAd(() => {
+                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 500)
+                    that.FightScene.updateFightUI()
+                }, Def.videoType.video_battery);
+            }, this);
+
+
+
+
+
 
 
 
@@ -85,16 +102,16 @@ export class EqiupChange {
                 //that.buttonArray.push(equipBtn)
                 that.buttonArray.set(key,equipBtn)
 
+                // 炮台价格
+                let payPrice = String(batteryData[key].PAY_PRICE)
+                let needgold = button.getChildByName("needgold").getComponent(cc.Label)
+                needgold.string = payPrice
+
 
                 i = i + 1
             }
 
 
-            // 初始化
-            let CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
-            if(CurrentBattery == null){
-                cc.sys.localStorage.setItem("CurrentBattery","BATT_1");
-            }
             cc.sys.localStorage.setItem("BATT_1",true);
             that.initBatteryPreview("BATT_1")
 
@@ -120,7 +137,7 @@ export class EqiupChange {
 
         let equipIndex = cc.sys.localStorage.getItem(index);
         cc.log("equipIndex==========>",equipIndex)
-        if(equipIndex == null){  // 购买炮台
+        if(equipIndex == null || equipIndex.length == 0){  // 购买炮台
             this.buyBattry(index)
             return
         }
@@ -144,8 +161,12 @@ export class EqiupChange {
             cc.sys.localStorage.setItem("CurrentGolds",curGolds - payPrice);
             this.FightScene.updateFightUI()
             this.resetAllButton()
+            new TipUI(this.FightScene,"购买成功")
         }else{
             new TipUI(this.FightScene,"金币不足")
+
+            
+            this.lookvideoBtn.active = true
         }
     }
 

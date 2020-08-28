@@ -1,4 +1,4 @@
-import {Def} from "./Def"
+import {Def} from "./frameworks/Def"
 export class AudioMgr {
     private static instance: AudioMgr = null;
     private audioID;

@@ -3,7 +3,7 @@
     Date:2014/5/7
     **/
 
-import { Utils } from "./Utils";
+import { Utils } from "./frameworks/Utils";
 import FightScene from "./FightScene";
 
 

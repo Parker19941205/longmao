@@ -8,6 +8,8 @@ import { Bullet } from "./Bullet";
 import { GameData } from "./GameData";
 import { TipUI } from "./TipUI";
 import { resolveSrv } from "dns";
+import { SDK } from "./platform/SDK";
+import { Def } from "./frameworks/Def";
 
 
 export class FightUI {
@@ -119,54 +121,82 @@ export class FightUI {
 
 
 
-
         var bulletNormalBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("bulletNormalBtn")
 
 
         bulletNormalBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
-           cc.log("升级=========>")
+           let level =  cc.sys.localStorage.getItem("bullet" + BombType.Normal);
+
+           if(Number(level)%3 == 0 && Number(level) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+
+
            var isCanLv = this.dealUpLv(BombType.Normal)
            if(isCanLv){
-            let level =  cc.sys.localStorage.getItem("bullet" + BombType.Normal);
-            cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
-
-            //this.updateInfo(bulletNormalBtn,BombType.Normal)
-            this.updateAll()
+                cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
+                this.updateAll()
            }
         }, this);
 
+
         bulletRockBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
-            cc.log("升级=========>")
+            let level =  cc.sys.localStorage.getItem("bullet" + BombType.Rock);
+
+            if(Number(level)%3 == 0 && Number(level) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Rock,Number(level) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+
+
             var isCanLv = this.dealUpLv(BombType.Rock)
             if(isCanLv){
-                let level =  cc.sys.localStorage.getItem("bullet" + BombType.Rock);
                 cc.sys.localStorage.setItem("bullet" + BombType.Rock,Number(level) + 1);
-    
-                //this.updateInfo(bulletRockBtn,BombType.Rock)
                 this.updateAll()
             }
          }, this);
 
          airBulletBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
-            cc.log("升级=========>")
+            let level =  cc.sys.localStorage.getItem("bullet" + BombType.Air);
+
+            if(Number(level)%3 == 0 && Number(level) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Air,Number(level) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+
+
             var isCanLv = this.dealUpLv(BombType.Air)
             if(isCanLv){
-                let level =  cc.sys.localStorage.getItem("bullet" + BombType.Air);
                 cc.sys.localStorage.setItem("bullet" + BombType.Air,Number(level) + 1);
-    
-                //this.updateInfo(airBulletBtn,BombType.Air)
                 this.updateAll()
             }
          }, this);
 
          iceBulletBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
-            cc.log("升级=========>")
+            let level =  cc.sys.localStorage.getItem("bullet" + BombType.Ice);
+
+            if(Number(level)%3 == 0 && Number(level) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Ice,Number(level) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+
+
             var isCanLv = this.dealUpLv(BombType.Ice)
             if(isCanLv){
-                let level =  cc.sys.localStorage.getItem("bullet" + BombType.Ice);
                 cc.sys.localStorage.setItem("bullet" + BombType.Ice,Number(level) + 1);
-    
-                //this.updateInfo(iceBulletBtn,BombType.Ice)
                 this.updateAll()
             }
          }, this);
@@ -174,26 +204,43 @@ export class FightUI {
 
          bulletScreenBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
             cc.log("升级=========>")
+            let level =  cc.sys.localStorage.getItem("bullet" + BombType.Screen);
+            if(Number(level)%3 == 0 && Number(level) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Screen,Number(level) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+
+
+
+
             var isCanLv = this.dealUpLv(BombType.Screen)
             if(isCanLv){
-                let level =  cc.sys.localStorage.getItem("bullet" + BombType.Screen);
                 cc.sys.localStorage.setItem("bullet" + BombType.Screen,Number(level) + 1);
-    
-                //this.updateInfo(bulletScreenBtn,BombType.Screen)
                 this.updateAll()
             }
          }, this);
 
 
          bulletProtectBtn.getChildByName("lvupBtn").on("touchend", (event) => {   // 升级
-            cc.log("升级=========>")
+            let level_m =  cc.sys.localStorage.getItem("bullet" + BombType.Protect);
+            cc.log("升级=========>",level_m)
+            if(Number(level_m)%3 == 0 && Number(level_m) != 1 ){
+                SDK.getInstance().ShowVideoAd(() => {
+                    cc.sys.localStorage.setItem("bullet" + BombType.Protect,Number(level_m) + 1);
+                    this.updateAll()
+                }, Def.videoType.upbullet);
+                return
+            }
+           
+
+    
 
             var isCanLv = this.dealUpLv(BombType.Protect)
             if(isCanLv){
-                let level_m =  cc.sys.localStorage.getItem("bullet" + BombType.Protect);
                 cc.sys.localStorage.setItem("bullet" + BombType.Protect,Number(level_m) + 1);
-    
-                //this.updateInfo(bulletProtectBtn,BombType.Protect)
                 this.updateAll()
             }
         }, this);
@@ -212,7 +259,13 @@ export class FightUI {
                 //this.updateInfo(bulletScreenBtn,BombType.Screen)
                 this.updateAll()
             }else{
-                new TipUI(this.FightScene,"金币不足")
+                //new TipUI(this.FightScene,"金币不足")
+
+                SDK.getInstance().ShowVideoAd(() => {
+                    let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
+                    cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
+                    this.updateAll()
+                }, Def.videoType.buyhighbullet);
             }
          }, this);
 
@@ -228,7 +281,13 @@ export class FightUI {
 
                 this.updateAll()
             }else{
-                new TipUI(this.FightScene,"金币不足")
+                //new TipUI(this.FightScene,"金币不足")
+
+                SDK.getInstance().ShowVideoAd(() => {
+                    let num =  cc.sys.localStorage.getItem("ProtectNum");
+                    cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
+                    this.updateAll()
+                }, Def.videoType.buyhighbullet);
             }
          }, this);
 
@@ -238,52 +297,49 @@ export class FightUI {
 
 
 
-   
-
-
 
 
 
         let level = cc.sys.localStorage.getItem("bullet" + BombType.Normal);
-        if(level == null){
+        if(level == null || level.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Normal,1);
         }
         let level2 = cc.sys.localStorage.getItem("bullet" + BombType.Rock);
-        if(level2 == null){
+        if(level2 == null || level2.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Rock,1);
         }
         let level3 = cc.sys.localStorage.getItem("bullet" + BombType.Air);
-        if(level3 == null){
+        if(level3 == null || level3.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Air,1);
         }
         let level4 = cc.sys.localStorage.getItem("bullet" + BombType.Ice);
-        if(level4 == null){
+        if(level4 == null || level4.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Ice,1);
         }
 
         let level5 = cc.sys.localStorage.getItem("bullet" + BombType.Screen);
-        if(level5 == null){
+        if(level5 == null || level5.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Screen,1);
         }
 
         let level6 = cc.sys.localStorage.getItem("bullet" + BombType.Protect);
-        if(level6 == null){
+        if(level6 == null || level6.length == 0){
             cc.sys.localStorage.setItem("bullet" + BombType.Protect,1);
         }
 
 
 
         let ScreenbulletNum = cc.sys.localStorage.getItem("ScreenbulletNum");
-        if(ScreenbulletNum == null){
+        if(ScreenbulletNum == null || ScreenbulletNum.length == 0){
             cc.sys.localStorage.setItem("ScreenbulletNum",0);
         }
         let ProtectNum = cc.sys.localStorage.getItem("ProtectNum");
-        if(ProtectNum == null){
+        if(ProtectNum == null || ProtectNum.length == 0){
             cc.sys.localStorage.setItem("ProtectNum",0);
         }
 
         let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");
-        if(CurrentGolds == null){
+        if(CurrentGolds == null || CurrentGolds.length == 0){
             cc.sys.localStorage.setItem("CurrentGolds",0);
         }
 
@@ -340,6 +396,10 @@ export class FightUI {
 
 
     playGoldNum(earnGold?:number,times?:number){
+        if(this.FightScene.isguajiing == true){
+            return
+        }
+
         if( times == null ){
             times = 1
         }
@@ -350,6 +410,11 @@ export class FightUI {
 
     earnMoney(star, gem, gold){
         //cc.log("获得分数========>",gold)
+        if(this.FightScene.isguajiing == true){
+            return
+        }
+
+
 
         this.earnStar = this.earnStar + (star || 0)
         this.earnGem = this.earnGem + (gem || 0)
@@ -365,6 +430,13 @@ export class FightUI {
         }
 
         cc.sys.localStorage.setItem("CurrentGolds",this.earnGold);
+
+
+
+        let bulletScreenBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletScreenBtn")
+        let bulletProtectBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletProtectBtn")
+        this.updateInfo(bulletScreenBtn,BombType.Screen)
+        this.updateInfo(bulletProtectBtn,BombType.Protect)
     }
 
 
@@ -493,12 +565,12 @@ export class FightUI {
         level_label.string = "Lv." + level
 
         var Golds = this.getNeedGolds(bulletType)
-        cc.log("Golds=========>",Golds)
+        //cc.log("Golds=========>",Golds)
 
         need_label.string = Golds
 
 
-        var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+        var curGolds = Number(cc.sys.localStorage.getItem("CurrentGolds"))
         let balance = Number(curGolds) - Number(Golds)
         if(balance >= 0){
             var redicon =  node.getChildByName("lvupBtn").getChildByName("redicon")
@@ -532,20 +604,85 @@ export class FightUI {
             var buyBtn = node.getChildByName("buyBtn")
             if(buyBtn){
                 buyBtn.active = true
+                var videoicon = node.getChildByName("buyBtn").getChildByName("videoicon")
+                var buygold = node.getChildByName("buyBtn").getChildByName("buygold").getComponent(cc.Label)
+
+                videoicon.active = false
+
+                // 金币不足显示视频icon
+                if(bulletType == BombType.Protect){
+                    buygold.string = "800"
+                    if(curGolds < 800){
+                        videoicon.active = true
+                        buygold.string = ""
+                    }
+                }else if(bulletType == BombType.Screen){
+                    buygold.string = "500"
+                    if(curGolds < 500){
+                        videoicon.active = true
+                        buygold.string = ""
+                    }
+                }
             }
+
+          
+
+
+        
+            node.active = true
+
+             // 得到当前关卡
+            var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
+            if(Number(lastSaevGates) == 1){
+                if(bulletType == BombType.Rock || bulletType == BombType.Air){
+                    node.active = false
+                }
+            }else if(Number(lastSaevGates) == 2){
+                if(bulletType == BombType.Rock){
+                    node.active = false
+                }
+            }
+
+
+            // 隐藏普通子弹
             if(bulletType == BombType.Normal){
                 node.active = false
             }
 
+
+
         }else{
             node.getChildByName("lvupBtn").active = true
             var buyBtn = node.getChildByName("buyBtn")
+            let videoicon =  node.getChildByName("lvupBtn").getChildByName("videoicon")
+            if(videoicon){
+                videoicon.active = false
+            }
+
             if(buyBtn){
                 buyBtn.active = false
             }
+
             if(bulletType == BombType.Normal){
                 node.active = true
             }
+
+            let need = node.getChildByName("lvupBtn").getChildByName("need")
+            need.active = true
+
+            if(Number(level)%3 == 0 && Number(level) != 1 ){
+               let videoicon =  node.getChildByName("lvupBtn").getChildByName("videoicon")
+                if(videoicon){
+                    videoicon.active = true
+                    need.active = false
+                }
+            }
+
+
+
+
+
+
         }
 
 

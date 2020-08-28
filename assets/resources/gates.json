@@ -1844,7 +1844,7 @@
     "1": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1,
+    "hard_level": 0.1,
     "next_gates": "2",
     "gate_type": 0,
     "gate_cond": "",
