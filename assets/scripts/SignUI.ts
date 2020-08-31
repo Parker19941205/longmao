@@ -34,10 +34,13 @@ export class SignUI {
         if( !CanvasNode ) { cc.log( 'find Canvas error' ); return; } 
         var that = this
 
-        cc.log("time==>",Date.parse(new Date().toString()))
-        cc.log("time2==>",Lib.GetTimeBySecond())
+        //cc.log("time==>",Date.parse(new Date().toString()))
+        //cc.log("time2==>",Lib.GetTimeBySecond())
 
-        
+        let SignInDays = cc.sys.localStorage.getItem("SignInDays")
+        if(SignInDays >= 9){ // 签满重来
+            cc.sys.localStorage.setItem("SignInDays",0);
+        }
 
 
         var onResourceLoaded = function(errorMessage, loadedResource )

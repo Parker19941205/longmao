@@ -6,6 +6,7 @@
 import { AudioMgr } from "./AudioMarger";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 
 
 export class FightVictory {
@@ -68,14 +69,13 @@ export class FightVictory {
 
 
              nothanksNode.on("touchend", (event) => {   //  普通领取
-                SDK.getInstance().ShowVideoAd(() => {
-                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
-                    that.FightScene.updateFightUI()
+                var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
+                that.FightScene.updateFightUI()
 
-                    resource.removeFromParent()
-                    that.FightScene.goHome()
-                }, Def.videoType.video_score);
+                resource.removeFromParent()
+                that.FightScene.goHome()
+
              }, this);
 
 
@@ -85,6 +85,19 @@ export class FightVictory {
              var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
              var currentGates = Number(lastSaevGates) + 1
              cc.sys.localStorage.setItem("CurrentGates",Number(currentGates));
+
+
+             var share_btn = resource.getChildByName("share_btn")
+             // 抖音录屏功能
+             if(PlatformManager.CurrentPlatform == Platform.BYTEDANCE){
+                share_btn.active = true
+            }
+
+            // 分享录屏
+            share_btn.on("touchend", function (event) {
+                console.log("点击分享录屏=============>")
+                PlatformManager.getInstance().shareVideo()
+            }, this);
 
 
 

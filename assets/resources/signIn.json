@@ -1,56 +1,56 @@
 {
 	"1": {
-		"BIG_ICON": "qiandao_gold2",
+		"BIG_ICON": "qiandao_baodan2",
 		"KIND": 2,
+		"SMALL_ICON": "small_baodan",
+		"AMOUNT": 3
+	},
+	"3": {
+		"BIG_ICON": "qiandao_shouwei2",
+		"KIND": 3,
+		"SMALL_ICON": "small_shouwei",
+		"AMOUNT": 3
+	},
+	"2": {
+		"BIG_ICON": "qiandao_gold2",
+		"KIND": 1,
+		"SMALL_ICON": "small_gold",
+		"AMOUNT": 5000
+	},
+	"5": {
+		"BIG_ICON": "qiandao_gold2",
+		"KIND": 4,
 		"SMALL_ICON": "small_gold",
 		"AMOUNT": 1000
 	},
-	"3": {
+	"4": {
 		"BIG_ICON": "qiandao_baodan2",
-		"KIND": 3,
+		"KIND": 2,
 		"SMALL_ICON": "small_baodan",
 		"AMOUNT": 5
-	},
-	"2": {
-		"BIG_ICON": "qiandao_baoshi2",
-		"KIND": 1,
-		"SMALL_ICON": "small_baoshi",
-		"AMOUNT": 200
-	},
-	"5": {
-		"BIG_ICON": "qiandao_shouwei2",
-		"KIND": 4,
-		"SMALL_ICON": "small_shouwei",
-		"AMOUNT": 5
-	},
-	"4": {
-		"BIG_ICON": "qiandao_gold2",
-		"KIND": 2,
-		"SMALL_ICON": "small_gold",
-		"AMOUNT": 100000
 	},
 	"7": {
+		"BIG_ICON": "qiandao_gold2",
+		"KIND": 3,
+		"SMALL_ICON": "small_gold",
+		"AMOUNT": 10000
+	},
+	"6": {
+		"BIG_ICON": "qiandao_shouwei2",
+		"KIND": 1,
+		"SMALL_ICON": "small_shouwei",
+		"AMOUNT": 5
+	},
+	"9": {
 		"BIG_ICON": "qiandao_baodan2",
 		"KIND": 3,
 		"SMALL_ICON": "small_baodan",
-		"AMOUNT": 2
-	},
-	"6": {
-		"BIG_ICON": "qiandao_baoshi2",
-		"KIND": 1,
-		"SMALL_ICON": "small_baoshi",
-		"AMOUNT": 50
-	},
-	"9": {
-		"BIG_ICON": "qiandao_shouwei2",
-		"KIND": 3,
-		"SMALL_ICON": "small_shouwei",
-		"AMOUNT": 2
+		"AMOUNT": 10
 	},
 	"8": {
-		"BIG_ICON": "qiandao_gold2",
+		"BIG_ICON": "qiandao_shouwei2",
 		"KIND": 2,
-		"SMALL_ICON": "small_gold",
-		"AMOUNT": 3000
+		"SMALL_ICON": "small_shouwei",
+		"AMOUNT": 10
 	}
 }

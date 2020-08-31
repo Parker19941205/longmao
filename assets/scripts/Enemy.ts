@@ -79,7 +79,7 @@ export class Enemy{
     private guajiCDTime
     private cdNormal = 6
     private sumTime = 5
-
+    private force = false
 
 
      // 构造方法
@@ -466,6 +466,8 @@ export class Enemy{
     die(force?:any){
         //cc.log("敌人die========================>")
         this.isDeath = true
+        this.force = force
+
         // let armatureDisplay:dragonBones.ArmatureDisplay = node.addComponent(dragonBones.ArmatureDisplay);
         // armatureDisplay.dragonAsset = resource[0];
         // armatureDisplay.dragonAtlasAsset = resource[3];
@@ -713,7 +715,7 @@ export class Enemy{
 
     // 金币掉落特效
     dropGoldEffect(position,index){
-        if(this.FightScene.isguajiing == true){
+        if(this.force == true){
             return
         }
 

@@ -44,7 +44,7 @@ export interface PlatformCommon {
     hasVideoAd: boolean;
     sdkConfig: ADConfig;
     /**初始化 必须判断callback是否存在 然后调用返回*/
-    initSdk(args?: any, callback?: Function);
+    initSdk(scene,args?: any, callback?: Function);
     /**登录 必须判断callback是否存在 然后调用返回*/
     login(args?: any, callback?: Function)
     /**支付 必须判断callback是否存在 然后调用返回*/
@@ -153,6 +153,7 @@ export class PlatformManager {
                 if (PlatformManager.CurrentPlatform == Platform.Vivo) {
                     console.log("当前平台是vivo============>")
                     //this.currentPaltform = new VivoManager();
+                    this.currentPaltform = new EditorManager()
                 }
                 break
             case cc.sys.BAIDU_GAME:
@@ -198,8 +199,8 @@ export class PlatformManager {
 
     }
 
-    initSdk(args?: any, callback?: Function) {
-        this.currentPaltform.initSdk(args, callback)
+    initSdk(scene,args?: any, callback?: Function) {
+        this.currentPaltform.initSdk(scene, args, callback)
     }
     login(args?: any, callback?: Function) {
         this.currentPaltform.login(args, callback)

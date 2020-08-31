@@ -87,6 +87,8 @@ export default class FightScene extends cc.Component {
     @property(cc.Button)
     guajishouyiBtn: cc.Button = null;  //挂机收益
 
+    @property(cc.Node)
+    guajishouyiNode :cc.Node = null;   //guajishouyiNode
 
     private startX = 0
     private startY = 0
@@ -830,18 +832,19 @@ export default class FightScene extends cc.Component {
 
         this.clearAllEnemy()
 
-      
-       
+         
+       // 停止录屏
+       PlatformManager.getInstance().stopRecorderManager()
 
     }
 
 
 
-    clearAllEnemy(){
+    clearAllEnemy(force?:boolean){
         for(var i=0;i<this.enemyList.length;i++){
             let ani = this.enemyList[i]
             if(ani){
-                ani.die()
+                ani.die(force)
             }
         }
     }
@@ -938,14 +941,14 @@ export default class FightScene extends cc.Component {
           last.active = true
           current.active = true
 
-            if(Number(this.currentGates) > 2){
-                next2.active = true
-                last2.active = true
+            // if(Number(this.currentGates) > 2){
+            //     next2.active = true
+            //     last2.active = true
 
-                nextLabel2.string = String(Number(this.currentGates) + 2)
-                lastLabel2.string = String(Number(this.currentGates) - 2)
+            //     nextLabel2.string = String(Number(this.currentGates) + 2)
+            //     lastLabel2.string = String(Number(this.currentGates) - 2)
 
-            }
+            // }
         }else{
             if(Number(this.currentGates) == 1){
                 current.active = true
@@ -953,8 +956,8 @@ export default class FightScene extends cc.Component {
                 current.active = false
                 next.active = false
                 last.active = false
-                next2.active = false
-                last2.active = false
+                //next2.active = false
+                //last2.active = false
             }
         }
     }
@@ -977,13 +980,16 @@ export default class FightScene extends cc.Component {
 
 
     gameStart(){
-        this.clearAllEnemy()
+        this.clearAllEnemy(true)
         this.cleanFightScene()
-        this.isguajiing = false
         this.startGameBtn.node.active = false
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = false
         this.pauseBtn.node.active = true
+        this.signBtn.node.active = false
+        this.guajishouyiNode.active = false
+        this.eqiupChangeBtn.node.active = false
+        this.isguajiing = false
 
 
         // 得到当前关卡
@@ -1021,6 +1027,10 @@ export default class FightScene extends cc.Component {
                 new Help(this)
             }, 3)
         }
+
+
+        // 开始录屏
+        PlatformManager.getInstance().recorderManager()
     }
 
     // 回到主页
@@ -1028,7 +1038,11 @@ export default class FightScene extends cc.Component {
         this.cleanFightScene()
         this.isguajiing = true
         this.startGameBtn.node.active = true
+        this.signBtn.node.active = true
+        this.guajishouyiNode.active = true
+        this.eqiupChangeBtn.node.active = true
         this.enemyData = null
+
 
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = true
@@ -1069,7 +1083,6 @@ export default class FightScene extends cc.Component {
             if(ready){
                 ready.removeFromParent()
                 that.g_game_start = true
-
                 that.getFightUI().updateAll()
             }
         })

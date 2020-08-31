@@ -6,6 +6,7 @@
 import { AudioMgr } from "./AudioMarger";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 
 
 export class FightFail {
@@ -73,6 +74,23 @@ export class FightFail {
     
             var action = cc.repeatForever(cc.sequence(cc.delayTime(1),callback))
             daojishi.runAction(action)
+
+
+            var share_btn = resource.getChildByName("share_btn")
+            // 抖音录屏功能
+            if(PlatformManager.CurrentPlatform == Platform.BYTEDANCE){
+               share_btn.active = true
+           }
+
+            // 分享录屏
+            share_btn.on("touchend", function (event) {
+                console.log("点击分享录屏=============>")
+                PlatformManager.getInstance().shareVideo()
+            }, this);
+
+
+
+
 
 
 

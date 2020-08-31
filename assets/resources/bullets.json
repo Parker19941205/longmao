@@ -145,7 +145,7 @@
     },
     "S114": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 51200,
     "ICON": "icon.png",
@@ -161,7 +161,7 @@
     },
     "S228": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 437900,
     "ICON": "icon.png",
@@ -193,7 +193,7 @@
     },
     "S229": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 470900,
     "ICON": "icon.png",
@@ -257,7 +257,7 @@
     },
     "S118": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 87200,
     "ICON": "icon.png",
@@ -305,7 +305,7 @@
     },
     "S121": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 120500,
     "ICON": "icon.png",
@@ -337,7 +337,7 @@
     },
     "S220": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 217100,
     "ICON": "icon.png",
@@ -401,7 +401,7 @@
     },
     "S119": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 97700,
     "ICON": "icon.png",
@@ -417,7 +417,7 @@
     },
     "S103": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 1700,
     "ICON": "icon.png",
@@ -497,7 +497,7 @@
     },
     "S218": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 173900,
     "ICON": "icon.png",
@@ -545,7 +545,7 @@
     },
     "S122": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 132800,
     "ICON": "icon.png",
@@ -577,7 +577,7 @@
     },
     "S127": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 203300,
     "ICON": "icon.png",
@@ -593,7 +593,7 @@
     },
     "S215": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 118100,
     "ICON": "icon.png",
@@ -625,7 +625,7 @@
     },
     "S203": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 2900,
     "ICON": "icon.png",
@@ -641,7 +641,7 @@
     },
     "S219": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 194900,
     "ICON": "icon.png",
@@ -657,7 +657,7 @@
     },
     "S205": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 10100,
     "ICON": "icon.png",
@@ -737,7 +737,7 @@
     },
     "S117": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 77300,
     "ICON": "icon.png",
@@ -785,7 +785,7 @@
     },
     "S230": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 505100,
     "ICON": "icon.png",
@@ -849,7 +849,7 @@
     },
     "S206": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 15500,
     "ICON": "icon.png",
@@ -865,7 +865,7 @@
     },
     "S227": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 406100,
     "ICON": "icon.png",
@@ -897,7 +897,7 @@
     },
     "S222": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 265100,
     "ICON": "icon.png",
@@ -961,7 +961,7 @@
     },
     "S216": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 135500,
     "ICON": "icon.png",
@@ -993,7 +993,7 @@
     },
     "S111": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 30500,
     "ICON": "icon.png",
@@ -1057,7 +1057,7 @@
     },
     "S102": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 800,
     "ICON": "icon.png",
@@ -1121,7 +1121,7 @@
     },
     "S214": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 101900,
     "ICON": "icon.png",
@@ -1153,7 +1153,7 @@
     },
     "S128": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 219200,
     "ICON": "icon.png",
@@ -1233,7 +1233,7 @@
     },
     "S129": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 235700,
     "ICON": "icon.png",
@@ -1265,7 +1265,7 @@
     },
     "S217": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 154100,
     "ICON": "icon.png",
@@ -1281,7 +1281,7 @@
     },
     "S130": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 252800,
     "ICON": "icon.png",
@@ -1361,7 +1361,7 @@
     },
     "S107": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 11300,
     "ICON": "icon.png",
@@ -1489,7 +1489,7 @@
     },
     "S116": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 68000,
     "ICON": "icon.png",
@@ -1505,7 +1505,7 @@
     },
     "S104": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 3200,
     "ICON": "icon.png",
@@ -1521,7 +1521,7 @@
     },
     "S221": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 240500,
     "ICON": "icon.png",
@@ -1633,7 +1633,7 @@
     },
     "S202": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 1100,
     "ICON": "icon.png",
@@ -1745,7 +1745,7 @@
     },
     "S120": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 108800,
     "ICON": "icon.png",
@@ -1809,7 +1809,7 @@
     },
     "S212": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 73100,
     "ICON": "icon.png",
@@ -1825,7 +1825,7 @@
     },
     "S112": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 36800,
     "ICON": "icon.png",
@@ -1841,7 +1841,7 @@
     },
     "S123": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 145700,
     "ICON": "icon.png",
@@ -1921,7 +1921,7 @@
     },
     "S225": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 346100,
     "ICON": "icon.png",
@@ -1985,7 +1985,7 @@
     },
     "S113": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 43700,
     "ICON": "icon.png",
@@ -2017,7 +2017,7 @@
     },
     "S115": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 59300,
     "ICON": "icon.png",
@@ -2113,7 +2113,7 @@
     },
     "S209": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 38900,
     "ICON": "icon.png",
@@ -2145,7 +2145,7 @@
     },
     "S211": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 60500,
     "ICON": "icon.png",
@@ -2223,7 +2223,7 @@
     "UPGRADE_GEM": 0,
     "POWER": 790
     },
-    "S618": {
+    "S647": {
     "SLOW_RATE": false,
     "SPEED": 300,
     "CD": 3,
@@ -2273,7 +2273,7 @@
     },
     "S207": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 22100,
     "ICON": "icon.png",
@@ -2321,7 +2321,7 @@
     },
     "S201": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 0,
     "ICON": "icon.png",
@@ -2465,7 +2465,7 @@
     },
     "S110": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 24800,
     "ICON": "icon.png",
@@ -2513,7 +2513,7 @@
     },
     "S213": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 86900,
     "ICON": "icon.png",
@@ -2529,7 +2529,7 @@
     },
     "S106": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 8000,
     "ICON": "icon.png",
@@ -2609,7 +2609,7 @@
     },
     "S109": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 19700,
     "ICON": "icon.png",
@@ -2833,7 +2833,7 @@
     },
     "S224": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 317900,
     "ICON": "icon.png",
@@ -2865,7 +2865,7 @@
     },
     "S210": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 49100,
     "ICON": "icon.png",
@@ -2881,7 +2881,7 @@
     },
     "S125": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 173300,
     "ICON": "icon.png",
@@ -2977,7 +2977,7 @@
     },
     "S126": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 188000,
     "ICON": "icon.png",
@@ -3009,7 +3009,7 @@
     },
     "S208": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 29900,
     "ICON": "icon.png",
@@ -3057,7 +3057,7 @@
     },
     "S204": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 5900,
     "ICON": "icon.png",
@@ -3105,7 +3105,7 @@
     },
     "S108": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 15200,
     "ICON": "icon.png",
@@ -3121,7 +3121,7 @@
     },
     "S226": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 375500,
     "ICON": "icon.png",
@@ -3137,7 +3137,7 @@
     },
     "S105": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 5300,
     "ICON": "icon.png",
@@ -3185,7 +3185,7 @@
     },
     "S223": {
     "SLOW_RATE": false,
-    "SPEED": 618,
+    "SPEED": 647,
     "CD": 9,
     "UPGRADE_GOLD": 290900,
     "ICON": "icon.png",
@@ -3265,7 +3265,7 @@
     },
     "S101": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 0,
     "ICON": "icon.png",
@@ -3329,7 +3329,7 @@
     },
     "S124": {
     "SLOW_RATE": false,
-    "SPEED": 672,
+    "SPEED": 701,
     "CD": 1.5,
     "UPGRADE_GOLD": 159200,
     "ICON": "icon.png",

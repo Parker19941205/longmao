@@ -11,7 +11,7 @@
     },
     "BATT_2": {
     "TITLE_ICON": "paotai2",
-    "PAY_PRICE": 60,
+    "PAY_PRICE": 600,
     "ATK_INC": 10,
     "GOLD_INC": 5,
     "ATK_SPEED": 10,
@@ -21,7 +21,7 @@
     },
     "BATT_3": {
     "TITLE_ICON": "paotai3",
-    "PAY_PRICE": 300,
+    "PAY_PRICE": 3000,
     "ATK_INC": 10,
     "GOLD_INC": 10,
     "ATK_SPEED": 10,
@@ -31,7 +31,7 @@
     },
     "BATT_4": {
     "TITLE_ICON": "paotai4",
-    "PAY_PRICE": 680,
+    "PAY_PRICE": 6800,
     "ATK_INC": 10,
     "GOLD_INC": 5,
     "ATK_SPEED": 50,
@@ -41,7 +41,7 @@
     },
     "BATT_5": {
     "TITLE_ICON": "paotai5",
-    "PAY_PRICE": 980,
+    "PAY_PRICE": 9800,
     "ATK_INC": 30,
     "GOLD_INC": 5,
     "ATK_SPEED": 30,
@@ -51,7 +51,7 @@
     },
     "BATT_6": {
     "TITLE_ICON": "paotai6",
-    "PAY_PRICE": 1980,
+    "PAY_PRICE": 19800,
     "ATK_INC": 50,
     "GOLD_INC": 5,
     "ATK_SPEED": 10,

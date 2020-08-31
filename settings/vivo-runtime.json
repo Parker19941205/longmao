@@ -1,5 +1,5 @@
 {
-  "package": "com.longmao.com",
+  "package": "com.sfpaly.longmao.vivominigame",
   "name": "猫咪射手",
   "icon": "C:\\Users\\DELL\\Desktop\\longma\\icon.png",
   "versionName": "1.0.0",
@@ -9,7 +9,7 @@
   "logLevel": "log",
   "npmPath": "",
   "tinyPackageMode": true,
-  "tinyPackageServer": "https://yuema.sfplay.net/yuema_assets/longmao",
+  "tinyPackageServer": "https://yuema.sfplay.net/longmao_assets/vivo",
   "useDebugKey": false,
   "privatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\private.pem",
   "certificatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\certificate.pem",

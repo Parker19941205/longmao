@@ -32,7 +32,7 @@ export class SDK {
 
     public initSDK(scene) {
         this.FightScene = scene
-        PlatformManager.getInstance().initSdk();
+        PlatformManager.getInstance().initSdk(this.FightScene);
     }
     //开启本地通知
     public OpenNotify() {

@@ -69,52 +69,6 @@
     "mon_id": "A1003_2",
     "mon_time": "34"
     }
-    },
-    "A1004": {
-    "A1004_1": {
-    "mon_x": 327,
-    "mon_y": 155,
-    "mon_type": 1,
-    "mon_id": "A1004_1",
-    "mon_time": "45"
-    },
-    "A1004_2": {
-    "mon_x": 327,
-    "mon_y": 155,
-    "mon_type": 1,
-    "mon_id": "A1004_2",
-    "mon_time": "47"
-    },
-    "A1004_3": {
-    "mon_x": 327,
-    "mon_y": 155,
-    "mon_type": 1,
-    "mon_id": "A1004_3",
-    "mon_time": "49"
-    }
-    },
-    "A1005": {
-    "A1005_1": {
-    "mon_x": 578,
-    "mon_id": "A1005_1",
-    "mon_type": 5,
-    "mon_y": 458,
-    "mon_time": "60"
-    },
-    "A1005_2": {
-    "mon_x": 578,
-    "mon_id": "A1005_2",
-    "mon_type": 5,
-    "mon_y": 458,
-    "mon_time": "62"
-    },
-    "A1005_3": {
-    "mon_x": 578,
-    "mon_id": "A1005_3",
-    "mon_type": 5,
-    "mon_y": 458,
-    "mon_time": "64"
-    }
     }
     },
     {},
@@ -461,7 +415,7 @@
     "2": {
     "is_boss": 0,
     "next_gates": "3",
-    "hard_level": 1,
+    "hard_level": 0.5,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -1844,7 +1798,7 @@
     "1": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 0.1,
+    "hard_level": 0.5,
     "next_gates": "2",
     "gate_type": 0,
     "gate_cond": "",
@@ -1897,7 +1851,7 @@
     "4": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1,
+    "hard_level": 0.5,
     "next_gates": "5",
     "gate_type": 0,
     "gate_cond": "",
@@ -2000,93 +1954,7 @@
     }
     }
     },
-    {
-    "A1004": {
-    "A1004_1": {
-    "mon_x": 415,
-    "mon_y": 163,
-    "mon_type": 1,
-    "mon_id": "A1004_1",
-    "mon_time": "9"
-    },
-    "A1004_2": {
-    "mon_x": 669,
-    "mon_y": 161,
-    "mon_type": 1,
-    "mon_id": "A1004_2",
-    "mon_time": "19"
-    }
-    },
-    "A1003": {
-    "A1003_6": {
-    "mon_x": 929,
-    "mon_y": 165,
-    "mon_type": 1,
-    "mon_id": "A1003_6",
-    "mon_time": "17"
-    },
-    "A1003_1": {
-    "mon_x": 170,
-    "mon_y": 161,
-    "mon_type": 1,
-    "mon_id": "A1003_1",
-    "mon_time": "3"
-    },
-    "A1003_4": {
-    "mon_x": 578,
-    "mon_y": 168,
-    "mon_type": 1,
-    "mon_id": "A1003_4",
-    "mon_time": "13"
-    },
-    "A1003_2": {
-    "mon_x": 324,
-    "mon_y": 165,
-    "mon_type": 1,
-    "mon_id": "A1003_2",
-    "mon_time": "7"
-    },
-    "A1003_5": {
-    "mon_x": 848,
-    "mon_y": 164,
-    "mon_type": 1,
-    "mon_id": "A1003_5",
-    "mon_time": 0
-    },
-    "A1003_3": {
-    "mon_x": 500,
-    "mon_y": 168,
-    "mon_type": 1,
-    "mon_id": "A1003_3",
-    "mon_time": "11"
-    }
-    },
-    "A1001": {
-    "A1001_2": {
-    "mon_x": 249,
-    "mon_y": 159,
-    "mon_type": 1,
-    "mon_id": "A1001_2",
-    "mon_time": "5"
-    },
-    "A1001_1": {
-    "mon_x": 92,
-    "mon_y": 161,
-    "mon_type": 1,
-    "mon_id": "A1001_1",
-    "mon_time": "1"
-    }
-    },
-    "A1002": {
-    "A1002_1": {
-    "mon_x": 1040,
-    "mon_y": 143,
-    "mon_type": 1,
-    "mon_id": "A1002_1",
-    "mon_time": "21"
-    }
-    }
-    },
+    {},
     {}
     ]
     },
@@ -6685,7 +6553,7 @@
     "3": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1,
+    "hard_level": 0.5,
     "next_gates": "4",
     "gate_type": 0,
     "gate_cond": "",
@@ -7118,7 +6986,7 @@
     "6": {
     "is_boss": 0,
     "next_gates": "7",
-    "hard_level": 1.5,
+    "hard_level": 0.8,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -9565,7 +9433,7 @@
     "5": {
     "is_boss": 0,
     "next_gates": "6",
-    "hard_level": 1,
+    "hard_level": 0.6,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -10482,7 +10350,7 @@
     "7": {
     "is_boss": 0,
     "next_gates": "8",
-    "hard_level": 1.5,
+    "hard_level": 1.2,
     "gate_type": 0,
     "map_id": "map1",
     "waves": [

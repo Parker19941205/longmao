@@ -1,6 +1,8 @@
 import { PlatformCommon, ADConfig } from "./PlatformManager";
 //import { ListenerManager } from "../margers/ListenerManager";
 import { Def } from "../frameworks/Def";
+import { TipUI } from "../TipUI";
+import FightScene from "../FightScene";
 //import { SDK } from "../frameworks/SDK";
 //import { GameMarger } from "../margers/GameMarger";
 
@@ -20,11 +22,12 @@ export class ByteDanceManager implements PlatformCommon {
     private BannerAdHight: number = 0
     private BannerAdWight: number = 0
     private InterstitialAd = null;
-
+    private FightScene:FightScene
 
     private VideoMap: Map<string, any> = new Map();
-    initSdk(args?: any, callback?: Function) {
-      
+    initSdk(scene,args?: any, callback?: Function) {
+        this.FightScene = scene
+
         let videoAd1 = tt.createRewardedVideoAd({ adUnitId: "2f4lb9m8mglnclljfg"})
         let videoAd2 = tt.createRewardedVideoAd({ adUnitId: "6l9uhjfqqd15g9fb88"})
         let videoAd3 = tt.createRewardedVideoAd({ adUnitId: "ocm6rj85l9f3mgd70h"})
@@ -329,7 +332,7 @@ export class ByteDanceManager implements PlatformCommon {
         console.log("videopath====================",videopath)
         console.log("videopath.length====================",videopath.length)
         if(videopath == null || videopath.length == 0 ){
-            //GameMarger.getInstance().ShowTips("还没有分享的内容")
+            new TipUI(this.FightScene,"还没有分享的内容")
             return
         }
 
@@ -338,11 +341,11 @@ export class ByteDanceManager implements PlatformCommon {
             channel: "video",
             query: "",
             templateId: "1fidnqkeari9dnd18o", // 替换成通过审核的分享ID
-            title: "恋爱攻略",
-            desc: "恋爱攻略",
+            title: "龙猫射手",
+            desc: "龙猫射手",
             extra: {
             videoPath: videopath, // 可用录屏得到的本地文件路径
-            videoTopics: ["恋爱攻略"],
+            videoTopics: ["龙猫射手"],
             },
             success() {
                 console.log("分享视频成功");
