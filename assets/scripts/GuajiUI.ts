@@ -10,6 +10,7 @@ import { TipUI } from "./TipUI";
 import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { PlatformManager } from "./platform/PlatformManager";
 
 
 export class GuajiUI {
@@ -79,6 +80,8 @@ export class GuajiUI {
            
         };
         cc.loader.loadRes('prefab/GuajiShouYi', onResourceLoaded );
+
+        PlatformManager.getInstance().showInsertAd("parseui")
     }
 
 

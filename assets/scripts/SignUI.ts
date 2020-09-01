@@ -10,6 +10,7 @@ import { TipUI } from "./TipUI";
 import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { PlatformManager } from "./platform/PlatformManager";
 
 
 export class SignUI {
@@ -18,6 +19,7 @@ export class SignUI {
     private rewardData = null
     private isDouble = false
     private curDayId = 0
+    private buttonArray:Map<any,any> = new Map()
 
      // 构造方法
      constructor(scene:any) {
@@ -109,6 +111,8 @@ export class SignUI {
 
                 button.setPosition(-160+x*160,110-(y*110))
                 rewordBg.addChild(button)
+                that.buttonArray.set(key,button)
+
 
 
                 var rewordnum = button.getChildByName("rewordnum").getComponent(cc.Label)  // 奖励数值
@@ -152,6 +156,8 @@ export class SignUI {
            
         };
         cc.loader.loadRes('prefab/SignUI', onResourceLoaded );
+
+        PlatformManager.getInstance().showInsertAd("parseui")
     }
 
 
@@ -165,6 +171,12 @@ export class SignUI {
         Utils.loadSprite("res/" + data.BIG_ICON, previewicon)
 
     }
+
+
+
+ 
+
+
 
 
 
@@ -188,7 +200,7 @@ export class SignUI {
 
 
     playSuccessReward(){
-        cc.log("rewardData==========>",this.rewardData)
+        //cc.log("rewardData==========>",this.rewardData)
 
         let kind = Number(this.rewardData.KIND)
         let amount = Number(this.rewardData.AMOUNT)
@@ -217,6 +229,18 @@ export class SignUI {
 
         this.FightScene.updateFightUI()
         //new TipUI(this.FightScene,"签到成功")
+
+
+        //cc.log("curDayId===========>",this.curDayId)
+        this.buttonArray.forEach((value , key) =>{
+            if(key == Number(this.curDayId)){
+                let yigeticon = value.getChildByName("yigeticon")  // 已获得icon
+                yigeticon.active = true
+            }
+        })
+
+
+    
     }
 
 

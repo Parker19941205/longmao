@@ -3,6 +3,8 @@
     Date:2014/5/7
     **/
 
+import { PlatformManager } from "./platform/PlatformManager";
+
 
 export class PauseUI {
     private FightScene;
@@ -38,7 +40,7 @@ export class PauseUI {
             if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
             if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
             var prefabNode = cc.instantiate( loadedResource );
-            that.FightScene.node.addChild(prefabNode,100)
+            that.FightScene.node.addChild(prefabNode,2000)
 
             var btnNode = prefabNode.getChildByName("btnNode")
             that.continu_btn = btnNode.getChildByName("continu_btn")
@@ -69,9 +71,7 @@ export class PauseUI {
 
 
         
-
-
-
+        PlatformManager.getInstance().showInsertAd("parseui")
 
 
     }

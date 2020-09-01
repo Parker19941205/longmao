@@ -4971,7 +4971,7 @@
     "25": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 1,
+    "hard_level": 2.6,
     "next_gates": "26",
     "gate_type": 0,
     "gate_cond": "",
@@ -8419,7 +8419,7 @@
     "26": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.5,
+    "hard_level": 2.7,
     "next_gates": "27",
     "gate_type": 0,
     "gate_cond": "",
@@ -10166,7 +10166,7 @@
     "8": {
     "is_boss": 0,
     "next_gates": "9",
-    "hard_level": 1.5,
+    "hard_level": 1.3,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -11910,7 +11910,7 @@
     "27": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 20,
+    "hard_level": 2.8,
     "next_gates": "28",
     "gate_type": 0,
     "gate_cond": "",
@@ -16444,7 +16444,7 @@
     "22": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3,
+    "hard_level": 2.5,
     "gate_type": 0,
     "next_gates": "23",
     "waves": [
@@ -20307,7 +20307,7 @@
     "23": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3,
+    "hard_level": 2.5,
     "gate_type": 0,
     "next_gates": "24",
     "waves": [

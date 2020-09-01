@@ -68,6 +68,7 @@ export class SDK {
     public CloseBannerAd() {
         PlatformManager.getInstance().hideBanner();
     }
+    
     //播放视频广告
     public ShowVideoAd(func: Function, videoType) {
         this.video_func = func;
@@ -76,6 +77,7 @@ export class SDK {
             this.ShowVideoFinish();
         }, this.videoType)
     }
+
     //播放视频广告结束
     private ShowVideoFinish() {
         // if (cc.sys.platform == cc.sys.WECHAT_GAME) {

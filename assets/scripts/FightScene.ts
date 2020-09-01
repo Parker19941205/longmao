@@ -646,7 +646,7 @@ export default class FightScene extends cc.Component {
                     this.isloadEnemy = false
                     this.isOutEnemy = false
                 }
-                if(listType == "enemy" && ani.force != true){
+                if(listType == "enemy" && ani.force != true && this.isguajiing == false){
                    this.dieEnemyList.push(ani.mon_id)
                    cc.log("死亡的怪物=============>",this.dieEnemyList)
                 }
@@ -1052,7 +1052,7 @@ export default class FightScene extends cc.Component {
         this.reloadGatesData()
         this.updateCurrentGates()
         this.playReadyAni()
-
+        this.getFightUI().updateAll()
 
         // 是否有试用炮台
         let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
@@ -1083,7 +1083,6 @@ export default class FightScene extends cc.Component {
     goHome(){
         this.cleanFightScene()
         this.isguajiing = true
-        this.startGameBtn.node.active = true
         this.signBtn.node.active = true
         this.guajishouyiNode.active = true
         this.eqiupChangeBtn.node.active = true
@@ -1109,6 +1108,7 @@ export default class FightScene extends cc.Component {
         //2秒后更新炮台
         this.scheduleOnce(() => {
             this.changeBattery()
+            this.startGameBtn.node.active = true
         }, 2)
 
         this.getFightUI().updateAll()
@@ -1124,7 +1124,6 @@ export default class FightScene extends cc.Component {
             let ready:cc.Node = pointNode.getChildByName("ready")
             if(ready){
                 ready.removeFromParent()
-                that.getFightUI().updateAll()
             }
         })
 
@@ -1239,6 +1238,10 @@ export default class FightScene extends cc.Component {
             this.changeBattery()
 
             var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
+            if(lastSaevGates == null || lastSaevGates.length == 0){
+                lastSaevGates = 1
+            }
+
             this.shiyongju = lastSaevGates
         }else{
             let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
@@ -1348,7 +1351,13 @@ export default class FightScene extends cc.Component {
 
     // 复活
     revive(){
-        this.cleanFightScene()
+        this.g_game_over = false      
+        this.isloadEnemy = false
+        this.issetBulletRock = false
+
+        this.curWave = this.curWave - 1
+        cc.log("复活当前这个======>",this.curWave)
+
         this.startGameBtn.node.active = false
         var guajiNode = this.node.getChildByName("guajiNode")
         guajiNode.active = false
@@ -1361,6 +1370,9 @@ export default class FightScene extends cc.Component {
         this.isguajiing = false
         this.g_game_start = true
         this.isRevive = true
+
+
+       
 
         // 得到当前关卡
         var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");

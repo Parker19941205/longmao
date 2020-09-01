@@ -249,6 +249,7 @@ export class FightUI {
 
         bulletScreenBtn.getChildByName("buyBtn").on("touchend", (event) => {   // 全屏弹购买
             cc.log("购买=========>")
+            this.FightScene.creatPauseUi()
             var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
             var buygold = bulletScreenBtn.getChildByName("buyBtn").getChildByName("buygold").getComponent(cc.Label)
             var need = Number(buygold.string)
@@ -303,6 +304,7 @@ export class FightUI {
             //     }, Def.videoType.buyhighbullet);
             // }
 
+            this.FightScene.creatPauseUi()
             SDK.getInstance().ShowVideoAd(() => {
                 let num =  cc.sys.localStorage.getItem("ProtectNum");
                 cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
@@ -433,6 +435,8 @@ export class FightUI {
             return
         }
 
+        let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");
+       // this.earnGold = CurrentGolds
 
 
         this.earnStar = this.earnStar + (star || 0)
@@ -454,8 +458,8 @@ export class FightUI {
 
         let bulletScreenBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletScreenBtn")
         let bulletProtectBtn = this.FightScene.node.getChildByName("buyNode").getChildByName("BulletProtectBtn")
-        this.updateInfo(bulletScreenBtn,BombType.Screen)
-        this.updateInfo(bulletProtectBtn,BombType.Protect)
+        //this.updateInfo(bulletScreenBtn,BombType.Screen)
+        //this.updateInfo(bulletProtectBtn,BombType.Protect)
     }
 
 
@@ -463,6 +467,8 @@ export class FightUI {
     rollNumLabelAtlas(label?:any, totalNum?:any, times?:any){
         //totalNum = 100
         //times = 1
+        //cc.log("totalNum===============>",totalNum)
+
 
         let num = Number(totalNum)
         let count = Number(times) * 10
@@ -495,6 +501,8 @@ export class FightUI {
                 var cclabel =label.getComponent(cc.Label)
 
                 let curNum = Number(cclabel.string)
+                //cc.log("ZHGE ===============>,cellNum====>",curNum,cellNum)
+
                 let showNum = String(curNum + cellNum)
 
 
@@ -723,6 +731,8 @@ export class FightUI {
     }
 
     updateScoreInfo(){
+        //cc.log("updateScoreInfo============>")
+        
         let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");
         var label =this.txt_gold.getComponent(cc.Label)
         label.string = CurrentGolds

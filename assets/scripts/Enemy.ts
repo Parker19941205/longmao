@@ -112,6 +112,7 @@ export class Enemy{
 
 
         let speed = Math.abs(this.res.speed)
+        //let speed = 80
         // cc.log("speed=============>", speed)
         // cc.log("angle=============>", this.res.angle)
         // cc.log("MathPI=============>", this.res.angle * Math.PI/2)

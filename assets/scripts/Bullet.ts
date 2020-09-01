@@ -72,8 +72,13 @@ export class Bullet {
         this.angle = angle
 
 
-        let level = cc.sys.localStorage.getItem("bullet" + Number(this.res["bombType"]));
+        var bulletType =  Number(this.res["bombType"])
+        if(this.res["bombType"] == BombType.AirSon){
+            bulletType = BombType.Air
+        }
 
+        let level = cc.sys.localStorage.getItem("bullet" + bulletType);
+        //cc.log("bombType==================>",this.res["bombType"])
 
         this.bulletId = this.getBulletId(this.res["bombType"],level)
         //cc.log("子弹ID==================>",this.bulletId)
