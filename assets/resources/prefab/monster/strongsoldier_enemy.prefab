@@ -614,7 +614,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "c8VJck+a1E4L5igAlbxZ4n",
+    "fileId": "6c6FTV359JAaY1W+yLcSax",
     "sync": false
   },
   {
@@ -685,7 +685,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "14eXNJUm9FyYNrUD7GZhai",
+    "fileId": "cfXqq6J/tMXr5/mDjvr9ub",
     "sync": false
   },
   {
@@ -756,7 +756,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "d2izVGHzVLlr+OpHBacwe1",
+    "fileId": "0cQRjcXZtP7Z9xCdAhiZhZ",
     "sync": false
   },
   {
@@ -827,7 +827,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "410uadLndA6q9CRiTsbltE",
+    "fileId": "8epagiGgZLCouFySk+0JRv",
     "sync": false
   },
   {
@@ -898,7 +898,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "2ePOwNrs9GLL4M/iFJGq8o",
+    "fileId": "36R2MKrhFDHa651QSPwWPp",
     "sync": false
   },
   {
@@ -969,7 +969,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "deMkUIgcZC9bYMVzNjSnDh",
+    "fileId": "9dW4ZREVRIbai1HHO9kCd9",
     "sync": false
   },
   {
@@ -1040,7 +1040,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "18svyzQ/pBP717L4dM+C5W",
+    "fileId": "2dRSc/TrlKS4V9zhn916gP",
     "sync": false
   },
   {
@@ -1051,7 +1051,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "0aFGIfrhpC+o9M6K4sMEr4",
+    "fileId": "f4Bmq922BLr7LfDSZbSx+h",
     "sync": false
   },
   {
@@ -1062,7 +1062,7 @@
     "asset": {
       "__uuid__": "491442ef-50e0-4326-b91a-76b4952d2ca0"
     },
-    "fileId": "a468V6qAdLhb2eqY7aPddQ",
+    "fileId": "77nAscpYBFDam0fLqPV8vy",
     "sync": false
   },
   {
@@ -1079,7 +1079,7 @@
       }
     ],
     "_armatureName": "armatureName",
-    "_animationName": "",
+    "_animationName": "stand",
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "playTimes": 0,
@@ -1098,7 +1098,7 @@
       "__uuid__": "d4aaac86-d282-4339-9d10-dedb5134c653"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 0,
+    "_N$_animationIndex": 1,
     "_N$_defaultCacheMode": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false,

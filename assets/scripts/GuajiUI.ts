@@ -54,6 +54,8 @@ export class GuajiUI {
 
 
             that.currentGuajiNum =  cc.sys.localStorage.getItem("GuajiGold");
+        
+
             let goldNum = resource.getChildByName("win_bg").getChildByName("goldNum").getComponent(cc.Label)
             goldNum.string = String(that.currentGuajiNum)
 
@@ -102,7 +104,10 @@ export class GuajiUI {
         cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + amount)
 
         let num =  cc.sys.localStorage.getItem("GuajiGold");
-        cc.sys.localStorage.setItem("GuajiGold",Number(num) - Number(this.currentGuajiNum));
+        //cc.sys.localStorage.setItem("GuajiGold",Number(num) - Number(this.currentGuajiNum));
+        cc.sys.localStorage.setItem("GuajiGold",0);
+        
+
         this.FightScene.updateFightUI()
 
         this.Scene.removeFromParent()

@@ -24,6 +24,9 @@ export class OnlineOffUI {
      constructor(scene:any,goldNum) {
         this.FightScene = scene
         cc.log("离线收益类============>")
+
+
+
         this.currentGuajiNum = goldNum
    
         this.creatUI()
@@ -109,6 +112,9 @@ export class OnlineOffUI {
 
         var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
         cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + amount)
+
+        cc.sys.localStorage.setItem("GuajiGold",0);
+
 
         this.FightScene.updateFightUI()
         this.Scene.removeFromParent()

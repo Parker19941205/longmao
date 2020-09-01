@@ -80,11 +80,11 @@ export class Enemy{
     private cdNormal = 6
     private sumTime = 5
     private force = false
-
+    private mon_id = null
 
      // 构造方法
     constructor(scene, aniID?:any) {
-        //cc.log("构造敌人=============>",aniID)
+        cc.log("构造敌人=============>",aniID)
         this.scene = scene
         this.FightScene = scene
         this.battery = scene.battery
@@ -129,6 +129,7 @@ export class Enemy{
    
     init(data,hardLevel){
         this.setHardLevel(hardLevel)
+        this.mon_id = data.mon_id
 
         this.creatEnemy(data)
     }
@@ -182,7 +183,9 @@ export class Enemy{
             // 怪物初始位置
             if(that.data != null){
                 if(that.aniType == AniType.ANI_TYPE_BUILDING){
-                    spritePrefab.setPosition(that.data.mon_x, that.FightScene.SCREEN_HEIGHT + that.height/2)
+                    //spritePrefab.setPosition(that.data.mon_x/2, that.FightScene.SCREEN_HEIGHT + that.height/2)
+                    cc.log("解锁====>")
+                    spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 - that.data.mon_x/3, mon_y)
                     that.falling = true
                 }else{
                     spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 + that.data.mon_x/2, mon_y)  //data.mon_x

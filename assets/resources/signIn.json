@@ -1,43 +1,43 @@
 {
 	"1": {
 		"BIG_ICON": "qiandao_baodan2",
-		"KIND": 2,
+		"KIND": 3,
 		"SMALL_ICON": "small_baodan",
 		"AMOUNT": 3
 	},
 	"3": {
 		"BIG_ICON": "qiandao_shouwei2",
-		"KIND": 3,
+		"KIND": 4,
 		"SMALL_ICON": "small_shouwei",
 		"AMOUNT": 3
 	},
 	"2": {
 		"BIG_ICON": "qiandao_gold2",
-		"KIND": 1,
+		"KIND": 2,
 		"SMALL_ICON": "small_gold",
 		"AMOUNT": 5000
 	},
 	"5": {
 		"BIG_ICON": "qiandao_gold2",
-		"KIND": 4,
+		"KIND": 2,
 		"SMALL_ICON": "small_gold",
 		"AMOUNT": 1000
 	},
 	"4": {
 		"BIG_ICON": "qiandao_baodan2",
-		"KIND": 2,
+		"KIND": 3,
 		"SMALL_ICON": "small_baodan",
 		"AMOUNT": 5
 	},
 	"7": {
 		"BIG_ICON": "qiandao_gold2",
-		"KIND": 3,
+		"KIND": 2,
 		"SMALL_ICON": "small_gold",
 		"AMOUNT": 10000
 	},
 	"6": {
 		"BIG_ICON": "qiandao_shouwei2",
-		"KIND": 1,
+		"KIND": 4,
 		"SMALL_ICON": "small_shouwei",
 		"AMOUNT": 5
 	},
@@ -49,7 +49,7 @@
 	},
 	"8": {
 		"BIG_ICON": "qiandao_shouwei2",
-		"KIND": 2,
+		"KIND": 4,
 		"SMALL_ICON": "small_shouwei",
 		"AMOUNT": 10
 	}

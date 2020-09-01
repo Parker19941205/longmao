@@ -51,7 +51,8 @@ export class FightFail {
              continue_btn.on("touchend", (event) => {   // 重新开始
                 SDK.getInstance().ShowVideoAd(() => {
                     resource.removeFromParent()
-                    that.FightScene.goHome()
+                    //that.FightScene.goHome()
+                    that.FightScene.revive()
                 }, Def.videoType.video_rebirth);
              }, this);
 
@@ -87,9 +88,6 @@ export class FightFail {
                 console.log("点击分享录屏=============>")
                 PlatformManager.getInstance().shareVideo()
             }, this);
-
-
-
 
 
 

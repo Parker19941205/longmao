@@ -250,45 +250,64 @@ export class FightUI {
         bulletScreenBtn.getChildByName("buyBtn").on("touchend", (event) => {   // 全屏弹购买
             cc.log("购买=========>")
             var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-            if(curGolds > 500){
+            var buygold = bulletScreenBtn.getChildByName("buyBtn").getChildByName("buygold").getComponent(cc.Label)
+            var need = Number(buygold.string)
+            // if(curGolds > need){
+            //     let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
+            //     cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
+            //     cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) - need);
+
+
+            //     //this.updateInfo(bulletScreenBtn,BombType.Screen)
+            //     this.updateAll()
+            // }else{
+            //     //new TipUI(this.FightScene,"金币不足")
+
+            //     SDK.getInstance().ShowVideoAd(() => {
+            //         let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
+            //         cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
+            //         this.updateAll()
+            //     }, Def.videoType.buyhighbullet);
+            // }
+
+            SDK.getInstance().ShowVideoAd(() => {
                 let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
                 cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
-                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) - 500);
-
-
-                //this.updateInfo(bulletScreenBtn,BombType.Screen)
                 this.updateAll()
-            }else{
-                //new TipUI(this.FightScene,"金币不足")
+            }, Def.videoType.buyhighbullet);
 
-                SDK.getInstance().ShowVideoAd(() => {
-                    let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
-                    cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
-                    this.updateAll()
-                }, Def.videoType.buyhighbullet);
-            }
+
+
          }, this);
 
          bulletProtectBtn.getChildByName("buyBtn").on("touchend", (event) => {   // 保护弹购买
-            cc.log("购买=========>")
             var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-            if(curGolds > 800){
+            var buygold = bulletProtectBtn.getChildByName("buyBtn").getChildByName("buygold").getComponent(cc.Label)
+            var need = Number(buygold.string)
+            cc.log("购买=========>",need)
+            // if(curGolds > need){
+            //     let num =  cc.sys.localStorage.getItem("ProtectNum");
+            //     cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
+            //     cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) - need);
+
+            //     //this.updateInfo(bulletProtectBtn,BombType.Protect)
+
+            //     this.updateAll()
+            // }else{
+            //     //new TipUI(this.FightScene,"金币不足")
+
+            //     SDK.getInstance().ShowVideoAd(() => {
+            //         let num =  cc.sys.localStorage.getItem("ProtectNum");
+            //         cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
+            //         this.updateAll()
+            //     }, Def.videoType.buyhighbullet);
+            // }
+
+            SDK.getInstance().ShowVideoAd(() => {
                 let num =  cc.sys.localStorage.getItem("ProtectNum");
                 cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
-                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) - 800);
-
-                //this.updateInfo(bulletProtectBtn,BombType.Protect)
-
                 this.updateAll()
-            }else{
-                //new TipUI(this.FightScene,"金币不足")
-
-                SDK.getInstance().ShowVideoAd(() => {
-                    let num =  cc.sys.localStorage.getItem("ProtectNum");
-                    cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
-                    this.updateAll()
-                }, Def.videoType.buyhighbullet);
-            }
+            }, Def.videoType.buyhighbullet);
          }, this);
 
 
@@ -331,11 +350,11 @@ export class FightUI {
 
         let ScreenbulletNum = cc.sys.localStorage.getItem("ScreenbulletNum");
         if(ScreenbulletNum == null || ScreenbulletNum.length == 0){
-            cc.sys.localStorage.setItem("ScreenbulletNum",0);
+            cc.sys.localStorage.setItem("ScreenbulletNum",3);
         }
         let ProtectNum = cc.sys.localStorage.getItem("ProtectNum");
         if(ProtectNum == null || ProtectNum.length == 0){
-            cc.sys.localStorage.setItem("ProtectNum",0);
+            cc.sys.localStorage.setItem("ProtectNum",3);
         }
 
         let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");
@@ -611,23 +630,35 @@ export class FightUI {
 
                 // 金币不足显示视频icon
                 if(bulletType == BombType.Protect){
-                    buygold.string = "800"
-                    if(curGolds < 800){
-                        videoicon.active = true
-                        buygold.string = ""
-                    }
+
+                    // var beishu = Math.floor(Number(level)/10)
+                    // var shuzhi =  800 + (beishu*800)
+
+                    // buygold.string = String(shuzhi)
+                    // if(curGolds < shuzhi){
+                    //     videoicon.active = true
+                    //     buygold.string = ""
+                    // }
+
+
+                    videoicon.active = true
+                    buygold.string = ""
                 }else if(bulletType == BombType.Screen){
-                    buygold.string = "500"
-                    if(curGolds < 500){
-                        videoicon.active = true
-                        buygold.string = ""
-                    }
+                    // var beishu = Math.floor(Number(level)/10)
+                    // var shuzhi =  500 + (beishu*500)
+
+                    // buygold.string = String(shuzhi)
+                    // if(curGolds < shuzhi){
+                    //     videoicon.active = true
+                    //     buygold.string = ""
+                    // }
+
+                    videoicon.active = true
+                    buygold.string = ""
                 }
             }
 
           
-
-
         
             node.active = true
 

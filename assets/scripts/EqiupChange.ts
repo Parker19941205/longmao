@@ -17,7 +17,7 @@ export class EqiupChange {
     private buttonArray:Map<any,any> = new Map()
     private node
     private lookvideoBtn
-
+    private tipPayPrice = 0
 
      // 构造方法
      constructor(scene:any) {
@@ -62,8 +62,10 @@ export class EqiupChange {
             that.lookvideoBtn.on("touchend", (event) => {   
                 SDK.getInstance().ShowVideoAd(() => {
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 500)
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.tipPayPrice))
+
                     that.FightScene.updateFightUI()
+                    new TipUI(that.FightScene,"获得金币*" + String(that.tipPayPrice))
                 }, Def.videoType.video_battery);
             }, this);
 
@@ -155,6 +157,7 @@ export class EqiupChange {
     // 购买炮台
     buyBattry(index){
         let payPrice = Number(GameData.BatteryData[index].PAY_PRICE)
+       
         var curGolds = Number(cc.sys.localStorage.getItem("CurrentGolds"))
         if(curGolds >= payPrice){
             cc.sys.localStorage.setItem(index,true);
@@ -163,8 +166,8 @@ export class EqiupChange {
             this.resetAllButton()
             new TipUI(this.FightScene,"购买成功")
         }else{
+            this.tipPayPrice = payPrice
             new TipUI(this.FightScene,"金币不足")
-
             
             this.lookvideoBtn.active = true
         }

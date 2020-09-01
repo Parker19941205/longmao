@@ -23,6 +23,7 @@ import { EvalSourceMapDevToolPlugin } from "webpack";
 import { Lib } from "./frameworks/Lib";
 import { GuajiUI } from "./GuajiUI";
 import { OnlineOffUI } from "./OnlineOffUI";
+import { TipUI } from "./TipUI";
 
 const {ccclass, property} = cc._decorator;
 
@@ -87,6 +88,10 @@ export default class FightScene extends cc.Component {
     @property(cc.Button)
     guajishouyiBtn: cc.Button = null;  //挂机收益
 
+    @property(cc.Button)
+    lookvideo: cc.Button = null;  //
+
+
     @property(cc.Node)
     guajishouyiNode :cc.Node = null;   //guajishouyiNode
 
@@ -115,6 +120,9 @@ export default class FightScene extends cc.Component {
 
     private bulletList = new Array<any>();
     private enemyList = new Array<any>();
+    private dieEnemyList = new Array<any>();
+
+
 
     private g_curSpedMultiple = 1  //当前加速倍数
     public GatesData = null
@@ -151,6 +159,8 @@ export default class FightScene extends cc.Component {
     private QiqiuitemType = 0
     private QiqiuNode = null
     private hard_level = 1
+    private isRevive = false
+    private shiyongju = 1
 
     onDestroy() {
         console.log("离线========>")
@@ -247,6 +257,16 @@ export default class FightScene extends cc.Component {
          }, this);
 
          
+        this.lookvideo.node.on("touchend", (event) => {   
+            var that = this
+            SDK.getInstance().ShowVideoAd(() => {
+                var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(500))
+
+                that.updateFightUI()
+            }, Def.videoType.video_battery);
+        }, this);
+
 
 
         // 初始化炮台
@@ -418,10 +438,9 @@ export default class FightScene extends cc.Component {
         this.updateAnimationList(this.enemyList, delay,"enemy") 	//更新敌人
 
         
-        // cc.log("当前游戏中敌人的数量==========>",this.enemyList.length)
-        // cc.log("isloadEnemy==========>",this.isloadEnemy)
-        // cc.log("curWave==========>",this.curWave)
-        //cc.log("是否需要加载一次敌人==========>",this.isloadEnemy)
+        //cc.log("当前游戏中敌人的数量==========>",this.enemyList.length)
+        //cc.log("curWave==========>",this.curWave)
+        // cc.log("是否需要加载一次敌人==========>",this.isloadEnemy)
         //cc.log("当前游戏中子弹的数量==========>",this.bulletList.length)
         //cc.log("当前游戏中精灵表中的数量==========>",this.tagMap.size)
         if(this.enemyList.length == 0 && this.isloadEnemy == false && this.g_game_over == false && (this.g_game_start == true || this.isguajiing == true)){
@@ -627,6 +646,13 @@ export default class FightScene extends cc.Component {
                     this.isloadEnemy = false
                     this.isOutEnemy = false
                 }
+                if(listType == "enemy" && ani.force != true){
+                   this.dieEnemyList.push(ani.mon_id)
+                   cc.log("死亡的怪物=============>",this.dieEnemyList)
+                }
+
+
+
                 continue
             }
 
@@ -639,6 +665,7 @@ export default class FightScene extends cc.Component {
 
 
     initEnemys(wave){
+        //cc.log("enemyData进来了=============>")
         //cc.log("enemyData=============>",this.enemyData)
         if(this.enemyData == null){
             return
@@ -649,10 +676,10 @@ export default class FightScene extends cc.Component {
 
         // cc.log("enemyData=============>",this.enemyData)
         // cc.log("waveTable=============>",waveTable)
-        // cc.log("enemies111=============>",enemies)
+        //cc.log("enemies111=============>",enemies)
         // cc.log("json=============>",JSON.stringify(enemies))
         if(JSON.stringify(enemies) == "{}"){
-            cc.log("没有怪物了，则战斗胜利=============>")
+            cc.log("没有怪物了，则战斗胜利=============>",this.isguajiing)
             if(this.isguajiing == true){
                 this.curWave = 0
             }else{
@@ -666,11 +693,24 @@ export default class FightScene extends cc.Component {
         for(const key of Object.keys(enemies)) {
             //cc.log("key=============>",key)
             //cc.log("value=============>",enemies[key])
-
             for(const data of Object.values(enemies[key])){
                // cc.log("data=============>",data)
-                var EnemyObj = new Enemy(this,key)
-                EnemyObj.init(data, this.hard_level)
+               
+                var isAddEnemy = true
+                if(this.isRevive == true){
+                    for(var i=0;i < this.dieEnemyList.length;i++){
+                        if(data["mon_id"] == this.dieEnemyList[i]){
+                            isAddEnemy = false
+                        }
+                    }
+                }
+
+
+                if(isAddEnemy == true){
+                    var EnemyObj = new Enemy(this,key)
+                    EnemyObj.init(data, this.hard_level)
+                }
+
             }
         }
 
@@ -826,11 +866,13 @@ export default class FightScene extends cc.Component {
             array.push(cc.delayTime(2))
             array.push(showBalance)
             this.node.runAction(cc.sequence(array))
+            this.clearAllEnemy(true)
         }else{
             this.balanceUI = new FightVictory(this)
+            this.clearAllEnemy()
         }
 
-        this.clearAllEnemy()
+       
 
          
        // 停止录屏
@@ -900,12 +942,6 @@ export default class FightScene extends cc.Component {
         this.updateCurrentGates()
         this.playReadyAni()
 
-
-        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
-        if(ShiyongBattery != "" && ShiyongBattery != null){
-            cc.sys.localStorage.setItem("ShiyongBattery","");
-            this.changeBattery()
-        }
     }
 
   
@@ -975,6 +1011,9 @@ export default class FightScene extends cc.Component {
 
     reloadGatesData(){
         this.enemyData = GameData.GatesData[this.currentGates.toString()]
+        cc.log("重新reload怪物========>,currentGates=======>",this.enemyData,this.currentGates.toString())
+
+
         this.hard_level = this.enemyData["hard_level"] || 1.0
     }
 
@@ -989,7 +1028,14 @@ export default class FightScene extends cc.Component {
         this.signBtn.node.active = false
         this.guajishouyiNode.active = false
         this.eqiupChangeBtn.node.active = false
+        this.lookvideo.node.active = false
+
+
         this.isguajiing = false
+        this.g_game_start = true
+        this.dieEnemyList.splice(0,this.dieEnemyList.length);
+        this.isRevive = false
+
 
 
         // 得到当前关卡
@@ -1010,7 +1056,7 @@ export default class FightScene extends cc.Component {
 
         // 是否有试用炮台
         let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
-        if(ShiyongBattery != "" && ShiyongBattery != null && Number(this.currentGates) > 1){
+        if(ShiyongBattery != "" && ShiyongBattery != null && Number(this.currentGates) != this.shiyongju){
             cc.sys.localStorage.setItem("ShiyongBattery","");
             this.changeBattery()
         }
@@ -1041,6 +1087,7 @@ export default class FightScene extends cc.Component {
         this.signBtn.node.active = true
         this.guajishouyiNode.active = true
         this.eqiupChangeBtn.node.active = true
+        this.lookvideo.node.active = true
         this.enemyData = null
 
 
@@ -1056,11 +1103,6 @@ export default class FightScene extends cc.Component {
         if(this.deadPrefebAni){
             this.deadPrefebAni.removeFromParent()
             this.deadPrefebAni = null
-        }
-
-        let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
-        if(ShiyongBattery != "" && ShiyongBattery != null){
-            cc.sys.localStorage.setItem("ShiyongBattery","");
         }
 
 
@@ -1082,7 +1124,6 @@ export default class FightScene extends cc.Component {
             let ready:cc.Node = pointNode.getChildByName("ready")
             if(ready){
                 ready.removeFromParent()
-                that.g_game_start = true
                 that.getFightUI().updateAll()
             }
         })
@@ -1190,10 +1231,15 @@ export default class FightScene extends cc.Component {
     }
 
 
+
+
     playSuccessReward(){
         if(this.QiqiuitemType == 0){  // 试用高级炮台
             cc.sys.localStorage.setItem("ShiyongBattery","BATT_2");
             this.changeBattery()
+
+            var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
+            this.shiyongju = lastSaevGates
         }else{
             let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
             cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
@@ -1201,16 +1247,26 @@ export default class FightScene extends cc.Component {
         }
     }
 
+
+
+
+
     // 每秒更新
     updateData(){
-        if(this.isguajiing == true){
+        //if(this.isguajiing == true){
             let num =  cc.sys.localStorage.getItem("GuajiGold");
             if(num == null || num.length == 0){
                 num = 0
             }
 
-            cc.sys.localStorage.setItem("GuajiGold",Number(num) + 4);
-        }
+            var addNum = Number(num) + 4
+            if(Number(addNum)>14400){
+                addNum = 14400
+            }
+
+
+            cc.sys.localStorage.setItem("GuajiGold",addNum);
+        //}
         cc.sys.localStorage.setItem("offlineTime",Lib.GetTimeBySecond());
     }
 
@@ -1222,13 +1278,32 @@ export default class FightScene extends cc.Component {
         console.log("离线收益,offlineTime=====>",offlineTime)
         console.log("离线收益=====>",currentTime - offlineTime)
 
+        if(offlineTime.length == 0){
+            offlineTime = currentTime
+            console.log("离线收益字段为空=====>",offlineTime)
+        }
 
-        if(offlineTime != null && offlineTime.length > 0){
+
+
+
+        if(offlineTime != null && currentTime - offlineTime > 0){
             //cc.log("离线收益=====>",currentTime - offlineTime)
             var time = currentTime - offlineTime
+
+            let GuajiGold =  cc.sys.localStorage.getItem("GuajiGold");
+
+            let num = Number(GuajiGold)+time*4
+            if(num > 14400){
+                num = 14400
+            }
+
+            cc.sys.localStorage.setItem("GuajiGold",num);
+
+
+
             if(time > 0){
                 this.scheduleOnce(() => {
-                    new OnlineOffUI(this,time)
+                    new OnlineOffUI(this,num)
                 }, 1)
             }
         }
@@ -1271,8 +1346,51 @@ export default class FightScene extends cc.Component {
         SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
     }
 
+    // 复活
+    revive(){
+        this.cleanFightScene()
+        this.startGameBtn.node.active = false
+        var guajiNode = this.node.getChildByName("guajiNode")
+        guajiNode.active = false
+        this.pauseBtn.node.active = true
+        this.signBtn.node.active = false
+        this.guajishouyiNode.active = false
+        this.eqiupChangeBtn.node.active = false
+        this.lookvideo.node.active = false
 
+        this.isguajiing = false
+        this.g_game_start = true
+        this.isRevive = true
 
+        // 得到当前关卡
+        var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
+        this.currentGates = lastSaevGates
+       
+
+        this.enemyData = null
+        this.reloadGatesData()
+        this.updateCurrentGates()
+    
+        if(this.deadPrefebAni){
+            this.deadPrefebAni.removeFromParent()
+            this.deadPrefebAni = null
+        }
+
+        //2秒后更新炮台
+        this.scheduleOnce(() => {
+            this.changeBattery()
+        }, 2)
+        
+            
+
+        if(this.QiqiuNode != null){
+            this.QiqiuNode.removeFromParent()
+        }
+    
+      
+        // 开始录屏
+        PlatformManager.getInstance().recorderManager()
+    }
 
 
 

@@ -2781,7 +2781,7 @@
       }
     ],
     "_armatureName": "armatureName",
-    "_animationName": "",
+    "_animationName": "stand",
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "playTimes": 0,
@@ -2800,7 +2800,7 @@
       "__uuid__": "10bd1abc-bdd1-4d51-9829-2fb7fb253d97"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 0,
+    "_N$_animationIndex": 1,
     "_N$_defaultCacheMode": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false,

@@ -18,6 +18,8 @@ export class FightVictory {
     private _count_stars = 0
     private _count_gems = 0
     private _count_golds = 0
+    private resource = null
+    private isDouble = true
 
      // 构造方法
      constructor(scene:any) {
@@ -42,15 +44,20 @@ export class FightVictory {
             var resource = cc.instantiate( loadedResource );
             that.FightScene.node.addChild(resource,100)
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
+            that.resource = resource
+
 
             var next_btn = resource.getChildByName("next_btn")
-        
             next_btn.on("touchend", (event) => {   // 双倍领取
                 SDK.getInstance().ShowVideoAd(() => {
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 200)
-                    that.FightScene.updateFightUI()
+                    if(that.isDouble == true){
+                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100*2)
+                    }else{
+                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
+                    }
 
+                    that.FightScene.updateFightUI()
                     resource.removeFromParent()
                     that.FightScene.goHome()
                 }, Def.videoType.video_score);
@@ -80,7 +87,6 @@ export class FightVictory {
 
 
 
-
              //关卡加1下一关
              var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
              var currentGates = Number(lastSaevGates) + 1
@@ -101,6 +107,16 @@ export class FightVictory {
 
 
 
+            // 双倍复选框
+            var doubleGet = resource.getChildByName("doubleGet")
+            doubleGet.on('toggle', that.callback1, that);
+
+
+
+
+
+
+
 
              AudioMgr.getInstance().playEffect("BGM003");
              AudioMgr.getInstance().playEffect("SE012");
@@ -111,7 +127,20 @@ export class FightVictory {
 
 
    
-    
+    callback1 (event) {
+        var toggle = event;
+        //do whatever you want with toggle
+        var textlabel = this.resource.getChildByName("next_btn").getChildByName("textlabel").getComponent(cc.Label)
+
+        if(toggle.isChecked){
+            textlabel.string = "双倍领取"
+            this.isDouble = true
+        }else{
+            textlabel.string = "好的！"
+            this.isDouble = false
+
+        }
+    }
 
 
      
