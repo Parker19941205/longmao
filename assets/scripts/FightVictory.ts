@@ -26,7 +26,7 @@ export class FightVictory {
         cc.log("构造战斗胜利类=============>")
         this.FightScene = scene
 
-
+        AudioMgr.getInstance().playEffect("victory");
    
         this.creatBullet()
         return this

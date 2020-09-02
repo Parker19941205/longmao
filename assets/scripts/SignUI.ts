@@ -10,7 +10,7 @@ import { TipUI } from "./TipUI";
 import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
-import { PlatformManager } from "./platform/PlatformManager";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 
 
 export class SignUI {
@@ -89,6 +89,14 @@ export class SignUI {
                     that.playSuccessReward()
                 }
              }, this);
+
+
+             // 水印
+            var shuiyinLabel = resource.getChildByName("shuiyinLabel")
+             if(PlatformManager.CurrentPlatform == Platform.SISANJIUJIU){
+                shuiyinLabel.active = true
+            }
+          
 
 
 

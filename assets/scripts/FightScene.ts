@@ -302,6 +302,7 @@ export default class FightScene extends cc.Component {
             this.resumeAll()
 　　    },this);
 
+
     }
 
     start () {
@@ -946,6 +947,7 @@ export default class FightScene extends cc.Component {
     // 暂停所有
     pauseAll(){ //android会几率性闪退
         //cc.director.pause()
+        console.log("暂停所有===========>")
         cc.game.pause()
     }
 
@@ -953,6 +955,7 @@ export default class FightScene extends cc.Component {
     //恢复所有
     resumeAll(){ //android会几率性闪退
         //cc.director.resume()
+        console.log("恢复所有===========>")
         cc.game.resume()
     } 
 
@@ -1074,7 +1077,6 @@ export default class FightScene extends cc.Component {
         this.isRevive = false
 
 
-
         // 得到当前关卡
         var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
         if(lastSaevGates == null || lastSaevGates.length == 0){
@@ -1154,6 +1156,7 @@ export default class FightScene extends cc.Component {
 
 
     playReadyAni(){
+        AudioMgr.getInstance().playEffect("ready_go");
         let pointNode:cc.Node = this.node.getChildByName("pointNode")
         var that = this
         var dirPath = "ani/battlebegin"

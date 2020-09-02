@@ -6,6 +6,7 @@ import { Config,AdStub,AdInsertStub } from "../config/Config";
 // import { KKH5Manager } from "./KKH5Manager";
 import { ByteDanceManager } from "./ByteDanceManager";
 import { EditorManager } from "./EditorManager";
+import { SiSanJiuJiuManager } from "./SiSanJiuJiuManager";
 // import { GameData } from "../frameworks/GameData";
 // import { VivoManager } from "./VivoManager";
 // import { BaiduManager } from "./BaiduManager";
@@ -30,6 +31,9 @@ export enum Platform {
     Baidu = 5,
      /**QQ */
     QQGAME = 6,
+     /**4399 */
+    SISANJIUJIU = 7,
+
     EDITOR = 0,
 }
 
@@ -87,7 +91,7 @@ export interface PlatformCommon {
 
 export class PlatformManager {
     /** 打包的时候需要替换 当前平台 */
-    public static CurrentPlatform = Platform.Vivo;
+    public static CurrentPlatform = Platform.SISANJIUJIU;
 
     private static _instance: PlatformManager;
     private currentPaltform: PlatformCommon;
@@ -166,6 +170,9 @@ export class PlatformManager {
                 if (PlatformManager.CurrentPlatform == Platform.KUAIKAN) {
                     console.log("当前平台是KUAIKAN============>")
                     //this.currentPaltform = new KKH5Manager()
+                }else if(PlatformManager.CurrentPlatform == Platform.SISANJIUJIU){
+                    console.log("当前平台是4399============>")
+                    this.currentPaltform = new SiSanJiuJiuManager()
                 } else {
                     console.log("当前平台是EDITOR============>")
                     this.currentPaltform = new EditorManager()

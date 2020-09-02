@@ -10,7 +10,7 @@ import { TipUI } from "./TipUI";
 import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
-import { PlatformManager } from "./platform/PlatformManager";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 
 
 export class GuajiUI {
@@ -77,7 +77,11 @@ export class GuajiUI {
              }, this);
 
 
-           
+              // 水印
+            var shuiyinLabel = resource.getChildByName("shuiyinLabel")
+            if(PlatformManager.CurrentPlatform == Platform.SISANJIUJIU){
+               shuiyinLabel.active = true
+           }
         };
         cc.loader.loadRes('prefab/GuajiShouYi', onResourceLoaded );
 
