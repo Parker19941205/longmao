@@ -162,10 +162,13 @@ export default class FightScene extends cc.Component {
     private isRevive = false
     private shiyongju = 1
 
+
     onDestroy() {
         console.log("离线========>")
         //cc.sys.localStorage.setItem("offlineTime",Lib.GetTimeBySecond());
     }
+
+    
 
     onLoad(){
         this.g_fight_scene = this
@@ -261,10 +264,10 @@ export default class FightScene extends cc.Component {
             var that = this
             SDK.getInstance().ShowVideoAd(() => {
                 var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(500))
+                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(1000))
 
                 that.updateFightUI()
-            }, Def.videoType.video_battery);
+            }, Def.videoType.video_battery,"获得金币*1000");
         }, this);
 
 
@@ -285,6 +288,20 @@ export default class FightScene extends cc.Component {
         this.scheduleOnce(() => {
             this.bannerShowHide()
         }, 3)
+
+
+
+
+        cc.game.on(cc.game.EVENT_HIDE, function(){
+    　　　　console.log("游戏进入后台");
+            this.pauseAll()
+    　　},this);
+
+    　  cc.game.on(cc.game.EVENT_SHOW, function(){
+　　　　    console.log("游戏进入前台");
+            this.resumeAll()
+　　    },this);
+
     }
 
     start () {
@@ -719,7 +736,27 @@ export default class FightScene extends cc.Component {
     }
 
 
- 
+    
+    //建筑怪添加怪物
+    buildingAddEnemy(position){
+        //cc.log("建筑怪添加敌人==============>x,y",position.x,position.y)
+        var key = "A1003"
+        var data =  {
+            "mon_x": 571,
+            "mon_y": 157,
+            "mon_type": 1,
+            "mon_id": "A1003_1",
+            "mon_time": "14"
+        }
+
+
+        var EnemyObj = new Enemy(this,key)
+        EnemyObj.init(data, this.hard_level,position)
+    }
+
+
+
+
 
     //添加敌人
     addEnemy(obj){
@@ -1220,10 +1257,15 @@ export default class FightScene extends cc.Component {
 
             var clickNode = resource.getChildByName("clickNode")
             clickNode.on("touchend", (event) => {   // 看视频领取
-                cc.log("看视频领取==========>")
+                cc.log("看视频领取==========>",that.QiqiuitemType)
+                let str = "免费试用一局高级炮台"
+                if(that.QiqiuitemType == 1){ 
+                    str = "已获得炮弹x3"
+                }
+
                 SDK.getInstance().ShowVideoAd(() => {
                     that.playSuccessReward()
-                }, Def.videoType.qiqiugift);
+                }, Def.videoType.qiqiugift,str);
              }, that);
         }
         cc.loader.loadRes('prefab/QiqiuUI', onResourceLoaded );
@@ -1233,6 +1275,7 @@ export default class FightScene extends cc.Component {
 
 
     playSuccessReward(){
+        //cc.log("playSuccessReward==========>",this.QiqiuitemType)
         if(this.QiqiuitemType == 0){  // 试用高级炮台
             cc.sys.localStorage.setItem("ShiyongBattery","BATT_2");
             this.changeBattery()
@@ -1245,7 +1288,7 @@ export default class FightScene extends cc.Component {
             this.shiyongju = lastSaevGates
         }else{
             let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
-            cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
+            cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 3);
             this.updateFightUI()
         }
     }
@@ -1356,7 +1399,7 @@ export default class FightScene extends cc.Component {
         this.issetBulletRock = false
 
         this.curWave = this.curWave - 1
-        cc.log("复活当前这个======>",this.curWave)
+        cc.log("复活第几波怪物======>",this.curWave)
 
         this.startGameBtn.node.active = false
         var guajiNode = this.node.getChildByName("guajiNode")

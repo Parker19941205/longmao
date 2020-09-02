@@ -20,6 +20,8 @@ export class SDK {
     public videoType;
     public static bannerHeight = 120;
     private FightScene:FightScene
+    public videoTips;
+
 
     private static instance: SDK;
     private constructor() { }
@@ -70,9 +72,11 @@ export class SDK {
     }
     
     //播放视频广告
-    public ShowVideoAd(func: Function, videoType) {
+    public ShowVideoAd(func: Function, videoType,videoTips?:any) {
         this.video_func = func;
         this.videoType = videoType;
+        this.videoTips = videoTips;
+
         PlatformManager.getInstance().showVideoAd("window.SDK.ShowVideoFinish", () => {
             this.ShowVideoFinish();
         }, this.videoType)
@@ -84,7 +88,12 @@ export class SDK {
         //     wx.aldSendEvent(this.videoType)
         // }
         if (this.video_func) {
-            new TipUI(this.FightScene,"视频播放成功")
+            var str = "视频播放成功"
+            if(this.videoTips){
+                str = this.videoTips
+            }
+
+            new TipUI(this.FightScene,str)
             this.video_func();
             // GameData.addAchievementConditionNum("video_num", 1);
         } else {

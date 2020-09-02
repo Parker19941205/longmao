@@ -157,7 +157,7 @@ export class SignUI {
         };
         cc.loader.loadRes('prefab/SignUI', onResourceLoaded );
 
-        PlatformManager.getInstance().showInsertAd("parseui")
+        //PlatformManager.getInstance().showInsertAd("parseui")
     }
 
 

@@ -71,7 +71,7 @@ export class PauseUI {
 
 
         
-        PlatformManager.getInstance().showInsertAd("parseui")
+        //PlatformManager.getInstance().showInsertAd("parseui")
 
 
     }

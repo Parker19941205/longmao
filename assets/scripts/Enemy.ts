@@ -34,7 +34,7 @@ export class Enemy{
     private AIR_DRAG	= 600	// 空气阻力
     private g_air_time	= 0.1	// 子母弹生子弹间隔（秒）
     private multiple = 1.2	//默认加速倍数
-    private dropTime = 0
+    private dropTime = 0  // 下降时间
 
     private speed = 50
     private angle = 0
@@ -78,7 +78,7 @@ export class Enemy{
     private falling
     private guajiCDTime
     private cdNormal = 6
-    private sumTime = 5
+    private sumTime = 0
     private force = false
     private mon_id = null
 
@@ -98,7 +98,7 @@ export class Enemy{
         this.rewards = this.getDropRewards()
         this.aniType = parseInt(this.getAniType())
         //cc.log("敌人动画类型=============>",this.aniType)
-
+        //cc.log("res=============>",this.res)
 
 
 
@@ -128,11 +128,11 @@ export class Enemy{
         return this
     }
    
-    init(data,hardLevel){
+    init(data,hardLevel,position?:any){
         this.setHardLevel(hardLevel)
         this.mon_id = data.mon_id
 
-        this.creatEnemy(data)
+        this.creatEnemy(data,position)
     }
 
 
@@ -154,7 +154,7 @@ export class Enemy{
 
 
 
-    creatEnemy(data){
+    creatEnemy(data,position?:any){
         //cc.log("创建敌人预制体==============>")
         //我們先動態取得Canvas
         this.data = data
@@ -173,7 +173,7 @@ export class Enemy{
             let mon_y = -that.FightScene.SCREEN_HEIGHT/2+that.bottom_bg.height-10
             if(that.aniType == AniType.ANI_TYPE_LAND){
                 mon_y = -that.FightScene.SCREEN_HEIGHT/2+that.bottom_bg.height-10
-            }else if(that.aniType == AniType.ANI_TYPE_AIR){
+            }else if(that.aniType == AniType.ANI_TYPE_AIR || that.aniType == AniType.ANI_TYPE_BUILDING){
                 mon_y = 110
             }
 
@@ -185,13 +185,18 @@ export class Enemy{
             if(that.data != null){
                 if(that.aniType == AniType.ANI_TYPE_BUILDING){
                     //spritePrefab.setPosition(that.data.mon_x/2, that.FightScene.SCREEN_HEIGHT + that.height/2)
-                    cc.log("解锁====>")
+                    //cc.log("解锁====>")
                     spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 - that.data.mon_x/3, mon_y)
                     that.falling = true
                 }else{
                     spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 + that.data.mon_x/2, mon_y)  //data.mon_x
                 }
             }
+
+            if(position){
+                spritePrefab.setPosition(position.x, position.y)
+            }
+
 
     
 
@@ -249,33 +254,25 @@ export class Enemy{
         let dx = xPos - this.vx * delay
         let dy = yPos - this.vy * delay
    
-        //let yCp = this.bottom_bg.position.y+this.bottom_bg.height/2
-        //if(this.isDeath){
-            // if(Math.abs(this.res.gravity) > 0){
-            //     this.dropTime = this.dropTime + delay
-            //     let dx = xPos
-            //     let dy = yPos + this.vy * delay
-            //     dy = dy - this.res.gravity * this.dropTime
-            //     if(dy <= yCp){
-            //         dy = yCp
-            //         this.doDeath()
-            //     }
-            //     this.sprite.setPosition(dx, dy)
-            // }else{
-            //     this.doDeath()
-            // }
-            //this.doDeath()
-            //return
-        //}
+      
+        if(Math.abs(this.res.gravity) > 0){
+            if(this.aniType == AniType.ANI_TYPE_BUILDING){
+                this.dropTime = this.dropTime + delay
+                dy = dy - this.res.gravity * this.dropTime
+            }
+        }
 
 
-
+        let xPosBattery,yPosBattery =this.FightScene.batteryNode.getPosition()
+        let limit = yPosBattery.y
+        if(dy <= limit){
+		    dy = limit
+        }
 
 
 
 
         //cc.log("dx和dy===================>",dx,dy);
-        
         this.sprite.setPosition(dx, dy)
 
         //cc.log("SCREEN_WIDTH1===================>",this.FightScene.SCREEN_WIDTH/2);
@@ -285,24 +282,13 @@ export class Enemy{
         }
 
 
-
-
-
-        let xPosBattery,yPosBattery =this.FightScene.batteryNode.getPosition()
+       
         //cc.log("yPosBattery===================>",yPosBattery.x);
         if(dx <= yPosBattery.x){
             //cc.log("游戏失败===================>");
             this.FightScene.gameOver(false)
             return
         }
-
-
-        // 挂机中自动发技能
-        // if(this.FightScene.isguajiing == true && dx <= (yPosBattery.x + 300) && this.FightScene.issetBulletRock == false){
-        //     cc.log("发技能========>")
-        //     this.FightScene.createBulletRock()
-        // }
-
 
         this.FightScene.gjsumTime =this.FightScene.gjsumTime + delay
         // 挂机中自动发技能
@@ -318,6 +304,22 @@ export class Enemy{
             }
            
         }
+
+
+        if(this.aniType == AniType.ANI_TYPE_BUILDING){
+            this.sumTime = this.sumTime + delay
+            if(this.sumTime - this.countTime >= 5){
+                this.countTime = this.sumTime
+                
+                if(this.FightScene.isGameOver() == false){
+                    cc.log("创建怪物==========>")
+                    this.FightScene.buildingAddEnemy(cc.v2(dx, dy))
+                }
+            }
+	    }
+
+
+
 
     }
 
@@ -551,6 +553,7 @@ export class Enemy{
                     bonesNum = 3
                 }
 
+                AudioMgr.getInstance().playEffect("SE016");
                 for(var i=0;i<bonesNum;i++){
                    // cc.log("骨骼节点==============>",array[i])
                     var boneNode = array[i]
@@ -561,8 +564,6 @@ export class Enemy{
                     let point= pointNode.convertToNodeSpaceAR(worldPos)
                     this.dropGoldEffect(point,i+1)
                     this.deadEffect(point,1.0)
-                    AudioMgr.getInstance().playEffect("SE016");
-
                 }
 
 
@@ -719,7 +720,7 @@ export class Enemy{
 
     // 金币掉落特效
     dropGoldEffect(position,index){
-        if(this.force == true){
+        if(this.force == true || this.FightScene.isguajiing == true){
             return
         }
 
@@ -735,8 +736,11 @@ export class Enemy{
         let goldPos = this.FightScene.getGoldPos()
         let _removeEff = function(){
             //Effect:goldGainEffect(ccp(goldPos.x, goldPos.y))
+            // if(that.FightScene.audioID!= null){
+            //     console.log("停止音效=======>",that.FightScene.audioID)
+            //     AudioMgr.getInstance().stopEffect(that.FightScene.audioID);
+            // }
             AudioMgr.getInstance().playEffect("SE011");
-            //eff:die()
             goldEffectNode.removeFromParent()
         }
         let array = new Array()

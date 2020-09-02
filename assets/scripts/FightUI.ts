@@ -249,7 +249,6 @@ export class FightUI {
 
         bulletScreenBtn.getChildByName("buyBtn").on("touchend", (event) => {   // 全屏弹购买
             cc.log("购买=========>")
-            this.FightScene.creatPauseUi()
             var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
             var buygold = bulletScreenBtn.getChildByName("buyBtn").getChildByName("buygold").getComponent(cc.Label)
             var need = Number(buygold.string)
@@ -304,7 +303,6 @@ export class FightUI {
             //     }, Def.videoType.buyhighbullet);
             // }
 
-            this.FightScene.creatPauseUi()
             SDK.getInstance().ShowVideoAd(() => {
                 let num =  cc.sys.localStorage.getItem("ProtectNum");
                 cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);

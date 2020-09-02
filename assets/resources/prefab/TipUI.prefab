@@ -46,7 +46,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
+      "width": 1280,
       "height": 640
     },
     "_anchorPoint": {
@@ -58,7 +58,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        480,
+        640,
         320,
         0,
         0,
@@ -113,8 +113,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 235,
-      "height": 28
+      "width": 259,
+      "height": 44
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -125,8 +125,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        12,
+        8,
         0,
         0,
         0,
@@ -192,8 +192,8 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 235,
-      "height": 28
+      "width": 259,
+      "height": 44
     },
     "_resize": 1,
     "_N$layoutType": 2,
@@ -252,7 +252,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 180,
+      "width": 225,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -264,8 +264,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        9.796,
+        8.905,
         0,
         0,
         0,
@@ -305,7 +305,7 @@
     "_useOriginalSize": false,
     "_string": "你几句偶家几句偶家",
     "_N$string": "你几句偶家几句偶家",
-    "_fontSize": 20,
+    "_fontSize": 25,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,

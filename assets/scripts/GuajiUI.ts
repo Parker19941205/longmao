@@ -81,7 +81,7 @@ export class GuajiUI {
         };
         cc.loader.loadRes('prefab/GuajiShouYi', onResourceLoaded );
 
-        PlatformManager.getInstance().showInsertAd("parseui")
+        //PlatformManager.getInstance().showInsertAd("parseui")
     }
 
 
