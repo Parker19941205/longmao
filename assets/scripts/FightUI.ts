@@ -21,10 +21,9 @@ export class FightUI {
     private earnGold = 0
     private _count_stars = 0
     private _count_gems = 0
-    private _count_golds = 0
+    public _count_golds = 0
     private gold_icon
     private goldNode
-
 
      // 构造方法
      constructor(scene:any) {
@@ -359,7 +358,7 @@ export class FightUI {
 
         let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");
         if(CurrentGolds == null || CurrentGolds.length == 0){
-            cc.sys.localStorage.setItem("CurrentGolds",0);
+            cc.sys.localStorage.setItem("CurrentGolds",1000);
         }
 
 
@@ -460,6 +459,10 @@ export class FightUI {
         //this.updateInfo(bulletProtectBtn,BombType.Protect)
     }
 
+
+    getGolds(){
+	    return  this._count_golds || 0
+    }
 
     // 文字标签控件滚动数字
     rollNumLabelAtlas(label?:any, totalNum?:any, times?:any){
@@ -767,10 +770,13 @@ export class FightUI {
         //  this.FightScene.schedule(function(){
         //  }, 0.01);
         cdTime = cdTime || 6
-        //cc.log("cdTime===============>",cdTime)
+        cc.log("cdTime===============>",cdTime)
+        cc.log("cdTime2===============>",0.01/cdTime)
+
 
         var callback = (cc.callFunc(function () {
             jindu = jindu - (1/(100*cdTime))
+            //jindu = jindu - 0.1/cdTime
             bar.progress = jindu
             if(jindu < 0){
                 //cc.log("进来+==")

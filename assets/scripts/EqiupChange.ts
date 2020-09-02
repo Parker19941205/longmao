@@ -74,10 +74,6 @@ export class EqiupChange {
 
 
 
-
-
-
-
             let btn_template = scrollViewContent.getChildByName("paodanitem");
 
             let batteryData = GameData.BatteryData
@@ -119,6 +115,7 @@ export class EqiupChange {
 
 
             that.resetAllButton()
+
         };
         cc.loader.loadRes('prefab/PaodanChange', onResourceLoaded );
     }

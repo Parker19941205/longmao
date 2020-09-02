@@ -20,6 +20,7 @@ export class FightVictory {
     private _count_golds = 0
     private resource = null
     private isDouble = true
+    private earnGolds = 0
 
      // 构造方法
      constructor(scene:any) {
@@ -46,15 +47,24 @@ export class FightVictory {
             //bullet.setPosition(that.battery.node.position.x,that.battery.node.position.y)
             that.resource = resource
 
+            that.earnGolds = Number(that.FightScene.getFightUI().getGolds()) + Number(Math.floor(that.FightScene.getFightUI().getGolds() * that.FightScene.getGoldIncRate()))
+            // cc.log("earnGolds========>",that.earnGolds)
+            // cc.log("getGolds========>",that.FightScene.getFightUI().getGolds())
+            // cc.log("getGoldIncRate========>",that.FightScene.getGoldIncRate())
+            // cc.log("getGoldIncRate2========>",Number(Math.floor(that.FightScene.getFightUI().getGolds() * that.FightScene.getGoldIncRate())))
+
+            var win_Score = resource.getChildByName("win_bg").getChildByName("win_bg2").getChildByName("win_Score").getComponent(cc.Label)
+            win_Score.string = String(that.earnGolds)
+
 
             var next_btn = resource.getChildByName("next_btn")
             next_btn.on("touchend", (event) => {   // 双倍领取
                 SDK.getInstance().ShowVideoAd(() => {
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
                     if(that.isDouble == true){
-                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100*2)
+                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds)*2)
                     }else{
-                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
+                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds))
                     }
 
                     that.FightScene.updateFightUI()
@@ -74,10 +84,11 @@ export class FightVictory {
              resource.runAction(action)
 
 
+           
 
              nothanksNode.on("touchend", (event) => {   //  普通领取
                 var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 100)
+                cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds))
                 that.FightScene.updateFightUI()
 
                 resource.removeFromParent()

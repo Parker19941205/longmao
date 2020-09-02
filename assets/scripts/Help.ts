@@ -20,8 +20,7 @@ export class Help {
      constructor(scene:any) {
         cc.log("构造引导类=============>")
         this.FightScene = scene
-
-
+      
    
         this.creatUI()
         return this
@@ -53,6 +52,7 @@ export class Help {
                 var s1 = "res/helper_104"
 
                 if(Number(lastSaevGates) == 2 || Number(lastSaevGates) == 3){
+                    that.FightScene.topEnemyMove = false
                     resource.removeFromParent()
                     return
                 }
@@ -76,6 +76,7 @@ export class Help {
                         index = index + 1
                     })
                 }else{
+                    that.FightScene.topEnemyMove = false
                     resource.removeFromParent()
                 }
              }, this);
@@ -103,9 +104,9 @@ export class Help {
              }
 
 
-
-
-
+         
+            that.FightScene.topEnemyMove = true
+            
         };
         cc.loader.loadRes('prefab/helper_102', onResourceLoaded );
     }

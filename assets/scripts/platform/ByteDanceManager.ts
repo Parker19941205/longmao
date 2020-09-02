@@ -70,7 +70,7 @@ export class ByteDanceManager implements PlatformCommon {
             style: {
                 left: 0,
                 top: 0,
-                width: 200,
+                width: 128,
             }
             })
 

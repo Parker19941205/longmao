@@ -802,7 +802,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Sprite",
+    "_name": "win_bg2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 15
@@ -982,7 +982,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Label",
+    "_name": "win_Score",
     "_objFlags": 0,
     "_parent": {
       "__id__": 19

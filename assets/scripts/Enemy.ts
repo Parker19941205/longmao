@@ -234,8 +234,8 @@ export class Enemy{
 
 
     update(delay){
-        //console.log("delay===================>",delay);
-        if(this.sprite == null){
+        //console.log("delay===================>",this.FightScene.topEnemyMove);
+        if(this.sprite == null || this.FightScene.topEnemyMove == true){
             return
         }
 

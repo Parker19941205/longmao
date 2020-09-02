@@ -161,7 +161,7 @@ export default class FightScene extends cc.Component {
     private hard_level = 1
     private isRevive = false
     private shiyongju = 1
-
+    public topEnemyMove = false
 
     onDestroy() {
         console.log("离线========>")
@@ -212,7 +212,17 @@ export default class FightScene extends cc.Component {
         cc.director.getCollisionManager().enabledDebugDraw = false
         cc.director.getCollisionManager().enabledDrawBoundingBox = false
 
-    
+
+        // 得到当前关卡
+        var lastSaevGates= cc.sys.localStorage.getItem("CurrentGates");
+        if(lastSaevGates == null || lastSaevGates.length == 0){
+            lastSaevGates = 1
+        }
+        this.currentGates = lastSaevGates
+
+
+
+
         GameData.loadDataFromFile((loadFileNum) => {
             cc.log("loadFileNum===============>",loadFileNum)
             if(loadFileNum == 5){
@@ -225,6 +235,10 @@ export default class FightScene extends cc.Component {
                 this.scheduleOnce(() => {
                     this.changeBattery()
                 }, 1)
+
+                
+                this.updateCurrentGates()
+                this.reloadGatesData()
             }
         });
 
@@ -292,6 +306,7 @@ export default class FightScene extends cc.Component {
 
 
 
+
         cc.game.on(cc.game.EVENT_HIDE, function(){
     　　　　console.log("游戏进入后台");
             this.pauseAll()
@@ -338,6 +353,19 @@ export default class FightScene extends cc.Component {
         )
     }
     //https://yuema.sfplay.net/longmao_assets/bytedance
+
+
+    getGoldIncRate(){		// 金币结算加成
+        let batteryData = GameData.BatteryData
+        let index = cc.sys.localStorage.getItem("CurrentBattery");
+
+        if(batteryData[index] == null){
+            return 0
+        }
+       //return (Number(batteryData[index]["GOLD_INC"]) || 0)/100
+        return (Number(batteryData[index]["GOLD_INC"]) || 0)/100
+    }
+
 
 
 
@@ -987,6 +1015,7 @@ export default class FightScene extends cc.Component {
   
     // 更新关卡
     updateCurrentGates(){
+     
         var currentLabel = this.node.getChildByName("gatesNode").getChildByName("current").getChildByName("gatesLabel").getComponent(cc.Label)
         currentLabel.string = String(this.currentGates)
         var next = this.node.getChildByName("gatesNode").getChildByName("next")
@@ -1050,10 +1079,15 @@ export default class FightScene extends cc.Component {
     }
 
     reloadGatesData(){
-        this.enemyData = GameData.GatesData[this.currentGates.toString()]
+        if(this.isguajiing == true){
+            this.enemyData = GameData.GatesData["0"]
+        }else{
+            this.enemyData = GameData.GatesData[this.currentGates.toString()]
+        }
+
+
+       
         cc.log("重新reload怪物========>,currentGates=======>",this.enemyData,this.currentGates.toString())
-
-
         this.hard_level = this.enemyData["hard_level"] || 1.0
     }
 
@@ -1092,6 +1126,8 @@ export default class FightScene extends cc.Component {
         this.updateCurrentGates()
         this.playReadyAni()
         this.getFightUI().updateAll()
+        this.getFightUI()._count_golds = 0
+
 
         // 是否有试用炮台
         let ShiyongBattery = cc.sys.localStorage.getItem("ShiyongBattery");
@@ -1100,11 +1136,12 @@ export default class FightScene extends cc.Component {
             this.changeBattery()
         }
 
-
+        // 关闭气球、banner
         if(this.QiqiuNode != null){
             this.QiqiuNode.removeFromParent()
         }
-    
+        SDK.getInstance().CloseBannerAd()
+
 
          // 引导
          if(this.currentGates == 1 || this.currentGates == 2 || this.currentGates == 3){
@@ -1133,7 +1170,7 @@ export default class FightScene extends cc.Component {
         guajiNode.active = true
         this.pauseBtn.node.active = false
 
-        this.currentGates = 0
+        //this.currentGates = 0
         this.reloadGatesData()
 
         this.updateCurrentGates()
@@ -1329,10 +1366,7 @@ export default class FightScene extends cc.Component {
 
         if(offlineTime.length == 0){
             offlineTime = currentTime
-            console.log("离线收益字段为空=====>",offlineTime)
         }
-
-
 
 
         if(offlineTime != null && currentTime - offlineTime > 0){
@@ -1423,7 +1457,7 @@ export default class FightScene extends cc.Component {
         // 得到当前关卡
         var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
         this.currentGates = lastSaevGates
-       
+        this.getFightUI()._count_golds = 0
 
         this.enemyData = null
         this.reloadGatesData()
@@ -1440,12 +1474,13 @@ export default class FightScene extends cc.Component {
         }, 2)
         
             
-
+        // 关闭气球、banner
         if(this.QiqiuNode != null){
             this.QiqiuNode.removeFromParent()
         }
-    
+        SDK.getInstance().CloseBannerAd()
       
+        
         // 开始录屏
         PlatformManager.getInstance().recorderManager()
     }

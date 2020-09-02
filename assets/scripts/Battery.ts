@@ -41,6 +41,8 @@ export class Battery {
      }
 
 
+  
+
 
      createWeapon(battery,aniNode,callfunc){
         let position = this.getWeaponPos()

@@ -158,7 +158,7 @@ export class SignUI {
 
 
 
-
+            SDK.getInstance().CloseBannerAd()
 
 
            

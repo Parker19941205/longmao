@@ -81,10 +81,10 @@ export class Bullet {
         //cc.log("bombType==================>",this.res["bombType"])
 
         this.bulletId = this.getBulletId(this.res["bombType"],level)
-        //cc.log("子弹ID==================>",this.bulletId)
+        cc.log("子弹ID==================>",this.bulletId)
 
         this.info = this.getBulletRes(this.bulletId)
-        //cc.log("获取子弹数据==================>",this.info)
+        cc.log("获取子弹数据==================>",this.info)
         this.speed = this.info["SPEED"] || 0
 
         
