@@ -4,6 +4,7 @@
     **/
 
 import { PlatformManager } from "./platform/PlatformManager";
+import { Def } from "./frameworks/Def";
 
 
 export class PauseUI {
@@ -63,17 +64,12 @@ export class PauseUI {
                 that.FightScene.getFightScene().goHome()
             }, this);
 
-
+            //插屏
+            PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.parseui_insert)
 
         };
         cc.loader.loadRes('prefab/PauseUI', onResourceLoaded );
-
-
-
-        
-        //PlatformManager.getInstance().showInsertAd("parseui")
-
-
+      
     }
 
 

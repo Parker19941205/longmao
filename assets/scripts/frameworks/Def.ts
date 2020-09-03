@@ -73,6 +73,12 @@ export class Def {
       video_score: "结算界面双倍",
    }
 
+   public static readonly insertType = {
+      parseui_insert: "暂停界面插屏",
+      signui_insert: "签到界面插屏",
+      resultui_insert: "结算界面插屏",
+   }
+
 
    public static readonly bannerType = {
       banner_main: "主界面",

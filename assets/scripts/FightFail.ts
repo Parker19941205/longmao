@@ -90,11 +90,13 @@ export class FightFail {
             }, this);
 
 
-
-
             AudioMgr.getInstance().playEffect("BGM004");
+
+             //插屏
+            PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.resultui_insert)
         };
         cc.loader.loadRes('prefab/FightFail', onResourceLoaded );
+        
     }
 
 

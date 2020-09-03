@@ -11,10 +11,11 @@ import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
+import FightScene from "./FightScene";
 
 
 export class SignUI {
-    private FightScene;
+    private FightScene:FightScene;
     private Scene:cc.Node
     private rewardData = null
     private isDouble = false
@@ -25,7 +26,9 @@ export class SignUI {
      constructor(scene:any) {
         this.FightScene = scene
 
-
+        if(PlatformManager.CurrentPlatform ==  Platform.QQGAME){
+            this.FightScene.enterSignUI = true
+        }
    
         this.creatUI()
         return this
@@ -57,6 +60,7 @@ export class SignUI {
             closeButton.on("touchend", (event) => {
                 resource.removeFromParent()
                 that.FightScene.StopBannerNode  = false
+                that.FightScene.enterSignUI = false
              }, this);
 
 
@@ -161,11 +165,11 @@ export class SignUI {
             SDK.getInstance().CloseBannerAd()
 
 
-           
+            //插屏
+            PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.signui_insert)
         };
         cc.loader.loadRes('prefab/SignUI', onResourceLoaded );
-
-        //PlatformManager.getInstance().showInsertAd("parseui")
+        
     }
 
 

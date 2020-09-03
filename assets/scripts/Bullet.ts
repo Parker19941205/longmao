@@ -97,7 +97,7 @@ export class Bullet {
 
         if(this.bombType == BombType.Rock){
             this.GRAVITY = 50
-            this.speed = 300
+            this.speed = 370
         }
 
 

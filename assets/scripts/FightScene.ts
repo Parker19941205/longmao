@@ -151,12 +151,12 @@ export default class FightScene extends cc.Component {
     private bottom_bg
     public autoCdType = 0
     public StopBannerNode = false
+    public enterSignUI = false
 
 
     public gjcdNormal = 6
     public gjsumTime = 5
     public gjcountTime = 0
-    private QiqiuitemType = 0
     private QiqiuNode = null
     private hard_level = 1
     private isRevive = false
@@ -1237,6 +1237,9 @@ export default class FightScene extends cc.Component {
 
     createQiqiu(){
         var that = this
+        //cc.log("createQiqiu=====>")
+        cc.sys.localStorage.setItem("currentQiqiuReword","paotai");
+
         var onResourceLoaded = function(errorMessage, loadedResource )
         {
             if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
@@ -1257,30 +1260,37 @@ export default class FightScene extends cc.Component {
             })
             var action5 = cc.delayTime(3)
             var action6 = cc.callFunc(function(){
-                //cc.log("重新开始=====>",that.QiqiuitemType)
                 //resource.active = true
                 let itemiconNode = resource.getChildByName("itemicon")
                 itemiconNode.setContentSize(cc.size(120,80))
-                if(that.QiqiuitemType == 0){
-                    itemiconNode.setContentSize(cc.size(100,100))
-                }
+            
 
-
-                var resName ="res/qiandao_baodan2"
-                if(that.QiqiuitemType == 0){
-                    resName = "res/qiandao_baodan2"
-                    that.QiqiuitemType = 1
-                }else{
+                var resName ="res/batteryMagic"  // 默认炮台
+                var valueType = "paotai"
+                var currentQiqiuReword = cc.sys.localStorage.getItem("currentQiqiuReword");
+                if(currentQiqiuReword == null || currentQiqiuReword.length == 0){
                     resName = "res/batteryMagic"
-                    that.QiqiuitemType = 0
+                    valueType = "paotai"
+                }else{
+                    if(currentQiqiuReword == "paotai"){   // 炮弹
+                        resName = "res/qiandao_baodan2"
+                        valueType = "paotan"
+                        itemiconNode.setContentSize(cc.size(100,100))
+                    }else{
+                        resName = "res/batteryMagic"
+                        valueType = "paotai"
+                    }
                 }
 
-               
+                console.log("resName==========>",resName)
+                console.log("valueType==========>",valueType)
 
 
                 let rewordicon = resource.getChildByName("itemicon").getComponent(cc.Sprite)  // 奖励icon
                 Utils.loadSprite(resName, rewordicon)
                 resource.setPosition(-that.SCREEN_WIDTH/2,that.SCREEN_HEIGHT/2)
+
+                cc.sys.localStorage.setItem("currentQiqiuReword",valueType);
             })
 
 
@@ -1296,12 +1306,13 @@ export default class FightScene extends cc.Component {
 
             var clickNode = resource.getChildByName("clickNode")
             clickNode.on("touchend", (event) => {   // 看视频领取
-                cc.log("看视频领取==========>",that.QiqiuitemType)
+                var currentQiqiuReword = cc.sys.localStorage.getItem("currentQiqiuReword");
+                console.log("看视频领取currentQiqiuReword==========>",currentQiqiuReword)
                 let str = "免费试用一局高级炮台"
-                if(that.QiqiuitemType == 1){ 
+                if(currentQiqiuReword == "paotan"){
                     str = "已获得炮弹x3"
                 }
-
+               
                 SDK.getInstance().ShowVideoAd(() => {
                     that.playSuccessReward()
                 }, Def.videoType.qiqiugift,str);
@@ -1314,9 +1325,37 @@ export default class FightScene extends cc.Component {
 
 
     playSuccessReward(){
-        //cc.log("playSuccessReward==========>",this.QiqiuitemType)
-        if(this.QiqiuitemType == 0){  // 试用高级炮台
-            cc.sys.localStorage.setItem("ShiyongBattery","BATT_2");
+        var currentQiqiuReword = cc.sys.localStorage.getItem("currentQiqiuReword");
+        console.log("playSuccessReward==========>",currentQiqiuReword)
+        if(currentQiqiuReword == "paotai"){ // 试用高级炮台
+            var paotai = "BATT_2"
+            var paotai2 = cc.sys.localStorage.getItem("BATT_2");
+            var paotai3 = cc.sys.localStorage.getItem("BATT_3");
+            var paotai4 = cc.sys.localStorage.getItem("BATT_4");
+            var paotai5 = cc.sys.localStorage.getItem("BATT_5");
+            var paotai6 = cc.sys.localStorage.getItem("BATT_6");
+
+            if(paotai2 == null || paotai2.length == 0){
+                paotai = "BATT_2"
+            }
+            if(paotai3 == null || paotai3.length == 0){
+                paotai = "BATT_3"
+            }
+            if(paotai4 == null || paotai4.length == 0){
+                paotai = "BATT_4"
+            }
+            if(paotai5 == null || paotai5.length == 0){
+                paotai = "BATT_5"
+            }
+            if(paotai6 == null || paotai6.length == 0){
+                paotai = "BATT_6"
+            }
+            console.log("使用的炮台====>",paotai)
+
+
+
+
+            cc.sys.localStorage.setItem("ShiyongBattery",paotai);
             this.changeBattery()
 
             var lastSaevGates = cc.sys.localStorage.getItem("CurrentGates");
@@ -1411,7 +1450,7 @@ export default class FightScene extends cc.Component {
         var action3 = cc.delayTime(10)
         var action4 = cc.callFunc(function(){
             //cc.log("显示=====>")
-            if(that.isguajiing == true){
+            if(that.isguajiing == true && that.enterSignUI == false){
                 SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
             }
         })

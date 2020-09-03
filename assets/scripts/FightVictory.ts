@@ -123,17 +123,16 @@ export class FightVictory {
             doubleGet.on('toggle', that.callback1, that);
 
 
-
-
-
-
-
-
              AudioMgr.getInstance().playEffect("BGM003");
              AudioMgr.getInstance().playEffect("SE012");
 
+
+            //插屏
+            PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.resultui_insert)
         };
         cc.loader.loadRes('prefab/FightVictory', onResourceLoaded );
+
+      
     }
 
 

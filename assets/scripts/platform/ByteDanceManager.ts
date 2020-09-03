@@ -23,7 +23,6 @@ export class ByteDanceManager implements PlatformCommon {
     private BannerAdWight: number = 0
     private InterstitialAd = null;
     private FightScene:FightScene
-    //https://yuema.sfplay.net/longmao_assets/bytedance
 
 
     private VideoMap: Map<string, any> = new Map();
@@ -187,26 +186,26 @@ export class ByteDanceManager implements PlatformCommon {
 
 
     showInsertAd(args?: any, callback?: Function) {
-        console.log("播放插屏appName==============>",tt.getSystemInfoSync().appName) 
-        //const isToutiaio = tt.getSystemInfoSync().appName === "Toutiao";
-        // 插屏广告仅今日头条安卓客户端支持
-        //if (isToutiaio) {
-            console.log("播放插屏==============>",this.InterstitialAd) 
-            console.log("播放插屏的位置==============>",args) 
-            console.log("length==============>",args.length)  
-             /* 建议放在需要展示插屏广告的时机执行 */
-             if(this.InterstitialAd && args.length > 0){
-                console.log("开始show插屏==============>") 
-                this.InterstitialAd.show()
-                // this.InterstitialAd.show().catch((err) => {
-                //     console.error('插屏show',err)
-                //     console.error('插屏errCode',err.errCode)
-                //     if(err.errCode == 1004){
-                //         //GameMarger.getInstance().ShowTips("无适合的广告")
-                //     }
-                // })
-            }
-        //}
+        // console.log("播放插屏appName==============>",tt.getSystemInfoSync().appName) 
+        // const isToutiaio = tt.getSystemInfoSync().appName === "Toutiao";
+        // // 插屏广告仅今日头条安卓客户端支持
+        // if (isToutiaio) {
+        //     console.log("播放插屏==============>",this.InterstitialAd) 
+        //     console.log("播放插屏的位置==============>",args) 
+        //     console.log("length==============>",args.length)  
+        //      /* 建议放在需要展示插屏广告的时机执行 */
+        //      if(this.InterstitialAd && args.length > 0){
+        //         console.log("开始show插屏==============>") 
+        //         this.InterstitialAd.show()
+        //         // this.InterstitialAd.show().catch((err) => {
+        //         //     console.error('插屏show',err)
+        //         //     console.error('插屏errCode',err.errCode)
+        //         //     if(err.errCode == 1004){
+        //         //         //GameMarger.getInstance().ShowTips("无适合的广告")
+        //         //     }
+        //         // })
+        //     }
+        // }
     }
 
 

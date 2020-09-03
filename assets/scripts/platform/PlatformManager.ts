@@ -7,6 +7,7 @@ import { Config,AdStub,AdInsertStub } from "../config/Config";
 import { ByteDanceManager } from "./ByteDanceManager";
 import { EditorManager } from "./EditorManager";
 import { SiSanJiuJiuManager } from "./SiSanJiuJiuManager";
+import { QQGameManager } from "./QQGameManager";
 // import { GameData } from "../frameworks/GameData";
 // import { VivoManager } from "./VivoManager";
 // import { BaiduManager } from "./BaiduManager";
@@ -60,7 +61,7 @@ export interface PlatformCommon {
     /**关闭banner 必须判断callback是否存在 然后调用返回*/
     hideBanner(args?: any, callback?: Function)
     /**显示插屏 必须判断callback是否存在 然后调用返回*/
-    showInsertAd(args?: any, callback?: Function,stub?: AdInsertStub)
+    showInsertAd(args?: any, callback?: Function,stub?: string)
     /**播放视频广告 必须判断callback是否存在 然后调用返回*/
     showVideoAd(args?: any, callback?: Function,stub?: string)
 
@@ -91,7 +92,7 @@ export interface PlatformCommon {
 
 export class PlatformManager {
     /** 打包的时候需要替换 当前平台 */
-    public static CurrentPlatform = Platform.BYTEDANCE;
+    public static CurrentPlatform = Platform.QQGAME;
 
     private static _instance: PlatformManager;
     private currentPaltform: PlatformCommon;
@@ -140,8 +141,8 @@ export class PlatformManager {
                     this.currentPaltform = new ByteDanceManager();
                 } else if (PlatformManager.CurrentPlatform == Platform.QQGAME) {
                     console.log("当前平台是QQGAME============>")
-                    //window.tt = window.qq
-                    //this.currentPaltform = new QQGameManager();
+                    window.tt = window.qq
+                    this.currentPaltform = new QQGameManager();
                 }
                 break
             case cc.sys.ANDROID:
@@ -225,7 +226,7 @@ export class PlatformManager {
     hideBanner(args?: any, callback?: Function) {
         this.currentPaltform.hideBanner(args, callback)
     }
-    showInsertAd(args?: any, callback?: Function, stub?: AdInsertStub) {
+    showInsertAd(args?: any, callback?: Function, stub?: string) {
         this.currentPaltform.showInsertAd(args, callback, stub)
     }
     showVideoAd(args?: any, callback?: Function, stub?: string) {

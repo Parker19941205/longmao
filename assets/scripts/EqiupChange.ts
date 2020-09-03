@@ -111,7 +111,10 @@ export class EqiupChange {
 
 
             cc.sys.localStorage.setItem("BATT_1",true);
-            that.initBatteryPreview("BATT_1")
+            var CurrentBattery = cc.sys.localStorage.getItem("CurrentBattery");
+            if(CurrentBattery){
+                that.initBatteryPreview(CurrentBattery)
+            }
 
 
             that.resetAllButton()
@@ -143,6 +146,7 @@ export class EqiupChange {
 
    
         cc.sys.localStorage.setItem("CurrentBattery",index);
+        this.initBatteryPreview(index)
 
         //let batteryData = GameData.BatteryData
         //var file =  batteryData[index].ANI_FILE;

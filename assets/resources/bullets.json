@@ -2785,7 +2785,7 @@
     },
     "S501": {
     "SLOW_RATE": false,
-    "SPEED": 300,
+    "SPEED": 320,
     "CD": 6,
     "UPGRADE_GOLD": 0,
     "ICON": "icon.png",
