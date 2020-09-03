@@ -23,6 +23,8 @@ export class ByteDanceManager implements PlatformCommon {
     private BannerAdWight: number = 0
     private InterstitialAd = null;
     private FightScene:FightScene
+    //https://yuema.sfplay.net/longmao_assets/bytedance
+
 
     private VideoMap: Map<string, any> = new Map();
     initSdk(scene,args?: any, callback?: Function) {

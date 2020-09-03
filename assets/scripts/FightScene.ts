@@ -352,7 +352,6 @@ export default class FightScene extends cc.Component {
         })
         )
     }
-    //https://yuema.sfplay.net/longmao_assets/bytedance
 
 
     getGoldIncRate(){		// 金币结算加成
@@ -1480,7 +1479,7 @@ export default class FightScene extends cc.Component {
         }
         SDK.getInstance().CloseBannerAd()
       
-        
+
         // 开始录屏
         PlatformManager.getInstance().recorderManager()
     }
