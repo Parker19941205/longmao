@@ -102,17 +102,8 @@ export class SDK {
     }
     /**分享 */
     public share(args?: any, callback?: Function) {
-        let msg = ""
-        // if (GameData.data.sex == 0) {
-        //     //男生
-        //     let index = Math.floor(Math.random() * Config.shareMsg.BoyMsg.length);
-        //     msg = Config.shareMsg.BoyMsg[index]
-        // } else {
-        //     //女生
-        //     let index = Math.floor(Math.random() * Config.shareMsg.GirlMsg.length);
-        //     msg = Config.shareMsg.GirlMsg[index]
-        // }
-        // PlatformManager.getInstance().share({ msg: msg ,title: "恋爱攻略"}, callback)
+        let msg = "《猫咪射手》是一款萌系休闲冒险手游。"
+        PlatformManager.getInstance().share({ msg: msg ,title: "龙猫射手手游"}, callback)
     }
 
 

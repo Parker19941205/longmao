@@ -224,19 +224,21 @@ export class ByteDanceManager implements PlatformCommon {
         // 显示广告
         videoAd1.show().then(() => {
             console.log("广告显示成功");
+            this.FightScene.pauseAll()
         }).catch((err) => {
             console.log("广告组件出现问题", err);
             // 可以手动加载一次
             videoAd1.load().then(() => {
                 console.log("手动加载成功");
                 // 加载成功后需要再显示广告
+                this.FightScene.pauseAll()
                 return videoAd1.show();
             });
         });
 
 
 
-
+        var that = this
         let closefunc = (res)=>{
             console.log('视频广告关闭回调')
             if (res && res.isEnded) {
@@ -250,6 +252,7 @@ export class ByteDanceManager implements PlatformCommon {
             }
             videoAd1.offClose(closefunc)
             videoAd1.load()
+            that.FightScene.resumeAll()
         }
 
         videoAd1.onClose(closefunc)

@@ -9,13 +9,6 @@ import { Def } from "./frameworks/Def";
 
 export class PauseUI {
     private FightScene;
-    private txt_gold;
-    private earnStar = 0
-	private earnGem = 0
-    private earnGold = 0
-    private _count_stars = 0
-    private _count_gems = 0
-    private _count_golds = 0
     private continu_btn
     private goback_btn
         

@@ -8,6 +8,7 @@ import { ByteDanceManager } from "./ByteDanceManager";
 import { EditorManager } from "./EditorManager";
 import { SiSanJiuJiuManager } from "./SiSanJiuJiuManager";
 import { QQGameManager } from "./QQGameManager";
+import { BaiduManager } from "./BaiduManager";
 // import { GameData } from "../frameworks/GameData";
 // import { VivoManager } from "./VivoManager";
 // import { BaiduManager } from "./BaiduManager";
@@ -92,7 +93,7 @@ export interface PlatformCommon {
 
 export class PlatformManager {
     /** 打包的时候需要替换 当前平台 */
-    public static CurrentPlatform = Platform.QQGAME;
+    public static CurrentPlatform = Platform.SISANJIUJIU;
 
     private static _instance: PlatformManager;
     private currentPaltform: PlatformCommon;
@@ -164,7 +165,7 @@ export class PlatformManager {
             case cc.sys.BAIDU_GAME:
                 if (PlatformManager.CurrentPlatform == Platform.Baidu) {
                     console.log("当前平台是baidu============>")
-                    //this.currentPaltform = new BaiduManager();
+                    this.currentPaltform = new BaiduManager();
                 }
                 break
             default:

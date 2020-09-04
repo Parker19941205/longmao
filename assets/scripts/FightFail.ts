@@ -79,14 +79,19 @@ export class FightFail {
 
             var share_btn = resource.getChildByName("share_btn")
             // 抖音录屏功能
-            if(PlatformManager.CurrentPlatform == Platform.BYTEDANCE){
+            if(PlatformManager.CurrentPlatform == Platform.BYTEDANCE || PlatformManager.CurrentPlatform == Platform.QQGAME || PlatformManager.CurrentPlatform == Platform.Baidu){
                share_btn.active = true
            }
 
             // 分享录屏
             share_btn.on("touchend", function (event) {
                 console.log("点击分享录屏=============>")
-                PlatformManager.getInstance().shareVideo()
+                if(PlatformManager.CurrentPlatform == Platform.BYTEDANCE){
+                    PlatformManager.getInstance().shareVideo()
+                }
+                if(PlatformManager.CurrentPlatform == Platform.QQGAME || PlatformManager.CurrentPlatform == Platform.Baidu){
+                    SDK.getInstance().share()
+                }
             }, this);
 
 

@@ -349,11 +349,11 @@ export class FightUI {
 
         let ScreenbulletNum = cc.sys.localStorage.getItem("ScreenbulletNum");
         if(ScreenbulletNum == null || ScreenbulletNum.length == 0){
-            cc.sys.localStorage.setItem("ScreenbulletNum",3);
+            cc.sys.localStorage.setItem("ScreenbulletNum",1);
         }
         let ProtectNum = cc.sys.localStorage.getItem("ProtectNum");
         if(ProtectNum == null || ProtectNum.length == 0){
-            cc.sys.localStorage.setItem("ProtectNum",3);
+            cc.sys.localStorage.setItem("ProtectNum",1);
         }
 
         let CurrentGolds = cc.sys.localStorage.getItem("CurrentGolds");

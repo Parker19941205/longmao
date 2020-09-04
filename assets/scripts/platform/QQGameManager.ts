@@ -137,7 +137,7 @@ export class QQGameManager implements PlatformCommon {
         tt.shareAppMessage({
             title: args.title,
             desc: args.msg,
-            imageUrl: "http://yuema.sfplay.net/yuemaIcon/icon.png",
+            imageUrl: "http://yuema.sfplay.net/yuemaIcon/longmaoIcon.png",
             query: "",
             success() {
               console.log("分享成功");
@@ -201,19 +201,21 @@ export class QQGameManager implements PlatformCommon {
         // 显示广告
         videoAd.show().then(() => {
             console.log("广告显示成功");
+            this.FightScene.pauseAll()
         }).catch((err) => {
             console.log("广告组件出现问题", err);
             // 可以手动加载一次
             videoAd.load().then(() => {
                 console.log("手动加载成功");
                 // 加载成功后需要再显示广告
+                this.FightScene.pauseAll()
                 return videoAd.show();
             });
         });
 
 
 
-
+        var that = this
         let closefunc = (res)=>{
             console.log('视频广告关闭回调')
             if (res && res.isEnded) {
@@ -227,6 +229,7 @@ export class QQGameManager implements PlatformCommon {
             }
             videoAd.offClose(closefunc)
             videoAd.load()
+            that.FightScene.resumeAll()
         }
 
         videoAd.onClose(closefunc)

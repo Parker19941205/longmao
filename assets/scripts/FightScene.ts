@@ -17,7 +17,7 @@ import { AudioMgr } from "./AudioMarger";
 import { Help } from "./Help";
 import { SignUI } from "./SignUI";
 import { SDK } from "./platform/SDK";
-import { PlatformManager } from "./platform/PlatformManager";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 import { Def } from "./frameworks/Def";
 import { EvalSourceMapDevToolPlugin } from "webpack";
 import { Lib } from "./frameworks/Lib";
@@ -162,6 +162,7 @@ export default class FightScene extends cc.Component {
     private isRevive = false
     private shiyongju = 1
     public topEnemyMove = false
+    private audioIDbg = null
 
     onDestroy() {
         console.log("离线========>")
@@ -289,8 +290,11 @@ export default class FightScene extends cc.Component {
         // 初始化炮台
         this.battery = new Battery(this)   //炮台
       
-
-        AudioMgr.getInstance().playEffect("BGM002",true);
+        var that = this
+        AudioMgr.getInstance().playEffect("BGM002",true,null,function(audioID){
+            cc.log("背景音乐id====>",audioID)
+            that.audioIDbg = audioID
+        });
         PlatformManager.getInstance().init();
         SDK.getInstance().initSDK(this)
 
@@ -973,17 +977,35 @@ export default class FightScene extends cc.Component {
 
     // 暂停所有
     pauseAll(){ //android会几率性闪退
-        //cc.director.pause()
+        cc.director.pause()
         console.log("暂停所有===========>")
-        cc.game.pause()
+        if(PlatformManager.CurrentPlatform == Platform.Vivo){
+            if(this.audioIDbg != null){
+                AudioMgr.getInstance().pauseEffect(this.audioIDbg)
+            }
+        }else{
+            AudioMgr.getInstance().pauseAllEffects()
+        }
+
+        
+        //cc.game.pause()
     }
 
 
     //恢复所有
     resumeAll(){ //android会几率性闪退
-        //cc.director.resume()
+        cc.director.resume()
         console.log("恢复所有===========>")
-        cc.game.resume()
+        if(PlatformManager.CurrentPlatform == Platform.Vivo){
+            if(this.audioIDbg != null){
+                AudioMgr.getInstance().resumeEffect(this.audioIDbg)
+            }
+        }else{
+            AudioMgr.getInstance().resumeAllEffects()
+        }
+
+
+        //cc.game.resume()
     } 
 
 
@@ -1399,13 +1421,18 @@ export default class FightScene extends cc.Component {
     createOnlineOff(){
         var offlineTime = cc.sys.localStorage.getItem("offlineTime");
         var currentTime = Lib.GetTimeBySecond()
+
+        if(offlineTime == null || offlineTime.length == 0){
+            console.log("offlineTimew为空")
+            return
+        }
+
         console.log("离线收益,offlineTime=====>",offlineTime)
         console.log("离线收益=====>",currentTime - offlineTime)
 
-        if(offlineTime.length == 0){
-            offlineTime = currentTime
-        }
-
+        // if(offlineTime.length == 0){
+        //     offlineTime = currentTime
+        // }
 
         if(offlineTime != null && currentTime - offlineTime > 0){
             //cc.log("离线收益=====>",currentTime - offlineTime)
