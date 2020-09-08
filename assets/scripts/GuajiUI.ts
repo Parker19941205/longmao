@@ -50,6 +50,10 @@ export class GuajiUI {
             closeButton.on("touchend", (event) => {
                 resource.removeFromParent()
                 that.FightScene.StopBannerNode  = false
+
+                if(PlatformManager.CurrentPlatform == Platform.Vivo){
+                    SDK.getInstance().CloseBannerAd()
+                }
              }, this);
 
 
@@ -82,6 +86,9 @@ export class GuajiUI {
             if(PlatformManager.CurrentPlatform == Platform.SISANJIUJIU){
                shuiyinLabel.active = true
            }
+
+
+
         };
         cc.loader.loadRes('prefab/GuajiShouYi', onResourceLoaded );
 
@@ -118,6 +125,10 @@ export class GuajiUI {
         this.FightScene.updateFightUI()
 
         this.Scene.removeFromParent()
+
+        if(PlatformManager.CurrentPlatform == Platform.Vivo){
+            SDK.getInstance().CloseBannerAd()
+        }
      }
 
 

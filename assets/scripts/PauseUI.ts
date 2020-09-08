@@ -3,8 +3,9 @@
     Date:2014/5/7
     **/
 
-import { PlatformManager } from "./platform/PlatformManager";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 import { Def } from "./frameworks/Def";
+import { SDK } from "./platform/SDK";
 
 
 export class PauseUI {
@@ -60,6 +61,8 @@ export class PauseUI {
             //插屏
             PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.parseui_insert)
 
+
+
         };
         cc.loader.loadRes('prefab/PauseUI', onResourceLoaded );
       
@@ -97,6 +100,10 @@ export class PauseUI {
         array.push(cc.callFunc(function () {
             prefabNode.removeFromParent()
             that.FightScene.StopBannerNode  = false
+
+            if(PlatformManager.CurrentPlatform == Platform.Vivo){
+                SDK.getInstance().CloseBannerAd()
+            }
         }))
         btnNode.runAction(cc.sequence(array))
 

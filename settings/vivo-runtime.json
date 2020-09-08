@@ -9,7 +9,7 @@
   "logLevel": "log",
   "npmPath": "",
   "tinyPackageMode": false,
-  "tinyPackageServer": "",
+  "tinyPackageServer": "https://yuema.sfplay.net/longmao_assets/vivo",
   "useDebugKey": false,
   "privatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\private.pem",
   "certificatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\certificate.pem",

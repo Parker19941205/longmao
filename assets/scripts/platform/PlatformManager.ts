@@ -9,6 +9,8 @@ import { EditorManager } from "./EditorManager";
 import { SiSanJiuJiuManager } from "./SiSanJiuJiuManager";
 import { QQGameManager } from "./QQGameManager";
 import { BaiduManager } from "./BaiduManager";
+import { VivoManager } from "./VivoManager";
+import { OppoManager } from "./OppoManager";
 // import { GameData } from "../frameworks/GameData";
 // import { VivoManager } from "./VivoManager";
 // import { BaiduManager } from "./BaiduManager";
@@ -35,6 +37,8 @@ export enum Platform {
     QQGAME = 6,
      /**4399 */
     SISANJIUJIU = 7,
+    /**oppo */
+    OPPO = 8,
 
     EDITOR = 0,
 }
@@ -93,7 +97,7 @@ export interface PlatformCommon {
 
 export class PlatformManager {
     /** 打包的时候需要替换 当前平台 */
-    public static CurrentPlatform = Platform.BYTEDANCE;
+    public static CurrentPlatform = Platform.OPPO;
 
     private static _instance: PlatformManager;
     private currentPaltform: PlatformCommon;
@@ -158,14 +162,19 @@ export class PlatformManager {
             case cc.sys.VIVO_GAME:
                 if (PlatformManager.CurrentPlatform == Platform.Vivo) {
                     console.log("当前平台是vivo============>")
-                    //this.currentPaltform = new VivoManager();
-                    this.currentPaltform = new EditorManager()
+                    this.currentPaltform = new VivoManager();
                 }
                 break
             case cc.sys.BAIDU_GAME:
                 if (PlatformManager.CurrentPlatform == Platform.Baidu) {
                     console.log("当前平台是baidu============>")
                     this.currentPaltform = new BaiduManager();
+                }
+                break
+            case cc.sys.OPPO_GAME:
+                if (PlatformManager.CurrentPlatform == Platform.OPPO) {
+                    console.log("当前平台是OPPO============>")
+                    this.currentPaltform = new OppoManager();
                 }
                 break
             default:

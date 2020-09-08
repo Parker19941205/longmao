@@ -263,8 +263,11 @@ export default class FightScene extends cc.Component {
 
         this.signBtn.node.on("touchend", (event) => {   // 签到
             new SignUI(this)
-            this.StopBannerNode  = true
-            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+            if(PlatformManager.CurrentPlatform ==  Platform.QQGAME || PlatformManager.CurrentPlatform ==  Platform.Vivo){
+            }else{
+                this.StopBannerNode  = true
+                SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+            }
          }, this);
 
 
@@ -1476,8 +1479,8 @@ export default class FightScene extends cc.Component {
         })
         var action3 = cc.delayTime(10)
         var action4 = cc.callFunc(function(){
-            //cc.log("显示=====>")
-            if(that.isguajiing == true && that.enterSignUI == false){
+            //console.log("显示=====>",that.enterSignUI)
+            if(that.isguajiing == true && that.enterSignUI == false && PlatformManager.CurrentPlatform !=  Platform.Vivo){
                 SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
             }
         })
@@ -1490,8 +1493,9 @@ export default class FightScene extends cc.Component {
         array.push(action4)
         bannerShowNode.runAction(cc.repeatForever(cc.sequence(array)))
 
-
-        SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+        if(PlatformManager.CurrentPlatform !=  Platform.Vivo){
+            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+        }
     }
 
     // 复活

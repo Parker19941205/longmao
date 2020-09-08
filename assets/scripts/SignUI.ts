@@ -26,7 +26,7 @@ export class SignUI {
      constructor(scene:any) {
         this.FightScene = scene
 
-        if(PlatformManager.CurrentPlatform ==  Platform.QQGAME){
+        if(PlatformManager.CurrentPlatform ==  Platform.QQGAME || PlatformManager.CurrentPlatform ==  Platform.Vivo){
             this.FightScene.enterSignUI = true
         }
    
@@ -161,9 +161,7 @@ export class SignUI {
             }
 
 
-
             SDK.getInstance().CloseBannerAd()
-
 
             //插屏
             PlatformManager.getInstance().showInsertAd(null,null,Def.insertType.signui_insert)

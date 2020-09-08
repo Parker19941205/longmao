@@ -20,12 +20,19 @@ export class TipUI  {
         if( !CanvasNode ) { cc.log( 'find Canvas error' ); return; } 
         var that = this
 
+        var tips = this.FightScene.node.getChildByName("tips")
+        if(tips){
+            cc.log("提示框已存在======>")
+            return
+        }
+
+
         var onResourceLoaded = function(errorMessage, loadedResource )
         {
             if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
             if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
             var resource = cc.instantiate( loadedResource );
-            that.FightScene.node.addChild(resource,1000)
+            that.FightScene.node.addChild(resource,1000,"tips")
 
 
             let tipsLayer = resource

@@ -9,6 +9,7 @@ import { TipUI } from "./TipUI";
 import FightScene from "./FightScene";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { PlatformManager, Platform } from "./platform/PlatformManager";
 
 
 export class EqiupChange {
@@ -55,6 +56,10 @@ export class EqiupChange {
             closeBtn.on("touchend", (event) => {   
                 resource.removeFromParent()
                 that.FightScene.StopBannerNode  = false
+
+                if(PlatformManager.CurrentPlatform == Platform.Vivo){
+                    SDK.getInstance().CloseBannerAd()
+                }
             }, this);
 
 

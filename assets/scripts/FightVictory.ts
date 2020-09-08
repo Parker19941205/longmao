@@ -54,34 +54,39 @@ export class FightVictory {
             // cc.log("getGoldIncRate2========>",Number(Math.floor(that.FightScene.getFightUI().getGolds() * that.FightScene.getGoldIncRate())))
 
             var win_Score = resource.getChildByName("win_bg").getChildByName("win_bg2").getChildByName("win_Score").getComponent(cc.Label)
-            win_Score.string = String(that.earnGolds)
+            win_Score.string = String(Number(that.earnGolds)*2)
 
 
             var next_btn = resource.getChildByName("next_btn")
             next_btn.on("touchend", (event) => {   // 双倍领取
-                SDK.getInstance().ShowVideoAd(() => {
-                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                    if(that.isDouble == true){
+                if(that.isDouble == true){
+                    SDK.getInstance().ShowVideoAd(() => {
+                        var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
                         cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds)*2)
-                    }else{
-                        cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds))
-                    }
 
+                        that.FightScene.updateFightUI()
+                        resource.removeFromParent()
+                        that.FightScene.goHome()
+                    }, Def.videoType.video_score);
+                }else{
+                    var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(that.earnGolds))
+                    
                     that.FightScene.updateFightUI()
                     resource.removeFromParent()
                     that.FightScene.goHome()
-                }, Def.videoType.video_score);
+                }
              }, this);
 
 
 
              var nothanksNode = resource.getChildByName("nothanksNode")
-             var callback = cc.callFunc(function () {
-                nothanksNode.active =  true
-             })
+            //  var callback = cc.callFunc(function () {
+            //     nothanksNode.active =  true
+            //  })
      
-             var action = cc.sequence(cc.delayTime(3),callback)
-             resource.runAction(action)
+            //  var action = cc.sequence(cc.delayTime(3),callback)
+            //  resource.runAction(action)
 
 
            
@@ -138,22 +143,31 @@ export class FightVictory {
         };
         cc.loader.loadRes('prefab/FightVictory', onResourceLoaded );
 
-      
     }
 
 
-   
+    // 复选框回调
     callback1 (event) {
         var toggle = event;
         //do whatever you want with toggle
         var textlabel = this.resource.getChildByName("next_btn").getChildByName("textlabel").getComponent(cc.Label)
-
+        var videosmallicon = this.resource.getChildByName("next_btn").getChildByName("videosmallicon")
+        
         if(toggle.isChecked){
             textlabel.string = "双倍领取"
             this.isDouble = true
+            videosmallicon.active = true
+
+            var win_Score = this.resource.getChildByName("win_bg").getChildByName("win_bg2").getChildByName("win_Score").getComponent(cc.Label)
+            win_Score.string = String(Number(this.earnGolds)*2)
+
         }else{
-            textlabel.string = "好的！"
+            textlabel.string = "单倍领取"
             this.isDouble = false
+            videosmallicon.active = false
+
+            var win_Score = this.resource.getChildByName("win_bg").getChildByName("win_bg2").getChildByName("win_Score").getComponent(cc.Label)
+            win_Score.string = String(Number(this.earnGolds))
 
         }
     }

@@ -62,7 +62,7 @@ export class ByteDanceManager implements PlatformCommon {
         console.log("屏幕的高========>",windowHeight)
         console.log("屏幕的宽========>",windowWidth)
 
-        
+    
 
         let appName = tt.getSystemInfoSync().appName;
         if(appName != "Douyin"){
@@ -220,18 +220,24 @@ export class ByteDanceManager implements PlatformCommon {
             videoAd1 = this.VideoMap.get("其他")
         }
 
+        var platform = tt.getSystemInfoSync().platform
         //videoAd1.show()
         // 显示广告
-        videoAd1.show().then(() => {
-            console.log("广告显示成功");
-            //this.FightScene.pauseAll()
+        videoAd1.show().then(() => {   
+            console.log("广告显示成功===>",platform);
+
+            if(platform == "android"){
+                this.FightScene.pauseAll()
+            }
         }).catch((err) => {
             console.log("广告组件出现问题", err);
             // 可以手动加载一次
             videoAd1.load().then(() => {
                 console.log("手动加载成功");
                 // 加载成功后需要再显示广告
-                //this.FightScene.pauseAll()
+                if(platform == "android"){
+                    this.FightScene.pauseAll()
+                }
                 return videoAd1.show();
             });
         });
@@ -241,7 +247,9 @@ export class ByteDanceManager implements PlatformCommon {
         var that = this
         let closefunc = (res)=>{
             console.log('视频广告关闭回调')
-            //that.FightScene.resumeAll()
+            if(platform == "android"){
+                that.FightScene.resumeAll()
+            }
             if (res && res.isEnded) {
                 if (callback) {
                     console.log("callback===========>"),
