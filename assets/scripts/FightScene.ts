@@ -164,6 +164,9 @@ export default class FightScene extends cc.Component {
     public topEnemyMove = false
     private audioIDbg = null
 
+    private aniID = null
+    private indexID = null
+
     onDestroy() {
         console.log("离线========>")
         //cc.sys.localStorage.setItem("offlineTime",Lib.GetTimeBySecond());
@@ -700,7 +703,7 @@ export default class FightScene extends cc.Component {
                 }
                 if(listType == "enemy" && ani.force != true && this.isguajiing == false){
                    this.dieEnemyList.push(ani.mon_id)
-                   cc.log("死亡的怪物=============>",this.dieEnemyList)
+                   //cc.log("死亡的怪物=============>",this.dieEnemyList)
                 }
 
 
@@ -815,10 +818,35 @@ export default class FightScene extends cc.Component {
             }
         }
 
+        if(ani.aniID){
+            //console.log("aniID==============>",ani.aniID)
+            if(this.indexID == null){
+                this.node.addChild(ani.sprite);
+                this.indexID = ani.sprite.getSiblingIndex();
+                this.aniID = ani.aniID
+            }else{
+                if(ani.aniID == this.aniID){
+                }else{
+                    this.indexID = this.indexID + 1
+                }
+
+                this.node.insertChild(ani.sprite,this.indexID);
+                this.aniID = ani.aniID
+            }
+
+            
+            var index = ani.sprite.getSiblingIndex();
+            //console.log("index==============>",index)
+           
+        }else{
+            this.node.addChild(ani.sprite);
+        }
+
+      
+       
 
 
         //cc.log("FightScene添加敌人==============>",ani.sprite)
-        this.node.addChild(ani.sprite);
         tab.push(ani)
 
         //cc.log("随机整数=========>",tools.tagGenerator())

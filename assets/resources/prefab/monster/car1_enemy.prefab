@@ -2508,7 +2508,7 @@
     "_N$_defaultCacheMode": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false,
-    "_N$enableBatch": false,
+    "_N$enableBatch": true,
     "_id": ""
   },
   {

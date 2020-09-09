@@ -7,6 +7,7 @@ import { Utils } from "./frameworks/Utils"
 import CollisionEvent from "./CollisionEvent"
 import { Shake } from "./Shake"
 import { AudioMgr } from "./AudioMarger"
+import NodePoolMgr from "./NodePoolMgr"
 
 export class Bullet {
     scene: any
@@ -154,14 +155,14 @@ export class Bullet {
         if( !CanvasNode ) { cc.log( 'find Canvas error' ); return; } 
         var that = this
 
-        var onResourceLoaded = function(errorMessage, loadedResource )
-        {
-            if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
-            if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
-            var bullet = cc.instantiate( loadedResource );
+        //cc.log("对象池子弹key=============>","bombType" + this.bombType)
+        let bulletNodePool = NodePoolMgr.getInstance().getPrefabNodePool("bombType" + this.bombType)
+        //cc.log("从对象池取出的对象=============>",bulletNodePool)
+
+        if(bulletNodePool){
+            let bullet = bulletNodePool.getNode()
             that.sprite = bullet
             that.scene.addBullet(that)
-
 
             if(that.startPos == null){
                 bullet.setPosition(that.battery.position.x,that.battery.position.y)
@@ -169,11 +170,31 @@ export class Bullet {
                 bullet.setPosition(that.startPos.x,that.startPos.y)
             }
 
-  
             that.rotateAction2(3)
+        }else{
+            var onResourceLoaded = function(errorMessage, loadedResource )
+            {
+                if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
+                if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
+                var bullet = cc.instantiate( loadedResource );
+                that.sprite = bullet
+                that.scene.addBullet(that)
 
-        };
-        cc.loader.loadRes('prefab/' + that.res["ani"], onResourceLoaded );
+                if(that.startPos == null){
+                    bullet.setPosition(that.battery.position.x,that.battery.position.y)
+                }else{
+                    bullet.setPosition(that.startPos.x,that.startPos.y)
+                }
+    
+                that.rotateAction2(3)
+
+                // 保存到对象池
+                NodePoolMgr.getInstance().creatreNodePool("bombType" + that.bombType, bullet)
+            };
+            cc.loader.loadRes('prefab/' + that.res["ani"], onResourceLoaded );
+        }
+
+        
     }
 
 
@@ -557,7 +578,7 @@ export class Bullet {
     }
 
    
-
+    // 全屏弹爆炸动画
     bombEffectScreen(){
         for(var i=0;i<30;i++){
             let destX = tools.getRandomNumInt(-480,480)
@@ -573,12 +594,30 @@ export class Bullet {
                 }
             })
     
-            let node:cc.Node = new cc.Node();
+           
+
+            let node: cc.Node 
+            let nodePool = NodePoolMgr.getInstance().getPrefabNodePool("bombEffectScreen")
+            if(nodePool){
+                node = nodePool.getNode()
+                Utils.loadNodeDragonBones(node,null,"run",callfunc,1)
+            }else{
+                node = new cc.Node();
+                var loadfunc = (function(){
+                    //cc.log("bombEffectScreen node加载到对象池================>")
+                    // 保存到对象池
+                    NodePoolMgr.getInstance().creatreNodePool("bombEffectScreen", node)
+                })
+
+                
+                Utils.loadDragonBones2(node,dirPath,loadfunc,"armatureName","run",callfunc,1)
+            }
+
+
             node.setPosition(destX,destY)
             this.FightScene.node.addChild(node,0,"bombEffectScreen");
     
-            //Utils.loadDragonBones(node,dirPath,null,"run",callfunc,1)
-            Utils.loadDragonBones2(node,dirPath,null,"armatureName","run",callfunc,1)
+    
         }
     }
 

@@ -91,7 +91,7 @@ export class Utils{
 
 
             if (err || assets.length <= 0) return;
-            let animationDisplay = node.addComponent(dragonBones.ArmatureDisplay)
+            let animationDisplay:dragonBones.ArmatureDisplay = node.addComponent(dragonBones.ArmatureDisplay)
             assets.forEach(asset => {
                 if (asset instanceof dragonBones.DragonBonesAsset) {
                     animationDisplay.dragonAsset = asset;
@@ -103,7 +103,7 @@ export class Utils{
             animationDisplay.armatureName = armatureName;
             animationDisplay.playAnimation(newAnimation, playTimes);
             //animationDisplay.playAnimation("run",0);
-
+            //animationDisplay.enableBatch = true
 
             if(callback){
                 //cc.log("加载回调=========>")
@@ -119,6 +119,51 @@ export class Utils{
         })
     }
     
+
+
+
+    public static loadNodeDragonBones = function(node,  callback?:any, newAnimation = "Animation1", completeCallback = null, playTimes = 0) {
+
+
+            let animationDisplay:dragonBones.ArmatureDisplay = node.getComponent(dragonBones.ArmatureDisplay)
+            //animationDisplay.armatureName = armatureName;
+            animationDisplay.playAnimation(newAnimation, playTimes);
+            //animationDisplay.playAnimation("run",0);
+            //animationDisplay.enableBatch = true
+
+            if(callback){
+                //cc.log("加载回调=========>")
+                callback()
+            }
+
+
+            if (completeCallback) {
+                animationDisplay.addEventListener(dragonBones.EventObject.COMPLETE, completeCallback);
+            }
+    
+ 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static loadDragonBones = function(node, path,callback?:any, newAnimation = "Animation1", completeCallback?:any,playTimes = 0){
         cc.loader.loadResDir(path,cc.Asset,null,(err, resource)=>{
             //console.log("资源：",resource);

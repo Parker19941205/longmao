@@ -21,6 +21,8 @@ export class SignUI {
     private isDouble = false
     private curDayId = 0
     private buttonArray:Map<any,any> = new Map()
+    private resArray = new Array<any>()
+
 
      // 构造方法
      constructor(scene:any) {
@@ -61,6 +63,11 @@ export class SignUI {
                 resource.removeFromParent()
                 that.FightScene.StopBannerNode  = false
                 that.FightScene.enterSignUI = false
+
+                for (var i = 0; i < that.resArray.length; i++) {
+                    console.log("resName=========>",that.resArray[i])
+                    cc.loader.releaseRes(that.resArray[i], cc.SpriteFrame);
+                }
              }, this);
 
 
@@ -133,6 +140,9 @@ export class SignUI {
 
                 let rewordicon = button.getChildByName("rewordicon").getComponent(cc.Sprite)  // 奖励icon
                 Utils.loadSprite("res/" + SignInData[key].SMALL_ICON, rewordicon)
+                that.resArray.push("res/" + SignInData[key].SMALL_ICON)
+
+
 
                 let SignInDays = cc.sys.localStorage.getItem("SignInDays")
                 that.curDayId = Number(SignInDays) + 1
@@ -179,7 +189,6 @@ export class SignUI {
 
         previewnum.string = data.AMOUNT
         Utils.loadSprite("res/" + data.BIG_ICON, previewicon)
-
     }
 
 

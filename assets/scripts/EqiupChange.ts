@@ -19,6 +19,7 @@ export class EqiupChange {
     private node
     private lookvideoBtn
     private tipPayPrice = 0
+    private resArray = new Array<any>()
 
      // 构造方法
      constructor(scene:any) {
@@ -60,6 +61,10 @@ export class EqiupChange {
                 if(PlatformManager.CurrentPlatform == Platform.Vivo){
                     SDK.getInstance().CloseBannerAd()
                 }
+                for (var i = 0; i < that.resArray.length; i++) {
+                    console.log("resName=========>",that.resArray[i])
+                    cc.loader.releaseRes(that.resArray[i], cc.SpriteFrame);
+                }
             }, this);
 
 
@@ -89,7 +94,7 @@ export class EqiupChange {
                 let titileicon = button.getChildByName("titilebg").getChildByName("titileicon")
                 var icon = titileicon.getComponent(cc.Sprite)
                 Utils.loadSprite("res/" + batteryData[key].TITLE_ICON, icon)
-
+                that.resArray.push("res/" + batteryData[key].TITLE_ICON)
         
                 button.active = true;
                 button.index = key;

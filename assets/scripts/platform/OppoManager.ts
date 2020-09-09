@@ -52,15 +52,15 @@ export class OppoManager implements PlatformCommon{
         let res = qg.getSystemInfoSync()
         console.log("屏幕的高========>",res.screenHeight)
         console.log("屏幕的宽========>",res.screenWidth)
+        console.log("平台版本号========>",res.platformVersionCode)
 
-        if(res.platformVersionCode >= 1031){
+        if(res.platformVersionCode >= 1051){
             this.BannerAd = qg.createBannerAd({
-            posId: 'e0991de127b94e7db584a37a66d349b3',
+            adUnitId: '215235',
             style: {
-                left:res.screenWidth/2,
-                top:res.screenHeight,
-                width:100,
-                height:0,
+                left: 0,
+                top: 0,
+                width: 300,
             }
             })
 
@@ -72,8 +72,8 @@ export class OppoManager implements PlatformCommon{
                 this.BannerAdHight = size.height
                 this.BannerAdWight = size.width
 
-                //this.BannerAd.style.top = res.screenHeight - this.BannerAdHight
-                //this.BannerAd.style.left = res.screenWidth/2 - this.BannerAdWight/2
+                this.BannerAd.style.top = res.screenHeight - this.BannerAdHight
+                this.BannerAd.style.left = res.screenWidth/2 - this.BannerAdWight/2
             });
 
             this.BannerAd.onError((err) => {
@@ -121,36 +121,12 @@ export class OppoManager implements PlatformCommon{
             return
         }
 
-        var nowTime = Date.now();
-         console.log("间隔时间==============>" , nowTime - this.showBannerTime)
-        if(nowTime - this.showBannerTime > 10000){
-            this.BannerAd.show().then(()=>{ 
-                console.log('banner广告展示完成');
-                this.showBannerTime = nowTime;
-            }).catch((err)=>{
-                console.log('banner广告展示失败', JSON.stringify(err));
-            })
-        }
+        this.BannerAd.show().then(()=>{ 
+            console.log('banner广告展示完成');
+        }).catch((err)=>{
+            console.log('banner广告展示失败', JSON.stringify(err));
+        })
 
-
-
-
-
-        // let res = qg.getSystemInfoSync()
-        // console.log("真实屏幕的高========>",res.screenHeight)
-        // console.log("platformVersionCode========>",res.platformVersionCode)
-
-        // // 初始化广告banner
-        // if(res.platformVersionCode >= 1031){
-        //     var nowTime = Date.now();
-        //     console.log("间隔时间==============>" , nowTime - this.showBannerTime)
-        //     if(nowTime - this.showBannerTime > 10000){
-        //         console.log("进来了==============>")
-        //         this.createBanner()
-        //     }else{
-        //         this.hideBanner()
-        //     }
-        // }
     }
 
 
@@ -204,8 +180,6 @@ export class OppoManager implements PlatformCommon{
         console.log("隐藏banner==============>",this.BannerAd) 
         if(this.BannerAd != null){
             this.BannerAd.hide()
-            //this.BannerAd.destroy()
-            //this.BannerAd.offError()
         }
     }
 

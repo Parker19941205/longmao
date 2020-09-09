@@ -7,6 +7,7 @@ import FightScene, { BombType, ActType } from "./FightScene"
 import { tools } from "./tool"
 import { Utils } from "./frameworks/Utils"
 import { AudioMgr } from "./AudioMarger"
+import NodePoolMgr from "./NodePoolMgr"
 //import { AniType } from "./FightScene"
 
 //怪物类型
@@ -81,10 +82,12 @@ export class Enemy{
     private sumTime = 0
     private force = false
     private mon_id = null
+    private aniID
 
      // 构造方法
     constructor(scene, aniID?:any) {
         cc.log("构造敌人=============>",aniID)
+        this.aniID = aniID
         this.scene = scene
         this.FightScene = scene
         this.battery = scene.battery
@@ -161,13 +164,29 @@ export class Enemy{
         var CanvasNode = cc.find( 'Canvas' );
         if( !CanvasNode ) { cc.log( 'find Canvas error' ); return; } 
         var that = this
-        var onResourceLoaded = function(errorMessage, loadedResource )
-        {
-            if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
-            if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
-            var spritePrefab = cc.instantiate( loadedResource );
+
+        let enemyNodePool = NodePoolMgr.getInstance().getPrefabNodePool("EnemyType" + that.aniID)
+        //cc.log("从对象池取出的对象=============>",enemyNodePool)
+        //cc.log("对象池key=============>",that.aniID)
+
+        if(enemyNodePool){
+            let spritePrefab = enemyNodePool.getNode()
             that.sprite = spritePrefab
             that.scene.addEnemy(that)
+
+            let armatureDisplay:dragonBones.ArmatureDisplay =spritePrefab.getComponent(dragonBones.ArmatureDisplay)
+            armatureDisplay.playAnimation("stand",0);
+             // 显示血条
+            var bloodNode = that.sprite.getChildByName("bloodNode")
+            var bloodBarNode = bloodNode.getChildByName("bloodBar")
+            var bloodBar =  bloodBarNode.getComponent(cc.ProgressBar)
+        
+            if(bloodNode){
+                bloodNode.active = true
+                bloodBar.progress = 1
+            }
+
+
 
 
             let mon_y = -that.FightScene.SCREEN_HEIGHT/2+that.bottom_bg.height-10
@@ -178,35 +197,87 @@ export class Enemy{
             }
 
             that.width = that.res.size.width || 80
-	        that.height = that.res.size.height || 80
+            that.height = that.res.size.height || 80
 
-            //cc.log("width===========>",that.width)
             // 怪物初始位置
             if(that.data != null){
                 if(that.aniType == AniType.ANI_TYPE_BUILDING){
-                    //spritePrefab.setPosition(that.data.mon_x/2, that.FightScene.SCREEN_HEIGHT + that.height/2)
-                    //cc.log("解锁====>")
                     spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 - that.data.mon_x/3, mon_y)
                     that.falling = true
                 }else{
                     spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 + that.data.mon_x/2, mon_y)  //data.mon_x
                 }
             }
-
             if(position){
                 spritePrefab.setPosition(position.x, position.y)
             }
-
-
     
-
             // 将战斗类挂载到脚本上
             var collisionEvent = spritePrefab.getComponent(CollisionEvent)
             collisionEvent.fightScene=that.scene;
 
-        };
-        cc.loader.loadRes('prefab/' + this.actions.ANI_FILE, onResourceLoaded );
+        }else{
+            var onResourceLoaded = function(errorMessage, loadedResource )
+            {
+                if( errorMessage ) { cc.log( 'Prefab error:' + errorMessage ); return; }
+                if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( 'Prefab error' ); return; } 
+                var spritePrefab = cc.instantiate( loadedResource );
+                that.sprite = spritePrefab
+                that.scene.addEnemy(that)
+
+
+                let mon_y = -that.FightScene.SCREEN_HEIGHT/2+that.bottom_bg.height-10
+                if(that.aniType == AniType.ANI_TYPE_LAND){
+                    mon_y = -that.FightScene.SCREEN_HEIGHT/2+that.bottom_bg.height-10
+                }else if(that.aniType == AniType.ANI_TYPE_AIR || that.aniType == AniType.ANI_TYPE_BUILDING){
+                    mon_y = 110
+                }
+
+                that.width = that.res.size.width || 80
+                that.height = that.res.size.height || 80
+
+                //cc.log("width===========>",that.width)
+                // 怪物初始位置
+                if(that.data != null){
+                    if(that.aniType == AniType.ANI_TYPE_BUILDING){
+                        //spritePrefab.setPosition(that.data.mon_x/2, that.FightScene.SCREEN_HEIGHT + that.height/2)
+                        //cc.log("解锁====>")
+                        spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 - that.data.mon_x/3, mon_y)
+                        that.falling = true
+                    }else{
+                        spritePrefab.setPosition(that.FightScene.SCREEN_WIDTH/2 + that.data.mon_x/2, mon_y)  //data.mon_x
+                    }
+                }
+
+                if(position){
+                    spritePrefab.setPosition(position.x, position.y)
+                }
+        
+
+                // 将战斗类挂载到脚本上
+                var collisionEvent = spritePrefab.getComponent(CollisionEvent)
+                collisionEvent.fightScene=that.scene;
+
+
+                // 保存到对象池
+                NodePoolMgr.getInstance().creatreNodePool("EnemyType" + that.aniID, spritePrefab)
+            };
+            cc.loader.loadRes('prefab/' + this.actions.ANI_FILE, onResourceLoaded );
+        }
     }
+
+
+    addEnemy(){
+        
+    }
+
+
+
+
+
+
+
+
 
      getAniData(){
         var data = this.actions.ANI_DATA
@@ -710,12 +781,31 @@ export class Enemy{
             }
         })
 
-        let node:cc.Node = new cc.Node();
+        let node:cc.Node
+        let nodePool = NodePoolMgr.getInstance().getPrefabNodePool("deadsmoke")
+        if(nodePool){
+            node = nodePool.getNode()
+            Utils.loadNodeDragonBones(node,null,"run",callfunc,1)
+
+        }else{
+            node = new cc.Node();
+            var loadfunc = (function(){
+                //cc.log("deadsmoke node加载到对象池================>")
+                // 保存到对象池
+                NodePoolMgr.getInstance().creatreNodePool("deadsmoke", node)
+            })
+
+            
+            Utils.loadDragonBones2(node,dirPath,loadfunc,"armatureName","run",callfunc,1)
+           
+        }
+
+        //cc.log("node存在2222================>",node)
+        //let node:cc.Node = new cc.Node();
         node.setPosition(position)
         pointNode.addChild(node,0,"deadsmoke");
 
-        //Utils.loadDragonBones(node,dirPath,null,"run",callfunc,1)
-        Utils.loadDragonBones2(node,dirPath,null,"armatureName","run",callfunc,1)
+        
     }
 
     // 金币掉落特效
@@ -725,9 +815,18 @@ export class Enemy{
         }
 
 
-        var sceneNode:cc.Node = this.FightScene.node.getChildByName("goldEffectNode")
+        let goldEffectNode: cc.Node 
+        let goldNodePool = NodePoolMgr.getInstance().getPrefabNodePool("goldEffectNode")
+        if(goldNodePool){
+            goldEffectNode = goldNodePool.getNode()
+        }else{
+            var sceneNode:cc.Node = this.FightScene.node.getChildByName("goldEffectNode")
+            goldEffectNode = cc.instantiate(sceneNode);
 
-        var goldEffectNode = cc.instantiate(sceneNode);
+            // 保存到对象池
+            NodePoolMgr.getInstance().creatreNodePool("goldEffectNode", goldEffectNode)
+        }
+      
         goldEffectNode.active = true
         goldEffectNode.setPosition(position.x,position.y)
         this.FightScene.node.addChild(goldEffectNode)

@@ -621,7 +621,7 @@ export class FightUI {
         level_label.string = "Lv." + level
 
         var Golds = this.getNeedGolds(bulletType)
-        cc.log("升到下级所需的金币==============>",Golds)
+        //cc.log("升到下级所需的金币==============>",Golds)
 
         need_label.string = Golds
 
