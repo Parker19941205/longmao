@@ -34,17 +34,27 @@ export class OppoManager implements PlatformCommon{
         this.FightScene = scene
         //https://yuema.sfplay.net/longmao_assets/oppo
 
-        this.sdkConfig = new ADConfig();
-        this.sdkConfig.videoId = new Map<string, string>()
-        this.sdkConfig.videoId.set(Def.videoType.signget, "5e64a0191cbb43898ce5d20203d34769")
-        this.sdkConfig.videoId.set(Def.videoType.video_battery, "be0662750c2146098aa25e4439c8097b")
-        this.sdkConfig.videoId.set(Def.videoType.qiqiugift, "aca266efb1a548c8a35e98c53d275313")
-        this.sdkConfig.videoId.set(Def.videoType.buyhighbullet, "2d987392c4214158b6c6dc2936cb9886")
-        this.sdkConfig.videoId.set(Def.videoType.upbullet, "80544847253a47729549d92e795cf4e0")
-        this.sdkConfig.videoId.set(Def.videoType.guajishouyi, "86474123d5234d4ca30ceb983122a418")
-        this.sdkConfig.videoId.set(Def.videoType.video_offline, "ff31d72ed0f144078f10087fc1a94e56")
-        this.sdkConfig.videoId.set(Def.videoType.video_rebirth, "c0c465d4fbae47119f97e1775d1c825a")
-        this.sdkConfig.videoId.set(Def.videoType.video_score, "cdf225bd125643ba8590f1f25923fbc5")
+        let videoAd1 = qg.createRewardedVideoAd({ adUnitId: "215192"})
+        let videoAd2 = qg.createRewardedVideoAd({ adUnitId: "215207"})
+        let videoAd3 = qg.createRewardedVideoAd({ adUnitId: "215210"})
+        let videoAd4 = qg.createRewardedVideoAd({ adUnitId: "215212"})
+        let videoAd5 = qg.createRewardedVideoAd({ adUnitId: "215227"})
+        let videoAd6 = qg.createRewardedVideoAd({ adUnitId: "215228"})
+        let videoAd7 = qg.createRewardedVideoAd({ adUnitId: "215231"})
+        let videoAd8 = qg.createRewardedVideoAd({ adUnitId: "215233"})
+        let videoAd9 = qg.createRewardedVideoAd({ adUnitId: "215233"})
+
+
+        this.VideoMap.set(Def.videoType.signget, videoAd1);
+        this.VideoMap.set(Def.videoType.video_battery, videoAd2);
+        this.VideoMap.set(Def.videoType.qiqiugift, videoAd3);
+        this.VideoMap.set(Def.videoType.buyhighbullet, videoAd4);
+        this.VideoMap.set(Def.videoType.upbullet, videoAd5);
+        this.VideoMap.set(Def.videoType.guajishouyi, videoAd6);
+        this.VideoMap.set(Def.videoType.video_offline, videoAd7);
+        this.VideoMap.set(Def.videoType.video_rebirth, videoAd8);
+        this.VideoMap.set(Def.videoType.video_score, videoAd9);
+        this.VideoMap.set("其他", videoAd7);
     
 
 
@@ -60,7 +70,7 @@ export class OppoManager implements PlatformCommon{
             style: {
                 left: 0,
                 top: 0,
-                width: 300,
+                width: 400,
             }
             })
 
@@ -73,7 +83,7 @@ export class OppoManager implements PlatformCommon{
                 this.BannerAdWight = size.width
 
                 this.BannerAd.style.top = res.screenHeight - this.BannerAdHight
-                this.BannerAd.style.left = res.screenWidth/2 - this.BannerAdWight/2
+                this.BannerAd.style.left = res.screenWidth/2 - this.BannerAdWight/2+50
             });
 
             this.BannerAd.onError((err) => {
@@ -100,17 +110,6 @@ export class OppoManager implements PlatformCommon{
 
     share(args?: any, callback?: Function) {
         console.log("转发=================>")
-        qg.share({
-            success: res => {
-                console.log('onShareAppMessage share success', JSON.stringify(res));
-                if(callback){
-                    callback()
-                }
-            },
-            fail: err => {
-                console.log('onShareAppMessage share fail', JSON.stringify(err));
-            }
-        });
     }
 
 
@@ -130,49 +129,6 @@ export class OppoManager implements PlatformCommon{
     }
 
 
-    createBanner() {
-        console.log("创建Banner==================>",this.BannerAd);
-        console.log("stub===============>",this.stub)
-        if(this.BannerAd != null){
-            this.hideBanner()
-        }
-
-
-        let res = qg.getSystemInfoSync()
-        // 初始化广告banner
-        this.BannerAd = qg.createBannerAd({
-            posId: '637a8ee850d94534a8c60948a0af654e',
-            style: {
-                width:200
-            }
-        });
-        
-        var nowTime = Date.now();
-        console.log("当前时间戳========>",nowTime);
-
-        this.showBannerTime = nowTime;
-
-        // // 广告展示回调
-        this.BannerAd.show().then(()=>{ 
-            console.log('banner广告展示完成');
-            }).catch((err)=>{
-            console.log('banner广告展示失败', JSON.stringify(err));
-        })
-
-
-        // // 广告加载回调
-        // this.BannerAd.onLoad(() => {
-        //     console.log(' banner 广告加载回调');
-        // })
-
-
-        // // 监听banner广告错误事件
-        this.BannerAd.onError((err) => {
-            console.log(' banner 广告错误',err.errCode);
-        })
-      
-    }
-
 
 
 
@@ -186,96 +142,37 @@ export class OppoManager implements PlatformCommon{
 
 
     showInsertAd(args?: any, callback?: Function,stub?: string) {
-        //let posid = this.sdkConfig.insertId.get(stub)
-
-        // let res = qg.getSystemInfoSync()
-        // if(res.platformVersionCode >= 1031){
-        // }else{
-        //     console.log("==============>标准版本号过低")
-        //     return
-        // }
-
-        // console.log("开始显示插屏视频=============>")
-        // const interstitialAd = qg.createInterstitialAd({
-        //     posId:'9f03f50ccf37436d99a383c8aeef411c' 
-        // });
-
-        // interstitialAd.load()
-
-        // interstitialAd.onError(err => {
-        //     console.log("插屏广告加载失败", err);
-        //     interstitialAd.offError()
-        // });
-        
-
-        // interstitialAd.onLoad(err => {
-        //     console.log("插屏广告onLoad失败", err);
-        //     interstitialAd.offLoad()
-        // });
-
-
-
-
-        // interstitialAd.show().then(()=>{ 
-        //     console.log('插屏广告展示完成');
-        //     if (callback) {
-        //         callback()
-        //     }
-        // }).catch((err)=>{
-        //     console.log('插屏广告展示失败', JSON.stringify(err));
-        // })
     }
 
 
 
     showVideoAd(args?: any, callback?: Function,stub?: string) {
-        let instance = this
-        console.log("==============>showVideoAd",stub)
-
-        let res = qg.getSystemInfoSync()
-        if(res.platformVersionCode >= 1041){
-        }else{
-            console.log("==============>标准版本号过低")
-            return
-        }
-
-        //广告限制一分钟内只能请求一次
-        var nowTime = Date.now();
-        console.log("激励视频播放时间间隔======>", nowTime - this.showVideoTime);
-        if(nowTime - this.showVideoTime < 60*1000){
-            new TipUI(this.FightScene,"请一分钟后请求广告")
-            return
-        }
-
-        let m_posId = this.sdkConfig.videoId.get(stub);
-        if(m_posId == null){
+        let videoAd = this.VideoMap.get(stub);
+        if (videoAd == null) {
             console.log("==============>其他视频")
-            m_posId = "cdf225bd125643ba8590f1f25923fbc5"
+            videoAd = this.VideoMap.get("其他")
         }
 
-        let videoAd1 = qg.createRewardedVideoAd({ posId: m_posId})
-
-        videoAd1.onError(err => {
-            console.log("激励视频广告加载失败", err);
-            videoAd1.offError()
+        //videoAd.show()
+        // 显示广告
+        videoAd.show().then(() => {
+            console.log("广告显示成功");
+            //this.FightScene.pauseAll()
+        }).catch((err) => {
+            console.log("广告组件出现问题", err);
+            // 可以手动加载一次
+            videoAd.load().then(() => {
+                console.log("手动加载成功");
+                // 加载成功后需要再显示广告
+                //this.FightScene.pauseAll()
+                return videoAd.show();
+            });
         });
 
-        var that1 = this
-        videoAd1.onLoad(function(res) {
-            console.log('激励视频广告加载完成-onload触发', JSON.stringify(res));
-            instance.showVideoTime = Date.now();
-            videoAd1.show().then(()=>{ 
-                console.log('激励视频广告展示完成');
-                that1.FightScene.pauseAll()
-            }).catch((err)=>{
-                console.log('激励视频广告展示失败', JSON.stringify(err));
-            }) 
-            videoAd1.offLoad()
-        })
 
 
         var that = this
-        const func = (res)=>{
+        let closefunc = (res)=>{
             console.log('视频广告关闭回调')
             if (res && res.isEnded) {
                 if (callback) {
@@ -286,11 +183,12 @@ export class OppoManager implements PlatformCommon{
             } else {
                 console.log("播放中途退出，不下发游戏奖励");
             }
-            videoAd1.offClose()
-            videoAd1.load()
-            that.FightScene.resumeAll()
+            videoAd.offClose(closefunc)
+            videoAd.load()
+            //that.FightScene.resumeAll()
         }
-        videoAd1.onClose(func);
+
+        videoAd.onClose(closefunc)
     }
 
 

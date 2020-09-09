@@ -18,7 +18,7 @@
     "S504": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 7700,
     "ICON": "icon.png",
     "REMARK": false,
@@ -370,7 +370,7 @@
     "S513": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 115700,
     "ICON": "icon.png",
     "REMARK": false,
@@ -674,7 +674,7 @@
     "S509": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 51700,
     "ICON": "icon.png",
     "REMARK": false,
@@ -706,7 +706,7 @@
     "S507": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 29300,
     "ICON": "icon.png",
     "REMARK": false,
@@ -1106,7 +1106,7 @@
     "S508": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 39700,
     "ICON": "icon.png",
     "REMARK": false,
@@ -1330,7 +1330,7 @@
     "S510": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 65300,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2594,7 +2594,7 @@
     "S505": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 13300,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2706,7 +2706,7 @@
     "S511": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 80500,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2786,7 +2786,7 @@
     "S501": {
     "SLOW_RATE": false,
     "SPEED": 320,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 0,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2850,7 +2850,7 @@
     "S506": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 20500,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2930,7 +2930,7 @@
     "S503": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 3700,
     "ICON": "icon.png",
     "REMARK": false,
@@ -2946,7 +2946,7 @@
     "S502": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 1300,
     "ICON": "icon.png",
     "REMARK": false,
@@ -3298,7 +3298,7 @@
     "S512": {
     "SLOW_RATE": false,
     "SPEED": 300,
-    "CD": 6,
+    "CD": 5,
     "UPGRADE_GOLD": 97300,
     "ICON": "icon.png",
     "REMARK": false,

@@ -1452,7 +1452,7 @@ export default class FightScene extends cc.Component {
                 num = 0
             }
 
-            var addNum = Number(num) + 4
+            var addNum = Number(num) + 1
             if(Number(addNum)>14400){
                 addNum = 14400
             }
@@ -1487,7 +1487,7 @@ export default class FightScene extends cc.Component {
 
             let GuajiGold =  cc.sys.localStorage.getItem("GuajiGold");
 
-            let num = Number(GuajiGold)+time*4
+            let num = Number(GuajiGold)+time*1
             if(num > 14400){
                 num = 14400
             }
