@@ -24,6 +24,7 @@ import { Lib } from "./frameworks/Lib";
 import { GuajiUI } from "./GuajiUI";
 import { OnlineOffUI } from "./OnlineOffUI";
 import { TipUI } from "./TipUI";
+import NodePoolMgr from "./NodePoolMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -345,13 +346,15 @@ export default class FightScene extends cc.Component {
 
 
         var file =  batteryData[index].ANI_FILE;
-
+        //cc.log("file========>",file)
 
         var that = this
         that.batteryNode.active = true
 
 
         var node = that.batteryNode.getChildByName("node")
+        //var batteryNode:cc.Node = cc.instantiate(node);
+
         let pointNode:cc.Node = that.node.getChildByName("pointNode")
         pointNode.removeAllChildren()
 
@@ -931,7 +934,12 @@ export default class FightScene extends cc.Component {
 
         if(result == false){
             let pointNode:cc.Node = this.node.getChildByName("pointNode")
-            pointNode.removeAllChildren()
+            //pointNode.removeAllChildren()
+            var children=pointNode.children;
+            for (var i = 0; i < children.length; i++)
+            {
+                children[i].active = false
+            }
 
 
             var that = this
@@ -1235,7 +1243,15 @@ export default class FightScene extends cc.Component {
 
         //2秒后更新炮台
         this.scheduleOnce(() => {
-            this.changeBattery()
+            //this.changeBattery()
+            let pointNode:cc.Node = this.node.getChildByName("pointNode")
+            var children=pointNode.children;
+            for (var i = 0; i < children.length; i++)
+            {
+                children[i].active = true
+            }
+
+            this.batteryNode.active = true
             this.startGameBtn.node.active = true
         }, 2)
 

@@ -5,6 +5,7 @@
 
 import { Utils } from "./frameworks/Utils";
 import FightScene from "./FightScene";
+import NodePoolMgr from "./NodePoolMgr";
 
 
 export class Battery {
@@ -36,8 +37,29 @@ export class Battery {
      createBattery(battery,aniNode,callfunc){
         var dirPath = "ani/" + battery;
         //Utils.loadDragonBones(aniNode, dirPath,callfunc)
-        
         Utils.loadDragonBones2(aniNode, dirPath,callfunc)
+
+
+        // let nodePool = NodePoolMgr.getInstance().getPrefabNodePool(battery)
+        // if(nodePool){
+        //     //node = nodePool.getNode()
+        //     //Utils.loadNodeDragonBones(node,null,"run",callfunc,1)
+           
+        //     let node = nodePool.getNode()
+        //     cc.log("炮台对象池中存在=============>",node)
+
+        //     Utils.loadNodeDragonBones(node,callfunc)
+        // }else{
+
+        //     var callfunc2 = (function(){
+        //         cc.log("炮台对象池=============>",aniNode)
+        //          // 保存到对象池
+        //         NodePoolMgr.getInstance().creatreNodePool(battery, aniNode)
+        //         callfunc()
+        //     })
+
+        //     Utils.loadDragonBones2(aniNode, dirPath,callfunc2)
+        // }
      }
 
 

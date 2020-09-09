@@ -73,12 +73,13 @@ export class GuajiUI {
              }, this);
 
 
-             
+            let amount = Number(that.currentGuajiNum)
             var normal_btn = resource.getChildByName("normal_btn")
             normal_btn.on("touchend", (event) => {   // 普通领取
                 that.isDouble = false
                 that.successCallBack()
-             }, this);
+                new TipUI(that.FightScene,"获得金币*" + amount)
+             }, that);
 
 
               // 水印
@@ -101,10 +102,12 @@ export class GuajiUI {
             return
         }
 
+        let amount = Number(this.currentGuajiNum)
+        amount = 2*amount
       
         SDK.getInstance().ShowVideoAd(() => {
             this.successCallBack()
-        }, Def.videoType.guajishouyi);
+        }, Def.videoType.guajishouyi,"获得金币*" + amount);
     }
 
      successCallBack(){
@@ -121,7 +124,6 @@ export class GuajiUI {
         //cc.sys.localStorage.setItem("GuajiGold",Number(num) - Number(this.currentGuajiNum));
         cc.sys.localStorage.setItem("GuajiGold",0);
         
-
         this.FightScene.updateFightUI()
 
         this.Scene.removeFromParent()

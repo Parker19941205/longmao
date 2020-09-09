@@ -124,7 +124,6 @@ export class Utils{
 
     public static loadNodeDragonBones = function(node,  callback?:any, newAnimation = "Animation1", completeCallback = null, playTimes = 0) {
 
-
             let animationDisplay:dragonBones.ArmatureDisplay = node.getComponent(dragonBones.ArmatureDisplay)
             //animationDisplay.armatureName = armatureName;
             animationDisplay.playAnimation(newAnimation, playTimes);
@@ -143,10 +142,6 @@ export class Utils{
     
  
     }
-
-
-
-
 
 
 

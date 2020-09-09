@@ -618,7 +618,7 @@ export class FightUI {
         let need_label = node.getChildByName("lvupBtn").getChildByName("need").getComponent(cc.Label)
      
         let level = cc.sys.localStorage.getItem("bullet" + bulletType);
-        level_label.string = "Lv." + level
+        level_label.string = level
 
         var Golds = this.getNeedGolds(bulletType)
         //cc.log("升到下级所需的金币==============>",Golds)

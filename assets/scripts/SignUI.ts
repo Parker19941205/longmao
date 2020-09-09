@@ -98,6 +98,7 @@ export class SignUI {
                 var bool =  that.getReword()
                 if(bool == true){
                     that.playSuccessReward()
+                    new TipUI(that.FightScene,"签到成功")
                 }
              }, this);
 
@@ -247,7 +248,6 @@ export class SignUI {
 
 
         this.FightScene.updateFightUI()
-        //new TipUI(this.FightScene,"签到成功")
 
 
         //cc.log("curDayId===========>",this.curDayId)
