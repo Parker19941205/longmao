@@ -449,6 +449,11 @@ export class Bullet {
                 bulletAni.playAnimation('run', 1);
                 this.sprite.removeFromParent()
 
+                //将对象返回对象池
+                //NodePoolMgr.getInstance().getPrefabNodePool("bombType" + this.bombType).freeNode(this.sprite)
+                
+
+
                 AudioMgr.getInstance().playEffect("SE002");
                 //let armatureDisplay:dragonBones.ArmatureDisplay = this.bulletBomb.getComponent(dragonBones.ArmatureDisplay)
                // armatureDisplay.playAnimation("dead",1);
