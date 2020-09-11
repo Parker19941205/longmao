@@ -46,7 +46,6 @@ export class OppoManager implements PlatformCommon{
         let videoAd9 = qg.createRewardedVideoAd({ adUnitId: "215233"})
 
 
-
         this.VideoMap.set(Def.videoType.signget, videoAd1);
         this.VideoMap.set(Def.videoType.video_battery, videoAd2);
         this.VideoMap.set(Def.videoType.qiqiugift, videoAd3);
@@ -169,24 +168,35 @@ export class OppoManager implements PlatformCommon{
 
         var that = this
         // 显示广告
-        videoAd.show().then(() => {
-            console.log("广告显示成功");
-            //this.FightScene.pauseAll()
-        }).catch((err) => {
-            console.log("广告组件出现问题", err);
-            //new TipUI(that.FightScene,"视频广告出错")
-            // 可以手动加载一次
-            videoAd.load().then(() => {
-                console.log("手动加载成功");
-                // 加载成功后需要再显示广告
-                //this.FightScene.pauseAll()
-                return videoAd.show();
-            });
-        });
+        // videoAd.show().then(() => {
+        //     console.log("广告显示成功");
+        //     //this.FightScene.pauseAll()
+        // }).catch((err) => {
+        //     console.log("广告组件出现问题", err);
+        //     //new TipUI(that.FightScene,"视频广告出错")
+        //     // 可以手动加载一次
+        //     videoAd.load().then(() => {
+        //         console.log("手动加载成功");
+        //         // 加载成功后需要再显示广告
+        //         //this.FightScene.pauseAll()
+        //         return videoAd.show();
+        //     });
+        // });
+        console.log('videoAd=========>',videoAd)
+        videoAd.load()
+
+        let onLoadfunc = (err)=>{
+            console.log('激励视频加载成功====>',err)
+            videoAd.show()
+            videoAd.offLoad(onLoadfunc)
+        }
+        videoAd.onLoad(onLoadfunc)
+
+
 
        
         let errorfunc = (err)=>{
-            console.log(err)
+            console.log("视频广告出错回调=====>",err)
             new TipUI(that.FightScene,"视频广告出错")
             videoAd.offError(errorfunc)
         }
@@ -207,8 +217,8 @@ export class OppoManager implements PlatformCommon{
             }
             videoAd.offClose(closefunc)
             videoAd.offError(errorfunc)
-            videoAd.load()
-            //that.FightScene.resumeAll()
+            videoAd.offLoad(onLoadfunc)
+            //videoAd.load()
         }
 
         videoAd.onClose(closefunc)

@@ -173,7 +173,8 @@ export class Enemy{
             let spritePrefab = enemyNodePool.getNode()
             that.sprite = spritePrefab
             that.scene.addEnemy(that)
-
+            spritePrefab.angle = 0 
+            //cc.log("敌人的角度=============>",spritePrefab.angle)
             let armatureDisplay:dragonBones.ArmatureDisplay =spritePrefab.getComponent(dragonBones.ArmatureDisplay)
             armatureDisplay.playAnimation("stand",0);
              // 显示血条

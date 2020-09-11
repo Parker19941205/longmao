@@ -15,5 +15,5 @@
   "certificatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\certificate.pem",
   "disabledMode": "",
   "showNpmPath": false,
-  "packFirstScreenRes": false
+  "packFirstScreenRes": true
 }
