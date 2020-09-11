@@ -7,7 +7,7 @@
   "minPlatformVersion": "1060",
   "deviceOrientation": "landscape",
   "logLevel": "log",
-  "tinyPackageMode": true,
+  "tinyPackageMode": false,
   "tinyPackageServer": "https://yuema.sfplay.net/longmao_assets/oppo",
   "useDebugKey": false,
   "privatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\private.pem",

@@ -206,7 +206,7 @@
     "32": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3.5,
+    "hard_level": 4.2,
     "gate_type": 0,
     "next_gates": "33",
     "waves": [
@@ -470,7 +470,7 @@
     "15": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 2.5,
     "gate_type": 0,
     "next_gates": "16",
     "waves": [
@@ -1961,7 +1961,7 @@
     "18": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 3,
     "gate_type": 0,
     "next_gates": "19",
     "waves": [
@@ -3393,7 +3393,7 @@
     "21": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.5,
+    "hard_level": 3.2,
     "next_gates": "22",
     "gate_type": 0,
     "gate_cond": "",
@@ -4603,7 +4603,7 @@
     "12": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1.3,
+    "hard_level": 2.2,
     "gate_type": 0,
     "next_gates": "13",
     "waves": [
@@ -4810,7 +4810,7 @@
     "28": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3,
+    "hard_level": 4,
     "gate_type": 0,
     "next_gates": "29",
     "waves": [
@@ -4971,7 +4971,7 @@
     "25": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.6,
+    "hard_level": 3.5,
     "next_gates": "26",
     "gate_type": 0,
     "gate_cond": "",
@@ -5435,7 +5435,7 @@
     "33": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3.5,
+    "hard_level": 4.2,
     "gate_type": 0,
     "next_gates": "34",
     "waves": [
@@ -6333,7 +6333,7 @@
     "9": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1.2,
+    "hard_level": 1.8,
     "next_gates": "10",
     "gate_type": 0,
     "gate_cond": "8|1-11",
@@ -6486,7 +6486,7 @@
     "13": {
     "is_boss": 1,
     "next_gates": "14",
-    "hard_level": 1.5,
+    "hard_level": 2.3,
     "gate_type": 0,
     "map_id": "map1",
     "waves": [
@@ -6824,7 +6824,7 @@
     "16": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 2.5,
     "gate_type": 0,
     "next_gates": "17",
     "waves": [
@@ -6986,7 +6986,7 @@
     "6": {
     "is_boss": 0,
     "next_gates": "7",
-    "hard_level": 0.8,
+    "hard_level": 1.2,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -7152,7 +7152,7 @@
     "20": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 3,
     "gate_type": 0,
     "next_gates": "21",
     "waves": [
@@ -8419,7 +8419,7 @@
     "26": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.7,
+    "hard_level": 3.5,
     "next_gates": "27",
     "gate_type": 0,
     "gate_cond": "",
@@ -8632,7 +8632,7 @@
     "11": {
     "is_boss": 0,
     "map_id": "map1",
-    "hard_level": 1.3,
+    "hard_level": 2.1,
     "gate_type": 0,
     "next_gates": "12",
     "waves": [
@@ -8759,7 +8759,7 @@
     "31": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3.2,
+    "hard_level": 4,
     "gate_type": 0,
     "next_gates": "32",
     "waves": [
@@ -9194,7 +9194,7 @@
     "19": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 3,
     "gate_type": 0,
     "next_gates": "20",
     "waves": [
@@ -9433,7 +9433,7 @@
     "5": {
     "is_boss": 0,
     "next_gates": "6",
-    "hard_level": 0.6,
+    "hard_level": 0.9,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -9602,7 +9602,7 @@
     "24": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.5,
+    "hard_level": 3.5,
     "gate_type": 0,
     "next_gates": "25",
     "waves": [
@@ -10166,7 +10166,7 @@
     "8": {
     "is_boss": 0,
     "next_gates": "9",
-    "hard_level": 1,
+    "hard_level": 1.6,
     "map_id": "map1",
     "gate_type": 0,
     "gate_cond": "",
@@ -10350,7 +10350,7 @@
     "7": {
     "is_boss": 0,
     "next_gates": "8",
-    "hard_level": 1,
+    "hard_level": 1.4,
     "gate_type": 0,
     "map_id": "map1",
     "waves": [
@@ -11910,7 +11910,7 @@
     "27": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.8,
+    "hard_level": 4,
     "next_gates": "28",
     "gate_type": 0,
     "gate_cond": "",
@@ -14148,7 +14148,7 @@
     "29": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3,
+    "hard_level": 4,
     "next_gates": "30",
     "gate_type": 0,
     "gate_cond": "",
@@ -14382,7 +14382,7 @@
     "30": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 3.2,
+    "hard_level": 4,
     "next_gates": "31",
     "gate_type": 0,
     "gate_cond": "",
@@ -15354,7 +15354,7 @@
     "35": {
     "is_boss": 0,
     "map_id": "map3",
-    "hard_level": 4,
+    "hard_level": 4.5,
     "gate_type": 0,
     "next_gates": "36",
     "waves": [
@@ -16349,7 +16349,7 @@
     "14": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 1.5,
+    "hard_level": 2.5,
     "gate_type": 0,
     "next_gates": "15",
     "waves": [
@@ -16444,7 +16444,7 @@
     "22": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.5,
+    "hard_level": 3.2,
     "gate_type": 0,
     "next_gates": "23",
     "waves": [
@@ -16642,7 +16642,7 @@
     "17": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2,
+    "hard_level": 3,
     "gate_type": 0,
     "next_gates": "18",
     "waves": [
@@ -17235,7 +17235,7 @@
     "10": {
     "is_boss": 0,
     "next_gates": "11",
-    "hard_level": 1.3,
+    "hard_level": 2,
     "gate_type": 0,
     "map_id": "map1",
     "waves": [
@@ -19565,7 +19565,7 @@
     "34": {
     "is_boss": 1,
     "map_id": "map2",
-    "hard_level": 4,
+    "hard_level": 4.5,
     "next_gates": "35",
     "gate_type": 0,
     "gate_cond": "",
@@ -20307,7 +20307,7 @@
     "23": {
     "is_boss": 0,
     "map_id": "map2",
-    "hard_level": 2.5,
+    "hard_level": 3.2,
     "gate_type": 0,
     "next_gates": "24",
     "waves": [

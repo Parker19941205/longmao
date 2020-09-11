@@ -7,6 +7,7 @@ import { AudioMgr } from "./AudioMarger";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
+import { platform } from "os";
 
 
 export class FightVictory {
@@ -132,10 +133,30 @@ export class FightVictory {
             // 双倍复选框
             var doubleGet = resource.getChildByName("doubleGet")
             doubleGet.on('toggle', that.callback1, that);
+           
 
 
              AudioMgr.getInstance().playEffect("BGM003");
              AudioMgr.getInstance().playEffect("SE012");
+
+
+
+
+            if(PlatformManager.CurrentPlatform == Platform.OPPO){
+                var textlabel = resource.getChildByName("next_btn").getChildByName("textlabel").getComponent(cc.Label)
+                var videosmallicon = resource.getChildByName("next_btn").getChildByName("videosmallicon")
+                var win_Score = resource.getChildByName("win_bg").getChildByName("win_bg2").getChildByName("win_Score").getComponent(cc.Label)
+                var toggle:cc.Toggle = doubleGet.getComponent(cc.Toggle)
+
+                toggle.isChecked = false
+                that.isDouble = false
+                videosmallicon.active = false
+                win_Score.string = String(Number(that.earnGolds))
+                textlabel.string = "单倍领取"
+            }
+
+
+
 
 
             //插屏

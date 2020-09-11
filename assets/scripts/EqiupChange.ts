@@ -72,10 +72,10 @@ export class EqiupChange {
             that.lookvideoBtn.on("touchend", (event) => {   
                 SDK.getInstance().ShowVideoAd(() => {
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")
-                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 500)
+                    cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + 1000)
 
                     that.FightScene.updateFightUI()
-                    new TipUI(that.FightScene,"获得金币*" + String(500))
+                    new TipUI(that.FightScene,"获得金币*" + String(1000))
                 }, Def.videoType.video_battery);
             }, this);
 

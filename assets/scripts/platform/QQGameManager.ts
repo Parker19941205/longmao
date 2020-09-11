@@ -101,7 +101,7 @@ export class QQGameManager implements PlatformCommon {
         this.insertVideoMap.set(Def.insertType.resultui_insert, insvideoAd3);
 
 
-         /* 建议放在onReady里执行，提前加载广告 */
+        /* 建议放在onReady里执行，提前加载广告 */
         this.insertVideoMap.forEach((value , key) =>{
             value.load().catch((err) => {
                 console.error('load',err)

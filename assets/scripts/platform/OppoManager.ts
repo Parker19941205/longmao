@@ -33,6 +33,7 @@ export class OppoManager implements PlatformCommon{
     initSdk(scene,args?: any, callback?: Function) {
         this.FightScene = scene
         //https://yuema.sfplay.net/longmao_assets/oppo
+        //devtools://devtools/bundled/inspector.html?v8only=true&ws=192.168.10.34:12345/00010002-0003-4004-8005-000600070008
 
         let videoAd1 = qg.createRewardedVideoAd({ adUnitId: "215192"})
         let videoAd2 = qg.createRewardedVideoAd({ adUnitId: "215207"})
@@ -43,6 +44,7 @@ export class OppoManager implements PlatformCommon{
         let videoAd7 = qg.createRewardedVideoAd({ adUnitId: "215231"})
         let videoAd8 = qg.createRewardedVideoAd({ adUnitId: "215233"})
         let videoAd9 = qg.createRewardedVideoAd({ adUnitId: "215233"})
+
 
 
         this.VideoMap.set(Def.videoType.signget, videoAd1);
@@ -56,6 +58,18 @@ export class OppoManager implements PlatformCommon{
         this.VideoMap.set(Def.videoType.video_score, videoAd9);
         this.VideoMap.set("其他", videoAd7);
     
+
+        //var that = this
+        /* 建议放在onReady里执行，提前加载广告 */
+        // this.VideoMap.forEach((value , key) =>{
+        //     value.onError(function(err) {
+        //         console.log(err)
+        //         new TipUI(that.FightScene,"视频广告出错")
+        //     })
+        // })
+
+
+
 
 
         // 初始化广告banner
@@ -153,13 +167,14 @@ export class OppoManager implements PlatformCommon{
             videoAd = this.VideoMap.get("其他")
         }
 
-        //videoAd.show()
+        var that = this
         // 显示广告
         videoAd.show().then(() => {
             console.log("广告显示成功");
             //this.FightScene.pauseAll()
         }).catch((err) => {
             console.log("广告组件出现问题", err);
+            //new TipUI(that.FightScene,"视频广告出错")
             // 可以手动加载一次
             videoAd.load().then(() => {
                 console.log("手动加载成功");
@@ -169,6 +184,13 @@ export class OppoManager implements PlatformCommon{
             });
         });
 
+       
+        let errorfunc = (err)=>{
+            console.log(err)
+            new TipUI(that.FightScene,"视频广告出错")
+            videoAd.offError(errorfunc)
+        }
+        videoAd.onError(errorfunc)
 
 
         var that = this
@@ -184,6 +206,7 @@ export class OppoManager implements PlatformCommon{
                 console.log("播放中途退出，不下发游戏奖励");
             }
             videoAd.offClose(closefunc)
+            videoAd.offError(errorfunc)
             videoAd.load()
             //that.FightScene.resumeAll()
         }
