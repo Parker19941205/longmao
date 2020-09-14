@@ -11,6 +11,7 @@ import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class GuajiUI {
@@ -107,6 +108,12 @@ export class GuajiUI {
       
         SDK.getInstance().ShowVideoAd(() => {
             this.successCallBack()
+
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublehangup)
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublehangup,null,true)
+
         }, Def.videoType.guajishouyi,"获得金币*" + amount);
     }
 

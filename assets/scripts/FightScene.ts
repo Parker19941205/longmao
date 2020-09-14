@@ -25,6 +25,7 @@ import { GuajiUI } from "./GuajiUI";
 import { OnlineOffUI } from "./OnlineOffUI";
 import { TipUI } from "./TipUI";
 import NodePoolMgr from "./NodePoolMgr";
+import { DataCensus } from "./frameworks/DataCensus";
 
 const {ccclass, property} = cc._decorator;
 
@@ -273,6 +274,8 @@ export default class FightScene extends cc.Component {
 
         this.startGameBtn.node.on("touchend", (event) => {   // 开始游戏
             this.gameStart()
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.step_startgame)
         }, this);
 
 
@@ -280,6 +283,8 @@ export default class FightScene extends cc.Component {
            new EqiupChange(this)
            this.StopBannerNode  = true
            SDK.getInstance().ShowBannerAd(Def.bannerType.banner_main)
+           // 事件统计
+           DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.step_changebattery)
         }, this);
 
         this.signBtn.node.on("touchend", (event) => {   // 签到
@@ -306,6 +311,11 @@ export default class FightScene extends cc.Component {
                 cc.sys.localStorage.setItem("CurrentGolds",Number(curGolds) + Number(1000))
 
                 that.updateFightUI()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_battery)
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_battery,null,true)
             }, Def.videoType.video_battery,"获得金币*1000");
         }, this);
 
@@ -346,6 +356,7 @@ export default class FightScene extends cc.Component {
 　　    },this);
 
 
+        GameData.makeUUid()
     }
 
     start () {
@@ -950,6 +961,16 @@ export default class FightScene extends cc.Component {
 
 
         if(result == false){
+            let str = "level" + this.currentGates + "_fail"
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,str)
+
+            let str2 = "death" 
+            let subtr = this.currentGates
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,str2,subtr)
+
+
             let pointNode:cc.Node = this.node.getChildByName("pointNode")
             //pointNode.removeAllChildren()
             var children=pointNode.children;
@@ -995,6 +1016,10 @@ export default class FightScene extends cc.Component {
         }else{
             this.balanceUI = new FightVictory(this)
             this.clearAllEnemy()
+
+            let str = "level" + this.currentGates + "_success"
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,str)
         }
 
        
@@ -1197,6 +1222,10 @@ export default class FightScene extends cc.Component {
 
         this.currentGates = lastSaevGates
        
+        let str = "level" + this.currentGates + "_start"
+        // 事件统计
+        DataCensus.userStepCensus(Def.userStepEventID.user_step,str)
+
 
         this.enemyData = null
         this.reloadGatesData()
@@ -1401,7 +1430,14 @@ export default class FightScene extends cc.Component {
                
                 SDK.getInstance().ShowVideoAd(() => {
                     that.playSuccessReward()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_balloon)
+                     // 事件统计
+                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_balloon,null,true)
                 }, Def.videoType.qiqiugift,str);
+
+                
              }, that);
         }
         cc.loader.loadRes('prefab/QiqiuUI', onResourceLoaded );
@@ -1450,10 +1486,22 @@ export default class FightScene extends cc.Component {
             }
 
             this.shiyongju = lastSaevGates
+
+
+             // 事件统计
+             DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.balloon_start_gift2)
+             // 事件统计
+             DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.balloon_success_gift2,null,true)
+
         }else{
             let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
             cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 3);
             this.updateFightUI()
+
+             // 事件统计
+             DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.balloon_start_gift1)
+             // 事件统计
+             DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.balloon_success_gift1,null,true)
         }
     }
 
@@ -1613,6 +1661,10 @@ export default class FightScene extends cc.Component {
 
         // 开始录屏
         PlatformManager.getInstance().recorderManager()
+
+        let str = "revive_" + this.currentGates
+        // 事件统计
+        DataCensus.userStepCensus(Def.userStepEventID.user_step,str,null,true)
     }
 
 

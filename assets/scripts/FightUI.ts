@@ -10,6 +10,7 @@ import { TipUI } from "./TipUI";
 import { resolveSrv } from "dns";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class FightUI {
@@ -142,6 +143,12 @@ export class FightUI {
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+
                 }, Def.videoType.upbullet);
            }
         }, this);
@@ -162,10 +169,21 @@ export class FightUI {
             if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Rock,Number(level) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_bomb,null,true)
             }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Rock,Number(level) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_bomb,null,true)
                 }, Def.videoType.upbullet);
             }
          }, this);
@@ -186,10 +204,21 @@ export class FightUI {
             if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Air,Number(level) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_grapeshot,null,true)
             }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Air,Number(level) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+                
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_grapeshot,null,true)
                 }, Def.videoType.upbullet);
             }
          }, this);
@@ -210,10 +239,21 @@ export class FightUI {
             if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Ice,Number(level) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_cold,null,true)
             }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Ice,Number(level) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_cold,null,true)
                 }, Def.videoType.upbullet);
             }
          }, this);
@@ -236,10 +276,21 @@ export class FightUI {
             if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Screen,Number(level) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_fullscreen,null,true)
             }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Screen,Number(level) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_fullscreen,null,true)
                 }, Def.videoType.upbullet);
             }
          }, this);
@@ -262,10 +313,21 @@ export class FightUI {
             if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Protect,Number(level_m) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_guard,null,true)
             }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Protect,Number(level_m) + 1);
                     this.updateAll()
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_upgrade)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_guard,null,true)
                 }, Def.videoType.upbullet);
             }
 
@@ -301,10 +363,20 @@ export class FightUI {
                 let num =  cc.sys.localStorage.getItem("ScreenbulletNum");
                 cc.sys.localStorage.setItem("ScreenbulletNum",Number(num) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_bullet)
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_bullet,null,true)
+
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.purchase_users_fullscreen)
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.purchase_times_fullscreen,null,true)
+
+
             }, Def.videoType.buyhighbullet);
-
-
-
          }, this);
 
          bulletProtectBtn.getChildByName("buyBtn").on("touchend", (event) => {   // 保护弹购买
@@ -334,6 +406,17 @@ export class FightUI {
                 let num =  cc.sys.localStorage.getItem("ProtectNum");
                 cc.sys.localStorage.setItem("ProtectNum",Number(num) + 1);
                 this.updateAll()
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_bullet)
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_bullet,null,true)
+
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.purchase_users_bullet)
+                // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.purchase_times_bullet,null,true)
+
             }, Def.videoType.buyhighbullet);
          }, this);
 

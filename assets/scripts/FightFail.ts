@@ -7,6 +7,7 @@ import { AudioMgr } from "./AudioMarger";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class FightFail {
@@ -53,6 +54,11 @@ export class FightFail {
                     resource.removeFromParent()
                     //that.FightScene.goHome()
                     that.FightScene.revive()
+
+                     // 事件统计
+                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_rebirth)
+                     // 事件统计
+                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_rebirth,null,true)
                 }, Def.videoType.video_rebirth);
              }, this);
 

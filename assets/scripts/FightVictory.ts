@@ -8,6 +8,7 @@ import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
 import { platform } from "os";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class FightVictory {
@@ -68,6 +69,11 @@ export class FightVictory {
                         that.FightScene.updateFightUI()
                         resource.removeFromParent()
                         that.FightScene.goHome()
+
+                        // 事件统计
+                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_score)
+                        // 事件统计
+                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_score,null,true)
                     }, Def.videoType.video_score);
                 }else{
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")

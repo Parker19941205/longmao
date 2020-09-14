@@ -7,7 +7,8 @@
     "ATK_SPEED": 0,
     "PAY_TYPE": 2,
     "GEM_INC": 0,
-    "ANI_FILE": "Battery"
+    "ANI_FILE": "Battery",
+    "NAME": "超能猫咪"
     },
     "BATT_2": {
     "TITLE_ICON": "paotai2",
@@ -17,7 +18,8 @@
     "ATK_SPEED": 10,
     "PAY_TYPE": 1,
     "GEM_INC": 1,
-    "ANI_FILE": "Battery_magic"
+    "ANI_FILE": "Battery_magic",
+    "NAME": "魔法宝石"
     },
     "BATT_3": {
     "TITLE_ICON": "paotai3",
@@ -27,7 +29,8 @@
     "ATK_SPEED": 10,
     "PAY_TYPE": 1,
     "GEM_INC": 2,
-    "ANI_FILE": "Battery_gold"
+    "ANI_FILE": "Battery_gold",
+    "NAME": "幸运草"
     },
     "BATT_4": {
     "TITLE_ICON": "paotai4",
@@ -37,7 +40,8 @@
     "ATK_SPEED": 50,
     "PAY_TYPE": 1,
     "GEM_INC": 1,
-    "ANI_FILE": "Battery_windmill"
+    "ANI_FILE": "Battery_windmill",
+    "NAME": "田野风车"
     },
     "BATT_5": {
     "TITLE_ICON": "paotai5",
@@ -47,7 +51,8 @@
     "ATK_SPEED": 30,
     "PAY_TYPE": 1,
     "GEM_INC": 1,
-    "ANI_FILE": "Battery_hero"
+    "ANI_FILE": "Battery_hero",
+    "NAME": "司令部"
     },
     "BATT_6": {
     "TITLE_ICON": "paotai6",
@@ -57,7 +62,8 @@
     "ATK_SPEED": 10,
     "PAY_TYPE": 1,
     "GEM_INC": 1,
-    "ANI_FILE": "Battery_machine"
+    "ANI_FILE": "Battery_machine",
+    "NAME": "工业风暴"
     }
     }
     

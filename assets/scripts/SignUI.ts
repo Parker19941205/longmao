@@ -12,6 +12,7 @@ import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
 import FightScene from "./FightScene";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class SignUI {
@@ -86,6 +87,11 @@ export class SignUI {
                 if(bool == true){
                     SDK.getInstance().ShowVideoAd(() => {
                         that.playSuccessReward()
+
+                        // 事件统计
+                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublesignin)
+                        // 事件统计
+                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublesignin,null,true)
                     }, Def.videoType.signget);
                 }
              }, this);

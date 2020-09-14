@@ -10,6 +10,7 @@ import { TipUI } from "./TipUI";
 import { Lib } from "./frameworks/Lib";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
+import { DataCensus } from "./frameworks/DataCensus";
 
 
 export class OnlineOffUI {
@@ -101,6 +102,11 @@ export class OnlineOffUI {
       
         SDK.getInstance().ShowVideoAd(() => {
             this.successCallBack()
+
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_hangupwindow)
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_hangupwindow,null,true)
         }, Def.videoType.video_offline);
     }
 

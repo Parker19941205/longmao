@@ -10,7 +10,29 @@ import FightScene from "./FightScene";
 import { SDK } from "./platform/SDK";
 import { Def } from "./frameworks/Def";
 import { PlatformManager, Platform } from "./platform/PlatformManager";
+import { DataCensus } from "./frameworks/DataCensus";
 
+/**渠道平台 */
+export enum channelName {
+    "test",
+    /**快看 */
+    "快看",
+    /**微信 */
+    "微信",
+    /**字节跳动 */
+    "字节跳动",
+    /**vivo */
+    "Vivo",
+     /**baidu */
+    "Baidu",
+     /**QQ */
+    "QQGAME",
+    /**4399 */
+    "SISANJIUJIU",
+    /**OPPO */
+    "OPPO"
+
+}
 
 export class EqiupChange {
     private FightScene:FightScene
@@ -76,6 +98,11 @@ export class EqiupChange {
 
                     that.FightScene.updateFightUI()
                     new TipUI(that.FightScene,"获得金币*" + String(1000))
+
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_battery)
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_battery,null,true)
                 }, Def.videoType.video_battery);
             }, this);
 
@@ -176,12 +203,20 @@ export class EqiupChange {
             this.FightScene.updateFightUI()
             this.resetAllButton()
             new TipUI(this.FightScene,"购买成功")
+
+
+            let name = GameData.BatteryData[index].NAME
+            let str = "coinunlock_"
+            // 事件统计
+            DataCensus.userStepCensus(Def.userStepEventID.user_step,str,name,true)
         }else{
             this.tipPayPrice = payPrice
             new TipUI(this.FightScene,"金币不足")
             
             this.lookvideoBtn.active = true
         }
+
+
     }
 
 

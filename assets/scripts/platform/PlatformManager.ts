@@ -97,7 +97,7 @@ export interface PlatformCommon {
 
 export class PlatformManager {
     /** 打包的时候需要替换 当前平台 */
-    public static CurrentPlatform = Platform.OPPO;
+    public static CurrentPlatform = Platform.EDITOR;
 
     private static _instance: PlatformManager;
     private currentPaltform: PlatformCommon;
