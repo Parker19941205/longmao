@@ -28,7 +28,8 @@ export class BaiduManager implements PlatformCommon {
     private BannerAdWight: number = 0
     private stub: String = ""
 
-    //https://smartprogram.baidu.com/docs/game/api/adApi/swan.createBannerAd/
+    //https://smartprogram.baidu.com/docs/game/api/adApi/swan.createBannerAd/  百度sdk文档
+    //http://games.kkmh.com/kkH5sdk/sdk-doc/ 快看sdk文档
     private VideoMap: Map<string, any> = new Map();
     initSdk(scene,args?: any, callback?: Function) {
         this.FightScene = scene

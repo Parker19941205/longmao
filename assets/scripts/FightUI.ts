@@ -139,6 +139,9 @@ export class FightUI {
            if(isCanLv){
                 cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
                 this.updateAll()
+
+                 // 事件统计
+                DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_general,null,true)
            }else{
                 SDK.getInstance().ShowVideoAd(() => {
                     cc.sys.localStorage.setItem("bullet" + BombType.Normal,Number(level) + 1);
@@ -149,6 +152,8 @@ export class FightUI {
                     // 事件统计
                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_upgrade,null,true)
 
+                    // 事件统计
+                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.upgrade_general,null,true)
                 }, Def.videoType.upbullet);
            }
         }, this);

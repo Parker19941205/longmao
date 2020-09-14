@@ -171,6 +171,7 @@ export class Def {
       ad_times_score:"ad_times_score",
       step_startgame:"step_startgame",
       step_changebattery:"step_changebattery",
+      upgrade_general:"upgrade_general",
       upgrade_cold:"upgrade_cold",    
       upgrade_grapeshot:"upgrade_grapeshot",
       upgrade_bomb:"upgrade_bomb",    
