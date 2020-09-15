@@ -88,10 +88,17 @@ export class SignUI {
                     SDK.getInstance().ShowVideoAd(() => {
                         that.playSuccessReward()
 
-                        // 事件统计
-                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublesignin)
-                        // 事件统计
-                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublesignin,null,true)
+                        that.FightScene.scheduleOnce(() => {
+                             // 事件统计
+                            DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublesignin)
+                        },0)
+
+
+                        that.FightScene.scheduleOnce(() => {
+                              // 事件统计
+                            DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublesignin,null,true)
+                        },0.5)
+
                     }, Def.videoType.signget);
                 }
              }, this);

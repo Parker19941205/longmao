@@ -103,10 +103,16 @@ export class OnlineOffUI {
         SDK.getInstance().ShowVideoAd(() => {
             this.successCallBack()
 
-            // 事件统计
-            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_hangupwindow)
-            // 事件统计
-            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_hangupwindow,null,true)
+            this.FightScene.scheduleOnce(() => {
+                // 事件统计
+                DataCensus.userStepCensus(this.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_hangupwindow)
+            },0)
+ 
+            this.FightScene.scheduleOnce(() => {
+                 // 事件统计
+                DataCensus.userStepCensus(this.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_hangupwindow,null,true)
+             },0.5)
+ 
         }, Def.videoType.video_offline);
     }
 

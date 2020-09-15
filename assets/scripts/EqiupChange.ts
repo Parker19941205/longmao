@@ -98,11 +98,18 @@ export class EqiupChange {
 
                     that.FightScene.updateFightUI()
                     new TipUI(that.FightScene,"获得金币*" + String(1000))
+         
 
-                    // 事件统计
-                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_battery)
-                    // 事件统计
-                    DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_battery,null,true)
+                    that.FightScene.scheduleOnce(() => {
+                        // 事件统计
+                        DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_battery)
+                    },0)
+         
+                    that.FightScene.scheduleOnce(() => {
+                        // 事件统计
+                        DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_battery,null,true)
+                    },0.5)
+
                 }, Def.videoType.video_battery);
             }, this);
 
@@ -208,7 +215,7 @@ export class EqiupChange {
             let name = GameData.BatteryData[index].NAME
             let str = "coinunlock_"
             // 事件统计
-            DataCensus.userStepCensus(Def.userStepEventID.user_step,str,name,true)
+            DataCensus.userStepCensus(this.FightScene,Def.userStepEventID.user_step,str,name,true)
         }else{
             this.tipPayPrice = payPrice
             new TipUI(this.FightScene,"金币不足")

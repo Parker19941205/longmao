@@ -72,7 +72,7 @@ export class DataCensus {
     }
     
     // 用户步骤部分：
-    public static userStepCensus(eventId:string,uploadValue:string,suffixValue?:any,isOneNot?:boolean,isleijia?:boolean) {
+    public static userStepCensus(FightScene,eventId:string,uploadValue:string,suffixValue?:any,isOneNot?:boolean,isleijia?:boolean) {
         let appId = 3001
         let channel = channelName[PlatformManager.CurrentPlatform]
         let uid = GameData.uuid
@@ -100,10 +100,17 @@ export class DataCensus {
             }
 
 
+             //更新炮台
+            // FightScene.scheduleOnce(() => {
+               
+            // }, 0)
+
             let objectValue = {"appId":appId,"channel":channel,"uid":uid,"key":key,"value":value}
             HttpManager.getInstance().httpPost(UriMap.Census, objectValue, (str: string) => {
                 //console.log("http回调值=============>",str)
             },Config.httpUrl_Census)
+
+            
 
 
             if(isleijia){

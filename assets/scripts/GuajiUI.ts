@@ -109,10 +109,15 @@ export class GuajiUI {
         SDK.getInstance().ShowVideoAd(() => {
             this.successCallBack()
 
-            // 事件统计
-            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublehangup)
-            // 事件统计
-            DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublehangup,null,true)
+            this.FightScene.scheduleOnce(() => {
+               // 事件统计
+                DataCensus.userStepCensus(this.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_doublehangup)
+           },0)
+
+           this.FightScene.scheduleOnce(() => {
+                  // 事件统计
+                DataCensus.userStepCensus(this.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_doublehangup,null,true)
+            },0.5)
 
         }, Def.videoType.guajishouyi,"获得金币*" + amount);
     }

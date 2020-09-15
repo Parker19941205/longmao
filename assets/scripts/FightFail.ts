@@ -55,10 +55,17 @@ export class FightFail {
                     //that.FightScene.goHome()
                     that.FightScene.revive()
 
-                     // 事件统计
-                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_rebirth)
-                     // 事件统计
-                     DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_rebirth,null,true)
+
+                    that.FightScene.scheduleOnce(() => {
+                        // 事件统计
+                        DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_rebirth)
+                    },0)
+         
+                    that.FightScene.scheduleOnce(() => {
+                         // 事件统计
+                        DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_rebirth,null,true)
+                     },0.5)
+
                 }, Def.videoType.video_rebirth);
              }, this);
 

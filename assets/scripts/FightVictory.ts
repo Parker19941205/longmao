@@ -70,10 +70,16 @@ export class FightVictory {
                         resource.removeFromParent()
                         that.FightScene.goHome()
 
-                        // 事件统计
-                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_score)
-                        // 事件统计
-                        DataCensus.userStepCensus(Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_score,null,true)
+                        that.FightScene.scheduleOnce(() => {
+                            // 事件统计
+                            DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_users_score)
+                       },0)
+       
+                       that.FightScene.scheduleOnce(() => {
+                            // 事件统计
+                            DataCensus.userStepCensus(that.FightScene,Def.userStepEventID.user_step,Def.videoAbUploadValue.ad_times_score,null,true)
+                        },0.5)
+
                     }, Def.videoType.video_score);
                 }else{
                     var curGolds = cc.sys.localStorage.getItem("CurrentGolds")

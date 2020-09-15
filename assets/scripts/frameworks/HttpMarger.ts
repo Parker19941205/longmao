@@ -85,6 +85,8 @@ export class HttpManager {
         xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
+                console.log("readyState: "  ,xhr.readyState)
+                console.log("status: "  ,xhr.status)
                 if (xhr.status >= 200 && xhr.status < 400) {
                     let response = xhr.responseText;
                     // if (URIID[uriId].showLog) {
