@@ -73,6 +73,15 @@ export class DataCensus {
     
     // 用户步骤部分：
     public static userStepCensus(FightScene,eventId:string,uploadValue:string,suffixValue?:any,isOneNot?:boolean,isleijia?:boolean) {
+        // 4399不统计
+        if(PlatformManager.CurrentPlatform == Platform.SISANJIUJIU){
+            console.log("4399不统计=============>")
+            return
+        }
+
+
+
+
         let appId = 3001
         let channel = channelName[PlatformManager.CurrentPlatform]
         let uid = GameData.uuid
