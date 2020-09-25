@@ -2,8 +2,8 @@
   "package": "com.sfpaly.longmao.vivominigame",
   "name": "猫咪射手",
   "icon": "C:\\Users\\DELL\\Desktop\\longma\\icon.png",
-  "versionName": "1.0.2",
-  "versionCode": "3",
+  "versionName": "1.0.3",
+  "versionCode": "4",
   "minPlatformVersion": "1056",
   "deviceOrientation": "landscape",
   "logLevel": "log",
@@ -15,5 +15,5 @@
   "certificatePath": "C:\\Users\\DELL\\Desktop\\longma\\vivo\\certificate.pem",
   "disabledMode": "",
   "showNpmPath": false,
-  "packFirstScreenRes": false
+  "packFirstScreenRes": true
 }

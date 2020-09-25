@@ -227,39 +227,39 @@ export default class FightScene extends cc.Component {
         this.currentGates = lastSaevGates
 
 
-        // GameData.loadDataFromFile((loadFileNum) => {
-        //     cc.log("loadFileNum===============>",loadFileNum)
-        //     if(loadFileNum == 5){
-        //         this.enemyData = GameData.GatesData[this.currentGates.toString()]
-        //         console.log("文件加载完毕===============>",this.enemyData)
-        //         this.hard_level = this.enemyData["hard_level"] || 1.0
+        GameData.loadDataFromFile((loadFileNum) => {
+            cc.log("loadFileNum===============>",loadFileNum)
+            if(loadFileNum == 5){
+                this.enemyData = GameData.GatesData[this.currentGates.toString()]
+                console.log("文件加载完毕===============>",this.enemyData)
+                this.hard_level = this.enemyData["hard_level"] || 1.0
 
-        //         this.fightUI = new FightUI(this)
-        //         //更新炮台
-        //         this.scheduleOnce(() => {
-        //             this.changeBattery()
-        //         }, 1)
+                this.fightUI = new FightUI(this)
+                //更新炮台
+                this.scheduleOnce(() => {
+                    this.changeBattery()
+                }, 1)
 
                 
-        //         this.updateCurrentGates()
-        //         this.reloadGatesData()
-        //     }
-        // });
+                this.updateCurrentGates()
+                this.reloadGatesData()
+            }
+        });
 
 
-        this.enemyData = GameData.GatesData[this.currentGates.toString()]
-        console.log("文件加载完毕===============>",this.enemyData)
-        this.hard_level = this.enemyData["hard_level"] || 1.0
+        // this.enemyData = GameData.GatesData[this.currentGates.toString()]
+        // console.log("文件加载完毕===============>",this.enemyData)
+        // this.hard_level = this.enemyData["hard_level"] || 1.0
 
-        this.fightUI = new FightUI(this)
-        //更新炮台
-        this.scheduleOnce(() => {
-            this.changeBattery()
-        }, 0)
+        // this.fightUI = new FightUI(this)
+        // //更新炮台
+        // this.scheduleOnce(() => {
+        //     this.changeBattery()
+        // }, 0)
 
         
-        this.updateCurrentGates()
-        this.reloadGatesData()
+        // this.updateCurrentGates()
+        // this.reloadGatesData()
 
 
 

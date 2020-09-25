@@ -1,5 +1,7 @@
 {
-  "excludeScenes": [],
+  "excludeScenes": [
+    "e417969d-008f-413f-967d-0b451444b81f"
+  ],
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,
@@ -7,7 +9,7 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "startScene": "e417969d-008f-413f-967d-0b451444b81f",
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
   "title": "longmao",
   "webOrientation": "landscape",
   "includeSDKBox": false,
